@@ -22,10 +22,18 @@ type Engine interface {
 }
 
 type EObject struct {
-	id int
+	ID int
 	// nextLabelId?
 	// labels []string
 	// properties []EProperty
+}
+
+func (o EObject) GetId() int {
+	return o.ID
+}
+
+func (o EObject) SetId(newId int) {
+	o.ID = newId
 }
 
 type EProperty struct {

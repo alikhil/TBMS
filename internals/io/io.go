@@ -1,10 +1,11 @@
 package io
 
 type IO interface {
-	readBytes(file string, offset, count int) []byte
-	writeBytes(file string, offset int, bytes []byte)
-	createFile(file string)
-	fileExists(file string) bool
+	ReadBytes(file string, offset, count int) []byte
+	WriteBytes(file string, offset int, bytes []byte)
+	CreateFile(file string)
+	FileExists(file string) bool
+	DeleteFile(file string)
 }
 
 // there should be 3 types:
@@ -14,37 +15,45 @@ type LRUCache struct {
 	baseIO IO
 }
 
-func (c *LRUCache) readBytes(file string, offset, count int) []byte {
+func (c LRUCache) ReadBytes(file string, offset, count int) []byte {
 	panic("not implemented exception")
 }
 
-func (c *LRUCache) writeBytes(file string, offset int, bytes []byte) {
+func (c LRUCache) WriteBytes(file string, offset int, bytes []byte) {
 	panic("not implemented exception")
 }
 
-func (c *LRUCache) createFile(file string) {
-	c.baseIO.createFile(file)
+func (c LRUCache) CreateFile(file string) {
+	c.baseIO.CreateFile(file)
 }
 
-func (c *LRUCache) fileExists(file string) bool {
-	return c.baseIO.fileExists(file)
+func (c LRUCache) FileExists(file string) bool {
+	return c.baseIO.FileExists(file)
+}
+
+func (c LRUCache) DeleteFile(file string) {
+	c.baseIO.DeleteFile(file)
 }
 
 type LocalIO struct {
 }
 
-func (c LocalIO) readBytes(file string, offset, count int) []byte {
+func (c LocalIO) ReadBytes(file string, offset, count int) []byte {
 	panic("not implemented exception")
 }
 
-func (c LocalIO) writeBytes(file string, offset int, bytes []byte) {
+func (c LocalIO) WriteBytes(file string, offset int, bytes []byte) {
 	panic("not implemented exception")
 }
 
-func (c LocalIO) createFile(file string) {
+func (c LocalIO) CreateFile(file string) {
 	panic("not implemented exception")
 }
 
-func (c LocalIO) fileExists(file string) bool {
+func (c LocalIO) FileExists(file string) bool {
+	panic("not implemented exception")
+}
+
+func (c LocalIO) DeleteFile(file string) {
 	panic("not implemented exception")
 }
