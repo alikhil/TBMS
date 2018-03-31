@@ -1,5 +1,9 @@
 package engine
 
+import (
+	tuple "github.com/kmanley/golang-tuple"
+)
+
 // types starting with E are used only within Engine
 
 type Engine interface {
@@ -9,16 +13,21 @@ type Engine interface {
 	IterateRelationshipProperties(relID int) func() EProperty
 	IterateObjectLabels(objID int) func() string
 
+	CreateRelationship(firstObjID, secondObjectID int, relTypeID int) int
+	DeleteRelationship(firstObjID, secondObjectID int, relTypeID int) (int, error) // error if no such relationship
+
 	AddObjectLabel(objID, labelID int)
 	DeleteObjectLabel(objID, labelID int)
-	// AddObjectProperty(objID int, key string, val bool) how to use without Generics?
+	CreateObject(labels []string, properties []tuple.Tuple) // array of key-values
+	AddObjectProperty(objID int, property tuple.Tuple)
+	UpdateObjectProperty(objID int, property tuple.Tuple)
 
 	GetLabelByID(int) (string, error) // error if no such labelid
 	GetLabelId(string) (int, error)   // error if not exists
 	CreateLabel(string) int           // by name, return id
 
-	GetRelationshipID(string) (int, error) // error if no such relationship
-	CreateRelationship(string) int         // by type, return id
+	GetRelationshipTypeID(string) (int, error) // error if no such relationship type
+	CreateRelationshipType(string) int         // by type, return id
 }
 
 type EObject struct {
@@ -37,14 +46,14 @@ func (o EObject) SetId(newId int) {
 }
 
 type EProperty struct {
-	id  int
+	ID  int
 	key string
 	// propertyId?
 	// getInt? getBool? getString?
 }
 
 type ERelationship struct {
-	id             int
+	ID             int
 	firstObjectID  int
 	secondObjectID int
 	typeID         int
