@@ -6,12 +6,25 @@
 * Int - 4 bytes
 * Float 4 bytes
 * Boolean 1 bit/byte
-* String - fixed length or variable? ASCII or UTF16?
+* String - variable length, encoding is set by using parameter
 
 ## Stores
 
-* Node - 15 bytes
+* Node - 13 bytes
 
-| In Use | nextRelId | nextPropId | labels? | extra? | 
-|:------:|:---------:|:----------:|:-------:|:------:|
-| 1 byte | 4 bytes   | 4 bytes    |  hz     |    hz  |
+| inUse | nextRelId | nextPropId | nxtLabelId |
+|:------:|:---------:|:----------:|:----------:|
+| 1 byte | 4 bytes   | 4 bytes    |  4 byte    |
+
+* Relationship - 34 bytes
+
+|  inUse | firstNodeNxtRelId | second NodeNxtRelId | firstNodePrvRelId | secondNodePrvRelId | nxtPropertyId | relTypeId |
+|:------:|:-----------------:|:-------------------:|:-----------------:|:------------------:|:-------------:|:---------:|
+| 1 byte | 4 bytes           | 4 bytes             | 4 bytes           | 4 bytes            | 4 bytes       | 4 bytes   |
+
+Property - 10 bytes
+
+|  inUse |  type  | keyStringId | valueOrStrPtr |
+|:------:|:------:|:-----------:|:-------------:|
+| 1 byte | 1 byte | 4 bytes     | 4 bytes       |
+
