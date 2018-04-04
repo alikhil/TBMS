@@ -27,7 +27,7 @@ func readWriteFile(c IO, t *testing.T) {
 	readData, _ := c.ReadBytes(fname, offset, 5)
 
 	if !bytes.Equal(data, readData) {
-		t.Errorf("Read data is not equal to that which was written")
+		t.Errorf("Expected %v but got %v", data, readData)
 	}
 }
 
