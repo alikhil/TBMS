@@ -32,6 +32,8 @@ Property - 10 bytes
 
 String - 64 bytes
 
+We can partition strings based on purpose of use.
+
 |  inUse |  extra(ASCII/UTF) |   value  |   nxtPartID |
 |:------:|:-----------------:|:--------:|:-----------:|
 | 1 byte |        1 byte     | 58 bytes |   4 bytes   |
