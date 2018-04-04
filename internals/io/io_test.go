@@ -17,13 +17,14 @@ func createFile(c IO, t *testing.T) {
 func readWriteFile(c IO, t *testing.T) {
 	fname := "testfile"
 	data := []byte{0, 1, 2, 3, 4}
+	offset := 42
 
-	c.CreateFile(fname)
+	_ = c.CreateFile(fname)
 	defer c.DeleteFile(fname)
 
-	c.WriteBytes(fname, 0, data)
+	c.WriteBytes(fname, offset, data)
 
-	readData := c.ReadBytes(fname, 0, 5)
+	readData, _ := c.ReadBytes(fname, offset, 5)
 
 	if !bytes.Equal(data, readData) {
 		t.Errorf("Read data is not equal to that which was written")
