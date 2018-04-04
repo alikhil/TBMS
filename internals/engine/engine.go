@@ -31,14 +31,14 @@ type Engine interface {
 }
 
 type EObject struct {
-	ID int
+	id int
 	// nextLabelId?
 	// labels []string
 	// properties []EProperty
 }
 
 func (o EObject) GetId() int {
-	return o.ID
+	return o.id
 }
 
 func (o EObject) SetId(newId int) {
