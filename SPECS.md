@@ -32,8 +32,6 @@ Property - 10 bytes
 
 String - 64 bytes
 
-We can partition strings based on purpose of use.
-
 |  inUse |  extra(ASCII/UTF) |   value  |   nxtPartID |
 |:------:|:-----------------:|:--------:|:-----------:|
 | 1 byte |        1 byte     | 58 bytes |   4 bytes   |
@@ -50,3 +48,20 @@ InUse - 10 bytes
 |:------:|:------:|:--------:|:-------------:|
 | 1 byte | 1 byte | 4 bytes  | 4 bytes       |
 
+LabelString - 21 bytes
+
+|  inUse |  labelString |
+|:------:|:------------:|
+| 1 byte |    20 bytes  |
+
+PropertyKey - 21 bytes
+
+|  inUse |  propertyKey |
+|:------:|:------------:|
+| 1 byte |    20 bytes  |
+
+RelationshipType - 21 bytes
+
+|  inUse |  relType  |
+|:------:|:---------:|
+| 1 byte | 20 bytes  |
