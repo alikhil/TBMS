@@ -4,6 +4,19 @@ import (
 	tuple "github.com/kmanley/golang-tuple"
 )
 
+// Bytes per record in store
+const (
+	BytesPerNode         = 13
+	BytesPerRelationship = 34
+	BytesPerProperty     = 10
+	BytesPerString       = 64
+	BytesPerLabel        = 9
+	BytesPerLabelString  = 21
+	BytesPerPropertyKey  = 21
+	BytesPerRelType      = 21
+	BytesPerInUse        = 10
+)
+
 // types starting with E are used only within Engine
 
 type Engine interface {
@@ -28,17 +41,26 @@ type Engine interface {
 
 	GetRelationshipTypeID(string) (int, error) // error if no such relationship type
 	CreateRelationshipType(string) int         // by type, return id
+
+	// Getting free ids for each store using InUse
+}
+
+type RealEngine struct {
+}
+
+func (re *RealEngine) IterateObjects() func() EObject {
+
 }
 
 type EObject struct {
-	id int
+	ID int
 	// nextLabelId?
 	// labels []string
 	// properties []EProperty
 }
 
 func (o EObject) GetId() int {
-	return o.id
+	return o.ID
 }
 
 func (o EObject) SetId(newId int) {
