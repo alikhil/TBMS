@@ -1,6 +1,8 @@
 package engine
 
 import (
+	"bytes"
+	"encoding/binary"
 	io "github.com/alikhil/TBMS/internals/io"
 	tuple "github.com/kmanley/golang-tuple"
 )
@@ -115,8 +117,10 @@ func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
 	}
 }
 
-func parseInt(bytes []byte) int {
-	return 4
+func parseInt(data []byte) (ret int) {
+	buf := bytes.NewBuffer(data)
+	binary.Read(buf, binary.LittleEndian, &ret)
+	return
 }
 
 func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func() ([]byte, bool) {
