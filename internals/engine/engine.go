@@ -1,6 +1,7 @@
 package engine
 
 import (
+	io "github.com/alikhil/TBMS/internals/io"
 	tuple "github.com/kmanley/golang-tuple"
 )
 
@@ -17,11 +18,26 @@ const (
 	BytesPerInUse        = 10
 )
 
+// Names of files
+const (
+	FNNodes         = "nodes"
+	FNRelationships = "relationships"
+	FNProperties    = "properties"
+	FNStrings       = "strings"
+	// TODO: add others
+)
+
 // types starting with E are used only within Engine
 
 type Engine interface {
-	IterateObjects(labelID int) func() EObject
+	GetObjectIterator() func() []byte
+
+	GetNodesIterator() func() ENode
+	GetNodesByLabelIterator(labelID string) func() ENode
+
+	IterateAllRelatioships() func() ERelationship
 	IterateRelationships(relTypeID int) func() ERelationship
+
 	IterateObjectProperties(objID int) func() EProperty
 	IterateRelationshipProperties(relID int) func() EProperty
 	IterateObjectLabels(objID int) func() string
@@ -36,7 +52,7 @@ type Engine interface {
 	UpdateObjectProperty(objID int, property tuple.Tuple)
 
 	GetLabelByID(int) (string, error) // error if no such labelid
-	GetLabelId(string) (int, error)   // error if not exists
+	GetLabelID(string) (int, error)   // error if not exists
 	CreateLabel(string) int           // by name, return id
 
 	GetRelationshipTypeID(string) (int, error) // error if no such relationship type
@@ -46,24 +62,86 @@ type Engine interface {
 }
 
 type RealEngine struct {
+	io.IO
 }
 
-func (re *RealEngine) IterateObjects() func() EObject {
-
+func (re *RealEngine) GetLabelID(label string) (int, bool) {
+	return 0, false
 }
 
-type EObject struct {
-	ID int
-	// nextLabelId?
+func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
+	return func() (int, bool) {
+		return 0, false
+	}
+}
+
+func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool) {
+	nextNode := re.GetNodesIterator()
+	neededlabelID, ok := re.GetLabelID(label)
+	if !ok {
+
+		return func() (*ENode, bool) {
+			return nil, false
+		}
+	}
+
+	return func() (*ENode, bool) {
+		node, ok := nextNode()
+		if ok {
+			nextLabel := re.GetLabelIteratorFromId(node.nextLabelID)
+			for labelID, ok := nextLabel(); ok; {
+				if labelID == neededlabelID {
+					return node, true
+				}
+			}
+			return nil, false
+		}
+		return nil, false
+	}
+}
+
+func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
+	next := re.GetObjectIterator(FNNodes, BytesPerNode)
+	i := 0
+	return func() (*ENode, bool) {
+		data, ok := next()
+		if ok {
+			// TODO: add normal parsing
+			node := ENode{ID: i, nextLabelID: parseInt(data[1:4])}
+			i++
+			return &node, ok
+		}
+		return nil, false
+	}
+}
+
+func parseInt(bytes []byte) int {
+	return 4
+}
+
+func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func() ([]byte, bool) {
+	curOffset := 0
+	return func() (data []byte, ok bool) {
+		data, ok = re.IO.ReadBytes(filename, curOffset, recordLength)
+		if ok {
+			curOffset += BytesPerNode
+		}
+		return
+	}
+}
+
+type ENode struct {
+	ID          int
+	nextLabelID int
 	// labels []string
 	// properties []EProperty
 }
 
-func (o EObject) GetId() int {
+func (o ENode) GetId() int {
 	return o.ID
 }
 
-func (o EObject) SetId(newId int) {
+func (o ENode) SetId(newId int) {
 	o.ID = newId
 }
 
