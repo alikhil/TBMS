@@ -20,9 +20,9 @@ We store label, relationtype, keys
 
 * Relationship - 34 bytes
 
-|  inUse | firstNodeNxtRelId | second NodeNxtRelId | firstNodePrvRelId | secondNodePrvRelId | nxtPropertyId | relTypeId |
-|:------:|:-----------------:|:-------------------:|:-----------------:|:------------------:|:-------------:|:---------:|
-| 1 byte | 4 bytes           | 4 bytes             | 4 bytes           | 4 bytes            | 4 bytes       | 4 bytes   |
+|  inUse |  firstInChain | secondNodeId | firstNodeId | firstNodeNxtRelId | second NodeNxtRelId | firstNodePrvRelId | secondNodePrvRelId | nxtPropertyId | relTypeId |
+|:------:|:-------------:|:------------:|:-----------:|:-----------------:|:-------------------:|:-----------------:|:------------------:|:-------------:|:---------:|
+| 1 byte |     1 byte    |    4 bytes   |    4 bytes  |       4 bytes     | 4 bytes             | 4 bytes           | 4 bytes            | 4 bytes       | 4 bytes   |
 
 Property - 10 bytes
 
