@@ -3,6 +3,7 @@ package engine
 import (
 	"bytes"
 	"encoding/binary"
+
 	io "github.com/alikhil/TBMS/internals/io"
 	tuple "github.com/kmanley/golang-tuple"
 )
@@ -23,6 +24,8 @@ const (
 // Names of files
 const (
 	FNNodes         = "nodes"
+	FNLabels        = "labels"
+	FNLabelsStrings = "labelsStrings"
 	FNRelationships = "relationships"
 	FNProperties    = "properties"
 	FNStrings       = "strings"
@@ -68,7 +71,16 @@ type RealEngine struct {
 }
 
 func (re *RealEngine) GetLabelID(label string) (int, bool) {
-	return 0, false
+	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
+	i := 0
+	for data, ok := next(); ok; {
+		s := string(data[1:])
+		if label == s {
+			return i, true
+		}
+		i++
+	}
+	return -1, false
 }
 
 func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
