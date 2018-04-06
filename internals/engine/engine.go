@@ -120,19 +120,16 @@ func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
 	return func() (*ENode, bool) {
 		data, ok := next()
 		if ok {
-			// TODO: add normal parsing
-			node := ENode{ID: i, nextLabelID: parseInt(data[1:4])}
+			node, nodeInUse := parseNode(&data, i)
+			if !nodeInUse {
+				// Trying to access deleted or nonexisting node
+				return nil, false
+			}
 			i++
-			return &node, ok
+			return node, ok
 		}
 		return nil, false
 	}
-}
-
-func parseInt(data []byte) (ret int) {
-	buf := bytes.NewBuffer(data)
-	binary.Read(buf, binary.LittleEndian, &ret)
-	return
 }
 
 func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func() ([]byte, bool) {
@@ -146,31 +143,82 @@ func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func(
 	}
 }
 
+// EType is used for representing property types in database
+type EType byte
+
+const (
+	EInt EType = iota + 1
+	EString
+	EFloat
+	EBool
+)
+
+// ENode represents how node is stored
 type ENode struct {
-	ID          int
-	nextLabelID int
-	// labels []string
-	// properties []EProperty
-}
-
-func (o ENode) GetId() int {
-	return o.ID
-}
-
-func (o ENode) SetId(newId int) {
-	o.ID = newId
-}
-
-type EProperty struct {
-	ID  int
-	key string
-	// propertyId?
-	// getInt? getBool? getString?
-}
-
-type ERelationship struct {
 	ID             int
-	firstObjectID  int
-	secondObjectID int
-	typeID         int
+	nextLabelID    int
+	nextPropertyID int
+	nextRelID      int
+}
+
+// EProperty represents how property is stored
+type EProperty struct {
+	ID               int
+	keyStringID      int
+	typename         EType
+	valueOrStringPtr int
+}
+
+// ERelationship represents how relationship is stored
+type ERelationship struct {
+	ID           int
+	firstInChain bool
+
+	firstNodeID int
+	secondNode  int
+
+	firstNodeNxtRelID  int
+	secondNodeNxtRelID int
+	firstNodePrvRelID  int
+	secondNodePrvRelID int
+	typeID             int
+}
+
+// TODO: move parsers to parsers.go
+// TODO: pass all arrays and slices by reference
+
+func parseInt(data []byte) (ret int) {
+	buf := bytes.NewBuffer(data)
+	binary.Read(buf, binary.LittleEndian, &ret)
+	return
+}
+
+func parseBool(b byte) bool {
+	return b > 0
+}
+
+func parseNode(data *[]byte, nodeID int) (*ENode, bool) {
+
+	var inUse = parseBool((*data)[0])
+	if !inUse {
+		return nil, false
+	}
+
+	var node = ENode{
+		ID:             nodeID,
+		nextLabelID:    parseInt((*data)[1:4]),
+		nextPropertyID: parseInt((*data)[5:8]),
+		nextRelID:      parseInt((*data)[9:12])}
+	return &node, true
+}
+
+func parseProperty(data *[]byte) (*EProperty, bool) {
+	var inUse = parseBool((*data)[0])
+	if !inUse {
+		return nil, false
+	}
+	return &EProperty{
+		typename:         EType((*data)[1]),
+		keyStringID:      parseInt((*data)[2:5]),
+		valueOrStringPtr: parseInt((*data)[6:9])}, true
 }
