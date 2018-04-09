@@ -1,6 +1,4 @@
-package resources
-
-import "github/alikhil/TBMS/internals/engine"
+package engine
 
 const (
 	BytesPerNode         = 13
@@ -15,8 +13,8 @@ const (
 )
 
 /**
-	File names
- */
+File names
+*/
 const (
 	FNNodes         = "nodes"
 	FNLabels        = "labels"
@@ -28,10 +26,10 @@ const (
 )
 
 /**
-	TypeNames
- */
+TypeNames
+*/
 const (
-	EInt    engine.EType = iota + 1
+	EInt EType = iota + 1
 	EString
 	EFloat
 	EBool

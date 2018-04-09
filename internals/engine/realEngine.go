@@ -1,11 +1,6 @@
 package engine
 
-import (
-	constants "github/alikhil/TBMS/internals/resources"
-	"github/alikhil/TBMS/internals/engine"
-)
-
-type RealEngine engine.RealEngine
+// TODO: pass all arrays and slices by reference
 
 func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
 	return func() (int, bool) {
@@ -39,7 +34,7 @@ func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool
 }
 
 func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
-	next := re.GetObjectIterator(constants.FNNodes, constants.BytesPerNode)
+	next := re.GetObjectIterator(FNNodes, BytesPerNode)
 	i := 0
 	return func() (*ENode, bool) {
 		data, ok := next()
@@ -61,13 +56,13 @@ func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func(
 	return func() (data []byte, ok bool) {
 		data, ok = re.IO.ReadBytes(filename, curOffset, recordLength)
 		if ok {
-			curOffset += constants.BytesPerNode
+			curOffset += BytesPerNode
 		}
 		return
 	}
 }
 func (re *RealEngine) GetLabelID(label string) (int, bool) {
-	next := re.GetObjectIterator(constants.FNLabelsStrings, constants.BytesPerLabelString)
+	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
 	i := 0
 	for data, ok := next(); ok; {
 		s := string(data[1:])

@@ -1,6 +1,6 @@
 package engine
 
-import "github/alikhil/TBMS/internals/io"
+import "github.com/alikhil/TBMS/internals/io"
 
 type EType byte
 

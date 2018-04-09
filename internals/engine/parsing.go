@@ -1,13 +1,9 @@
 package engine
 
 import (
-	"encoding/binary"
 	"bytes"
-	"github/alikhil/TBMS/internals/engine"
+	"encoding/binary"
 )
-
-type ENode engine.ENode
-type EProperty engine.EProperty
 
 func parseInt(data []byte) (ret int) {
 	buf := bytes.NewBuffer(data)
@@ -39,7 +35,7 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 		return nil, false
 	}
 	return &EProperty{
-		Typename:         engine.EType((*data)[1]),
+		Typename:         EType((*data)[1]),
 		KeyStringID:      parseInt((*data)[2:5]),
 		ValueOrStringPtr: parseInt((*data)[6:9])}, true
 }
