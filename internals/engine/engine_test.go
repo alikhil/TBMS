@@ -8,20 +8,21 @@ import (
 
 func TestGetLabelID(t *testing.T) {
 	rw := io.LocalIO{}
+	filename := FNLabelsStrings
+	labelStr := "testLabelStr"
 
-	filename := "labelsStrings"
+	label := []byte{1} // In Use byte
 
-	label := []byte("fakeLabel")
-
-	// label = append(label, make([]byte, 21-len(label))...)
+	label = append(label, ([]byte(labelStr))...)
+	label = append(label, make([]byte, BytesPerLabelString-len(label))...) // fill left part with zeros
 
 	rw.CreateFile(filename)
 	defer rw.DeleteFile(filename)
 
 	rw.WriteBytes(filename, 0, label)
 
-	re := RealEngine{}
-	id, _ := re.GetLabelID("fakeLabel")
+	re := RealEngine{IO: rw}
+	id, _ := re.GetLabelID(labelStr)
 
 	if id != 0 {
 		t.Errorf("Expected %v but got %v", 0, id)

@@ -1,5 +1,9 @@
 package engine
 
+import (
+	"bytes"
+)
+
 // TODO: pass all arrays and slices by reference
 
 func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
@@ -65,7 +69,8 @@ func (re *RealEngine) GetLabelID(label string) (int, bool) {
 	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
 	i := 0
 	for data, ok := next(); ok; {
-		s := string(data[1:])
+		end := bytes.IndexByte(data, 0)
+		s := string(data[1:end])
 		if label == s {
 			return i, true
 		}

@@ -57,7 +57,7 @@ func (io LocalIO) ReadBytes(filename string, offset, count int) (data []byte, ok
 	if er != nil {
 		return nil, false
 	}
-	return data, false
+	return data, true
 
 }
 
