@@ -23,9 +23,9 @@ func parseNode(data *[]byte, nodeID int) (*ENode, bool) {
 	}
 	var node = ENode{
 		ID:             nodeID,
-		NextLabelID:    parseInt((*data)[1:4]),
-		NextPropertyID: parseInt((*data)[5:8]),
-		NextRelID:      parseInt((*data)[9:12])}
+		NextLabelID:    parseInt((*data)[1:5]),
+		NextPropertyID: parseInt((*data)[5:9]),
+		NextRelID:      parseInt((*data)[9:13])}
 	return &node, true
 }
 
@@ -36,6 +36,17 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 	}
 	return &EProperty{
 		Typename:         EType((*data)[1]),
-		KeyStringID:      parseInt((*data)[2:5]),
-		ValueOrStringPtr: parseInt((*data)[6:9])}, true
+		KeyStringID:      parseInt((*data)[2:6]),
+		ValueOrStringPtr: parseInt((*data)[6:10])}, true
+}
+
+func parseLabelString(data *[]byte) (*string, bool) {
+	var inUse = parseBool((*data)[0])
+	if !inUse {
+		return nil, false
+	}
+
+	end := bytes.IndexByte(*data, 0)
+	s := string((*data)[1:end])
+	return &s, true
 }

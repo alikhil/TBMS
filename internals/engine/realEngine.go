@@ -69,9 +69,8 @@ func (re *RealEngine) GetLabelID(label string) (int, bool) {
 	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
 	i := 0
 	for data, ok := next(); ok; {
-		end := bytes.IndexByte(data, 0)
-		s := string(data[1:end])
-		if label == s {
+		s, ok := parseLabelString(&data)
+		if ok && label == *s {
 			return i, true
 		}
 		i++
