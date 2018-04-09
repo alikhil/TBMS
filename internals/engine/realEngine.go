@@ -1,9 +1,5 @@
 package engine
 
-import (
-	"bytes"
-)
-
 // TODO: pass all arrays and slices by reference
 
 func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
