@@ -46,3 +46,8 @@ type ERelationship struct {
 	secondNodePrvRelID int
 	typeID             int
 }
+
+type ELabelString struct {
+	ID     int
+	String string
+}

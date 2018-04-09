@@ -40,7 +40,7 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 		ValueOrStringPtr: parseInt((*data)[6:10])}, true
 }
 
-func parseLabelString(data *[]byte) (*string, bool) {
+func parseLabelString(data *[]byte, id int) (*ELabelString, bool) {
 	var inUse = parseBool((*data)[0])
 	if !inUse {
 		return nil, false
@@ -48,5 +48,5 @@ func parseLabelString(data *[]byte) (*string, bool) {
 
 	end := bytes.IndexByte(*data, 0)
 	s := string((*data)[1:end])
-	return &s, true
+	return &ELabelString{ID: id, String: s}, true
 }

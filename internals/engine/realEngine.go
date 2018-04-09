@@ -51,6 +51,23 @@ func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
 	}
 }
 
+func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
+	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
+	i := 0
+	return func() (*ELabelString, bool) {
+		data, ok := next()
+		if ok {
+			label, labelStringInUse := parseLabelString(&data, i)
+			if !labelStringInUse {
+				return nil, false
+			}
+			i++
+			return label, ok
+		}
+		return nil, false
+	}
+}
+
 func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func() ([]byte, bool) {
 	curOffset := 0
 	return func() (data []byte, ok bool) {
@@ -62,11 +79,10 @@ func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func(
 	}
 }
 func (re *RealEngine) GetLabelID(label string) (int, bool) {
-	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
+	next := re.GetLabelStringIterator()
 	i := 0
-	for data, ok := next(); ok; {
-		s, ok := parseLabelString(&data)
-		if ok && label == *s {
+	for l, ok := next(); ok; {
+		if ok && label == l.String {
 			return i, true
 		}
 		i++
