@@ -35,16 +35,17 @@ type EProperty struct {
 
 type ERelationship struct {
 	ID           int
-	firstInChain bool
+	FirstInChain bool
 
-	firstNodeID int
-	secondNode  int
+	FirstNodeID int
+	SecondNode  int
 
-	firstNodeNxtRelID  int
-	secondNodeNxtRelID int
-	firstNodePrvRelID  int
-	secondNodePrvRelID int
-	typeID             int
+	FirstNodeNxtRelID  int
+	SecondNodeNxtRelID int
+	FirstNodePrvRelID  int
+	SecondNodePrvRelID int
+	NextPropertyID     int
+	TypeID             int
 }
 
 type ELabelString struct {

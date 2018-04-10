@@ -7,7 +7,7 @@ import (
 
 func parseInt(data []byte) (ret int) {
 	buf := bytes.NewBuffer(data)
-	binary.Read(buf, binary.LittleEndian, &ret)
+	binary.Read(buf, ConventionByteOrder, &ret)
 	return
 }
 
@@ -49,4 +49,24 @@ func parseLabelString(data *[]byte, id int) (*ELabelString, bool) {
 	end := bytes.IndexByte(*data, 0)
 	s := string((*data)[1:end])
 	return &ELabelString{ID: id, String: s}, true
+}
+
+func parseRelationship(data *[]byte, id int) (*ERelationship, bool) {
+	var inUse = parseBool((*data)[0])
+	if !inUse {
+		return nil, false
+	}
+
+	return &ERelationship{
+		ID:                 id,
+		FirstInChain:       parseBool((*data)[1]),
+		SecondNode:         parseInt((*data)[2:6]),
+		FirstNodeID:        parseInt((*data)[6:10]),
+		FirstNodeNxtRelID:  parseInt((*data)[10:14]),
+		SecondNodeNxtRelID: parseInt((*data)[14:18]),
+		FirstNodePrvRelID:  parseInt((*data)[18:22]),
+		SecondNodePrvRelID: parseInt((*data)[22:26]),
+		NextPropertyID:     parseInt((*data)[26:30]),
+		TypeID:             parseInt((*data)[30:34]),
+	}, true
 }

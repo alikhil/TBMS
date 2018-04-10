@@ -68,6 +68,23 @@ func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
 	}
 }
 
+func (re *RealEngine) GetRelationshiptIterator() func() (*ERelationship, bool) {
+	next := re.GetObjectIterator(FNRelationships, BytesPerRelationship)
+	i := 0
+	return func() (*ERelationship, bool) {
+		data, ok := next()
+		if ok {
+			rel, relInUse := parseRelationship(&data, i)
+			if !relInUse {
+				return nil, false
+			}
+			i++
+			return rel, ok
+		}
+		return nil, false
+	}
+}
+
 func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func() ([]byte, bool) {
 	curOffset := 0
 	return func() (data []byte, ok bool) {

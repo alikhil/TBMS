@@ -1,5 +1,9 @@
 package engine
 
+import (
+	"encoding/binary"
+)
+
 const (
 	BytesPerNode         = 13
 	BytesPerRelationship = 34
@@ -33,4 +37,11 @@ const (
 	EString
 	EFloat
 	EBool
+)
+
+/**
+Byte order to use in encoding/decoding
+*/
+var (
+	ConventionByteOrder = binary.LittleEndian
 )
