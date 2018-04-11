@@ -3,12 +3,17 @@ package engine
 import (
 	"bytes"
 	"encoding/binary"
+	"github.com/alikhil/TBMS/internals/logger"
 )
 
-func parseInt(data []byte) (ret int) {
+func parseInt(data []byte) int {
+	var ret int32
 	buf := bytes.NewBuffer(data)
-	binary.Read(buf, ConventionByteOrder, &ret)
-	return
+	err := binary.Read(buf, ConventionByteOrder, &ret)
+	if err != nil {
+		logger.Error.Printf("Can not parse int %v", err)
+	}
+	return int(ret)
 }
 
 func parseBool(b byte) bool {
