@@ -8,17 +8,17 @@ import (
 
 // types starting with E are used only within Engine
 type Engine interface {
-	GetObjectIterator() func() []byte
+	GetObjectIterator() func() ([]byte, bool)
 
-	GetNodesIterator() func() ENode
-	GetNodesByLabelIterator(labelID string) func() ENode
+	GetNodesIterator() func() (*ENode, bool)
+	GetNodesByLabelIterator(labelID string) func() (*ENode, bool)
 
-	IterateAllRelatioships() func() ERelationship
-	IterateRelationships(relTypeID int) func() ERelationship
+	GetRelationshiptIterator() func() (*ERelationship, bool)
+	GetRelationshiptIteratorByType(relTypeID int) func() (*ERelationship, bool)
 
-	IterateObjectProperties(objID int) func() EProperty
-	IterateRelationshipProperties(relID int) func() EProperty
-	IterateObjectLabels(objID int) func() string
+	GetObjectPropertiesIterator(objID int) func() (*EProperty, bool)
+	GetRelationshipPropertiesIterator(relID int) func() (*EProperty, bool)
+	GetObjectLabelsIterator(objID int) func() (labelID int, ok bool)
 
 	CreateRelationship(firstObjID, secondObjectID int, relTypeID int) int
 	DeleteRelationship(firstObjID, secondObjectID int, relTypeID int) (int, error) // error if no such relationship
