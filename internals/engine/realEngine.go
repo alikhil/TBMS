@@ -1,8 +1,13 @@
 package engine
 
+import (
+	"github.com/alikhil/TBMS/internals/logger"
+)
+
 // TODO: pass all arrays and slices by reference
 
 func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
+	// TODO: implement it
 	return func() (int, bool) {
 		return 0, false
 	}
@@ -105,4 +110,36 @@ func (re *RealEngine) GetLabelID(label string) (int, bool) {
 		i++
 	}
 	return -1, false
+}
+
+// GetObjectByID returns byte record of any object from certain file
+func (re *RealEngine) GetObjectByID(filename string, recordLength, id int) (*[]byte, bool) {
+	offset := recordLength * id
+	data, ok := re.IO.ReadBytes(filename, offset, recordLength)
+	if !ok {
+		logger.Trace.Printf("Object with id = %d cannot be read from file %s", id, filename)
+	}
+	return &data, ok
+}
+
+func (re *RealEngine) GetNodeByID(id int) (*ENode, bool) {
+	data, ok := re.GetObjectByID(FNNodes, BytesPerNode, id)
+	if !ok {
+		return nil, false
+	}
+	return parseNode(data, id)
+}
+
+func (re *RealEngine) saveObject(filename string, recordLength, id int, data *[]byte) bool {
+	offset := recordLength * id
+	ok := re.IO.WriteBytes(filename, offset, data)
+	if !ok {
+		logger.Warning.Printf("Failed to save object with id = %d to file %s", id, filename)
+	}
+	return ok
+}
+
+func (re *RealEngine) SaveNode(node *ENode) bool {
+	data := encodeNode(node)
+	return re.saveObject(FNNodes, BytesPerNode, node.ID, data)
 }

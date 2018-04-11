@@ -6,7 +6,7 @@ import (
 
 type IO interface {
 	ReadBytes(file string, offset, count int) (data []byte, ok bool)
-	WriteBytes(file string, offset int, bytes []byte) (ok bool)
+	WriteBytes(file string, offset int, bytes *[]byte) (ok bool)
 	CreateFile(file string) (ok bool)
 	FileExists(file string) bool
 	DeleteFile(file string) (ok bool)
@@ -23,7 +23,7 @@ func (c LRUCache) ReadBytes(file string, offset, count int) ([]byte, bool) {
 	return nil, false
 }
 
-func (c LRUCache) WriteBytes(file string, offset int, bytes []byte) bool {
+func (c LRUCache) WriteBytes(file string, offset int, bytes *[]byte) bool {
 	return false
 }
 
@@ -61,12 +61,12 @@ func (io LocalIO) ReadBytes(filename string, offset, count int) (data []byte, ok
 
 }
 
-func (io LocalIO) WriteBytes(filename string, offset int, bytes []byte) bool {
+func (io LocalIO) WriteBytes(filename string, offset int, bytes *[]byte) bool {
 	var file, err = os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return false
 	}
-	_, err = file.WriteAt(bytes, int64(offset))
+	_, err = file.WriteAt(*bytes, int64(offset))
 	return err == nil
 
 }
