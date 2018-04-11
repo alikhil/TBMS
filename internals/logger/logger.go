@@ -2,7 +2,7 @@ package logger
 
 import (
 	"io"
-	"io/ioutil"
+	// "io/ioutil"
 	"log"
 	"os"
 )
@@ -40,6 +40,6 @@ func Init(
 }
 
 func init() {
-	Init(ioutil.Discard, os.Stdout, os.Stdout, os.Stderr)
+	Init(os.Stdout /*ioutil.Discard*/, os.Stdout, os.Stdout, os.Stderr)
 	Info.Printf("Logger has been initialized")
 }
