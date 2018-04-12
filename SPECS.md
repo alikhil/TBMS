@@ -42,11 +42,11 @@ Labels - 9 bytes
 |:------:|:---------------:|:----------:|
 | 1 byte |      4 bytes    | 4 bytes    |
 
-InUse - 10 bytes
+InUse - 11 bytes
 
-|  inUse |  type  |   nodeID | nextFreeRowId |
-|:------:|:------:|:--------:|:-------------:|
-| 1 byte | 1 byte | 4 bytes  | 4 bytes       |
+|  inUse |  type  |  head  |   nodeID | nextFreeRowId |
+|:------:|:------:|:------:|:--------:|:-------------:|
+| 1 byte | 1 byte | 1 byte | 4 bytes  | 4 bytes       |
 
 LabelString - 21 bytes
 
