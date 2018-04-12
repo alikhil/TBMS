@@ -22,7 +22,7 @@ func readWriteFile(c IO, t *testing.T) {
 	_ = c.CreateFile(fname)
 	defer c.DeleteFile(fname)
 
-	c.WriteBytes(fname, offset, data)
+	c.WriteBytes(fname, offset, &data)
 
 	readData, _ := c.ReadBytes(fname, offset, 5)
 

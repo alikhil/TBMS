@@ -43,7 +43,7 @@ func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool
 }
 
 func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
-	next := re.GetObjectIterator(FNNodes, BytesPerNode)
+	next := re.GetObjectIterator(StoreNode)
 	i := 0
 	return func() (*ENode, bool) {
 
@@ -63,7 +63,7 @@ func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
 }
 
 func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
-	next := re.GetObjectIterator(FNLabelsStrings, BytesPerLabelString)
+	next := re.GetObjectIterator(StoreLabelString)
 	i := 0
 	return func() (*ELabelString, bool) {
 
@@ -82,7 +82,7 @@ func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
 }
 
 func (re *RealEngine) GetRelationshiptIterator() func() (*ERelationship, bool) {
-	next := re.GetObjectIterator(FNRelationships, BytesPerRelationship)
+	next := re.GetObjectIterator(StoreRelationship)
 	i := 0
 	return func() (*ERelationship, bool) {
 
@@ -100,12 +100,12 @@ func (re *RealEngine) GetRelationshiptIterator() func() (*ERelationship, bool) {
 	}
 }
 
-func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func() ([]byte, bool) {
+func (re *RealEngine) GetObjectIterator(store EStore) func() ([]byte, bool) {
 	curOffset := 0
 	return func() (data []byte, ok bool) {
-		data, ok = re.IO.ReadBytes(filename, curOffset, recordLength)
+		data, ok = re.IO.ReadBytes(FilenameStore[store], curOffset, BytesPerStore[store])
 		if ok {
-			curOffset += recordLength
+			curOffset += BytesPerStore[store]
 		}
 		return
 	}
@@ -113,7 +113,7 @@ func (re *RealEngine) GetObjectIterator(filename string, recordLength int) func(
 
 func (re *RealEngine) GetInUseRecordIterator() func() (*EInUseRecord, bool) {
 
-	next := re.GetObjectIterator(FNInUse, BytesPerInUse)
+	next := re.GetObjectIterator(StoreInUse)
 	i := 0
 	return func() (*EInUseRecord, bool) {
 
@@ -148,17 +148,17 @@ func (re *RealEngine) GetLabelID(label string) (int, bool) {
 }
 
 // GetObjectByID returns byte record of any object from certain file
-func (re *RealEngine) GetObjectByID(filename string, recordLength, id int) (*[]byte, bool) {
-	offset := recordLength * id
-	data, ok := re.IO.ReadBytes(filename, offset, recordLength)
+func (re *RealEngine) GetObjectByID(store EStore, id int) (*[]byte, bool) {
+	offset := BytesPerStore[store] * id
+	data, ok := re.IO.ReadBytes(FilenameStore[store], offset, BytesPerStore[store])
 	if !ok {
-		logger.Trace.Printf("Object with id = %d cannot be read from file %s", id, filename)
+		logger.Trace.Printf("Object with id = %d cannot be read from file %s", id, FilenameStore[store])
 	}
 	return &data, ok
 }
 
 func (re *RealEngine) GetNodeByID(id int) (*ENode, bool) {
-	data, ok := re.GetObjectByID(FNNodes, BytesPerNode, id)
+	data, ok := re.GetObjectByID(StoreNode, id)
 	if !ok {
 		return nil, false
 	}
@@ -166,7 +166,7 @@ func (re *RealEngine) GetNodeByID(id int) (*ENode, bool) {
 }
 
 func (re *RealEngine) GetInUseRecord(id int) (*EInUseRecord, bool) {
-	data, ok := re.GetObjectByID(FNInUse, BytesPerInUse, id)
+	data, ok := re.GetObjectByID(StoreInUse, id)
 	if !ok {
 		return nil, false
 	}
