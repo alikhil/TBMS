@@ -2,8 +2,6 @@ package engine
 
 import "github.com/alikhil/TBMS/internals/io"
 
-type EType byte
-
 type RealEngine struct {
 	io.IO
 }
@@ -51,4 +49,12 @@ type ERelationship struct {
 type ELabelString struct {
 	ID     int
 	String string
+}
+
+type EInUseRecord struct {
+	ID           int
+	StoreType    EStore
+	IsHead       bool
+	ObjID        int
+	NextRecordID int
 }

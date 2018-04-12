@@ -26,12 +26,12 @@ func parseNode(data *[]byte, nodeID int) (*ENode, bool) {
 	if !inUse {
 		return nil, false
 	}
-	var node = ENode{
+	return &ENode{
 		ID:             nodeID,
 		NextLabelID:    parseInt((*data)[1:5]),
 		NextPropertyID: parseInt((*data)[5:9]),
-		NextRelID:      parseInt((*data)[9:13])}
-	return &node, true
+		NextRelID:      parseInt((*data)[9:13]),
+	}, true
 }
 
 func parseProperty(data *[]byte) (*EProperty, bool) {
@@ -42,7 +42,8 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 	return &EProperty{
 		Typename:         EType((*data)[1]),
 		KeyStringID:      parseInt((*data)[2:6]),
-		ValueOrStringPtr: parseInt((*data)[6:10])}, true
+		ValueOrStringPtr: parseInt((*data)[6:10]),
+	}, true
 }
 
 func parseLabelString(data *[]byte, id int) (*ELabelString, bool) {
@@ -73,5 +74,20 @@ func parseRelationship(data *[]byte, id int) (*ERelationship, bool) {
 		SecondNodePrvRelID: parseInt((*data)[22:26]),
 		NextPropertyID:     parseInt((*data)[26:30]),
 		TypeID:             parseInt((*data)[30:34]),
+	}, true
+}
+
+func parseInUse(data *[]byte, id int) (*EInUseRecord, bool) {
+	var inUse = parseBool((*data)[0])
+	if !inUse {
+		return nil, false
+	}
+
+	return &EInUseRecord{
+		ID:           id,
+		StoreType:    EStore((*data)[1]),
+		IsHead:       parseBool((*data)[2]),
+		ObjID:        parseInt((*data)[3:7]),
+		NextRecordID: parseInt((*data)[7:11]),
 	}, true
 }

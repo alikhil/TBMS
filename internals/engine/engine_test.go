@@ -1,9 +1,8 @@
 package engine
 
 import (
-	"testing"
-
 	io "github.com/alikhil/TBMS/internals/io"
+	"testing"
 )
 
 func TestGetLabelID(t *testing.T) {
@@ -47,5 +46,67 @@ func TestGetSaveNode(t *testing.T) {
 	}
 	if *parsedNode != node {
 		t.Fatalf("Expected %+v but get %+v", node, parsedNode)
+	}
+}
+
+// for debuge purposes
+func getAllRecords(re *RealEngine) []EInUseRecord {
+	var list []EInUseRecord
+	var next = re.GetInUseRecordIterator()
+	for el, ok := next(); ok; el, ok = next() {
+		list = append(list, *el)
+	}
+	return list
+}
+
+func TestEncodeParseInt(t *testing.T) {
+
+	for a := -(1 << 21); a < (1 << 22); a++ {
+
+		var real = parseInt(encodeInt(a))
+		if real != a {
+			t.Errorf("expected %v but recieved %v", a, real)
+		}
+	}
+}
+
+func TestInitDatabase(t *testing.T) {
+	var en = RealEngine{IO: io.LocalIO{}}
+
+	en.InitDatabase()
+	defer en.DeleteFile(FNInUse)
+
+	for i := 1; i < 9; i++ {
+		id, ok := en.GetAndLockFreeIDForStore(EStore(i))
+		if !ok && id != 0 {
+			t.Fatalf("Expected id = 0 but get %d", id)
+		}
+	}
+}
+
+func TestGetAndLockFreeID(t *testing.T) {
+	var en = RealEngine{IO: io.LocalIO{}}
+
+	en.InitDatabase()
+	defer en.DeleteFile(FNInUse)
+
+	id, ok := en.GetAndLockFreeIDForStore(StoreNode)
+	if !ok {
+		t.Fatalf("can not lock id for %s", FilenameStore[StoreNode])
+	}
+
+	deleted := en.DeleteObject(id, StoreNode)
+	if !deleted {
+		t.Fatalf("object is not deleted")
+	}
+
+	newID, okNew := en.GetAndLockFreeIDForStore(StoreNode)
+
+	if !okNew {
+		t.Fatalf("can not lock id for %s after deletion", FilenameStore[StoreNode])
+	}
+
+	if id != newID {
+		t.Fatalf("expected %v but get %v", id, newID)
 	}
 }

@@ -34,3 +34,16 @@ func encodeProperty(prop *EProperty) *[]byte {
 	// TODO: use encodeNode as base and look and SPEC.md
 	panic("not implemented")
 }
+
+func encodeInUseRecord(record *EInUseRecord) *[]byte {
+	var isHead byte = 0
+	if record.IsHead {
+		isHead = 1
+	}
+	buffer := []byte{1, byte(record.StoreType), isHead}
+
+	buffer = append(buffer, encodeInt(record.ObjID)...)
+	buffer = append(buffer, encodeInt(record.NextRecordID)...)
+
+	return &buffer
+}

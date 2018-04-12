@@ -62,7 +62,7 @@ func (io LocalIO) ReadBytes(filename string, offset, count int) (data []byte, ok
 }
 
 func (io LocalIO) WriteBytes(filename string, offset int, bytes *[]byte) bool {
-	var file, err = os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0644)
+	var file, err = os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return false
 	}
