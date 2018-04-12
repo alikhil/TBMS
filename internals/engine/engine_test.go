@@ -95,6 +95,11 @@ func TestGetAndLockFreeID(t *testing.T) {
 		t.Fatalf("can not lock id for %s", FilenameStore[StoreNode])
 	}
 
+	defer func() {
+		if en.FileExists(FNNodes) {
+			en.DeleteFile(FNNodes)
+		}
+	}()
 	deleted := en.DeleteObject(id, StoreNode)
 	if !deleted {
 		t.Fatalf("object is not deleted")
