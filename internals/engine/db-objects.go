@@ -12,6 +12,7 @@ type EObject interface {
 	getID() int32
 	getStore() EStore
 	encode() *[]byte
+	fill(*[]byte, int32)
 }
 
 type EString struct {

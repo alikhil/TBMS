@@ -23,7 +23,7 @@ func TestGetLabelID(t *testing.T) {
 	re := RealEngine{IO: rw}
 	id, _ := re.GetLabelID(labelStr)
 
-	if id != 0 {
+	if id != FirstID {
 		t.Errorf("Expected %v but got %v", 0, id)
 	}
 
@@ -32,7 +32,7 @@ func TestGetLabelID(t *testing.T) {
 func TestGetSaveNode(t *testing.T) {
 	var en = RealEngine{IO: io.LocalIO{}}
 	var node = ENode{
-		ID:             0,
+		ID:             FirstID,
 		NextLabelID:    -1,
 		NextPropertyID: -1,
 		NextRelID:      -1}
@@ -40,7 +40,8 @@ func TestGetSaveNode(t *testing.T) {
 	en.SaveObject(&node)
 	defer en.IO.DeleteFile(FNNodes)
 
-	var parsedNode, ok = en.GetNodeByID(0)
+	var parsedNode = &ENode{ID: FirstID}
+	ok := en.GetObject(parsedNode)
 	if !ok {
 		t.Fatalf("Can not read saved node!")
 	}
@@ -52,8 +53,9 @@ func TestGetSaveNode(t *testing.T) {
 // for debuge purposes
 func getAllRecords(re *RealEngine) []EInUseRecord {
 	var list []EInUseRecord
-	var next = re.GetInUseRecordIterator()
-	for el, ok := next(); ok; el, ok = next() {
+	var nextFill = re.GetEObjectIterator(StoreInUse)
+	el := &EInUseRecord{}
+	for ok := nextFill(el); ok; ok = nextFill(el) {
 		list = append(list, *el)
 	}
 	return list
@@ -75,12 +77,13 @@ func TestInitDatabase(t *testing.T) {
 	var en = RealEngine{IO: io.LocalIO{}}
 
 	en.InitDatabase()
+	print32AllRecords(&en)
 	defer en.DeleteFile(FNInUse)
 
-	for i := 1; i < 9; i++ {
+	for i := 2; i <= 9; i++ {
 		id, ok := en.GetAndLockFreeIDForStore(EStore(i))
-		if !ok && id != 0 {
-			t.Fatalf("Expected id = 0 but get %d", id)
+		if !ok && id != FirstID {
+			t.Fatalf("Expected id = %d but get %d", FirstID, id)
 		}
 	}
 }

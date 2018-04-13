@@ -18,7 +18,7 @@ func (re *RealEngine) GetLabelIteratorFromId(labelID int32) func() (int32, bool)
 }
 
 func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool) {
-	nextNode := re.GetNodesIterator()
+	fillNextNode := re.GetEObjectIterator(StoreNode)
 	neededlabelID, ok := re.GetLabelID(label)
 	if !ok {
 
@@ -28,7 +28,8 @@ func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool
 	}
 
 	return func() (*ENode, bool) {
-		node, ok := nextNode()
+		node := &ENode{}
+		ok := fillNextNode(node)
 		if ok {
 			nextLabel := re.GetLabelIteratorFromId(node.NextLabelID)
 			for labelID, ok := nextLabel(); ok; {
@@ -42,66 +43,8 @@ func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool
 	}
 }
 
-func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
-	next := re.GetObjectIterator(StoreNode)
-	var i int32 = 0
-	return func() (*ENode, bool) {
-
-	iterate:
-		data, ok := next()
-		if ok {
-			node, nodeInUse := parseNode(&data, i)
-			i++
-			if !nodeInUse {
-				// jump to another node, since this one is not in use
-				goto iterate
-			}
-			return node, ok
-		}
-		return nil, false
-	}
-}
-
-func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
-	next := re.GetObjectIterator(StoreLabelString)
-	var i int32 = 0
-	return func() (*ELabelString, bool) {
-
-	iterate:
-		data, ok := next()
-		if ok {
-			label, labelStringInUse := parseLabelString(&data, i)
-			i++
-			if !labelStringInUse {
-				goto iterate
-			}
-			return label, ok
-		}
-		return nil, false
-	}
-}
-
-func (re *RealEngine) GetRelationshiptIterator() func() (*ERelationship, bool) {
-	next := re.GetObjectIterator(StoreRelationship)
-	var i int32 = 0
-	return func() (*ERelationship, bool) {
-
-	iterate:
-		data, ok := next()
-		if ok {
-			rel, relInUse := parseRelationship(&data, i)
-			i++
-			if !relInUse {
-				goto iterate
-			}
-			return rel, ok
-		}
-		return nil, false
-	}
-}
-
-func (re *RealEngine) GetObjectIterator(store EStore) func() ([]byte, bool) {
-	var curOffset int32 = 0
+func (re *RealEngine) getObjectIterator(store EStore) func() ([]byte, bool) {
+	var curOffset int32
 	return func() (data []byte, ok bool) {
 		data, ok = re.IO.ReadBytes(FilenameStore[store], curOffset, BytesPerStore[store])
 		if ok {
@@ -111,29 +54,36 @@ func (re *RealEngine) GetObjectIterator(store EStore) func() ([]byte, bool) {
 	}
 }
 
-func (re *RealEngine) GetInUseRecordIterator() func() (*EInUseRecord, bool) {
-
-	next := re.GetObjectIterator(StoreInUse)
-	var i int32 = 0
-	return func() (*EInUseRecord, bool) {
-
+// GetEObjectIterator - returns function for iterating objects of certain store
+// Example:
+//	nextFill := re.GetEObjectIterator(StoreNodes)
+//  node := &ENode{} // empty obj to where next node will be loaded
+//  for ok := nextFill(node); ok; ok = nextFill(node) {
+//  	// use node somehow
+//  }
+func (re *RealEngine) GetEObjectIterator(store EStore) func(EObject) bool {
+	next := re.getObjectIterator(store)
+	var i int32
+	return func(ob EObject) bool {
 	iterate:
 		data, ok := next()
 		if ok {
-			rec, recInUse := parseInUse(&data, i)
 			i++
-			if !recInUse {
+			if notInUse(&data) {
 				goto iterate
 			}
-			return rec, ok
+
+			ob.fill(&data, i)
+			return ok
 		}
-		return nil, false
+		return false
 	}
 }
 
 // GetNodeRelationshipsIterator return iterator that allows to iterate all rellationship of node
 func (re *RealEngine) GetNodeRelationshipsIterator(nodeID int32) func() (*ERelationship, bool) {
-	node, ok := re.GetNodeByID(nodeID)
+	node := &ENode{ID: nodeID}
+	ok := re.GetObject(node)
 	if !ok {
 		return func() (*ERelationship, bool) { return nil, false }
 	}
@@ -142,7 +92,8 @@ func (re *RealEngine) GetNodeRelationshipsIterator(nodeID int32) func() (*ERelat
 
 	return func() (*ERelationship, bool) {
 
-		cur, ok := re.GetRelatationship(nxtID)
+		cur := &ERelationship{ID: nxtID}
+		ok := re.GetObject(cur)
 		if !ok {
 			return nil, false
 		}
@@ -155,18 +106,10 @@ func (re *RealEngine) GetNodeRelationshipsIterator(nodeID int32) func() (*ERelat
 	Getters/Setters
  * ***************** */
 
-func (re *RealEngine) GetRelatationship(id int32) (*ERelationship, bool) {
-	data, ok := re.GetObjectByID(StoreRelationship, id)
-	if !ok {
-		return nil, false
-	}
-
-	return parseRelationship(data, id)
-}
-
 func (re *RealEngine) GetLabelID(label string) (int32, bool) {
-	next := re.GetLabelStringIterator()
-	for l, ok := next(); ok; l, ok = next() {
+	fillNextLabelStr := re.GetEObjectIterator(StoreLabelString)
+	l := &ELabelString{}
+	for ok := fillNextLabelStr(l); ok; ok = fillNextLabelStr(l) {
 		if ok && label == l.String {
 			return l.ID, true
 		}
@@ -174,9 +117,8 @@ func (re *RealEngine) GetLabelID(label string) (int32, bool) {
 	return -1, false
 }
 
-// GetObjectByID returns byte record of any object from certain file
-func (re *RealEngine) GetObjectByID(store EStore, id int32) (*[]byte, bool) {
-	offset := BytesPerStore[store] * id
+func (re *RealEngine) getObjectByID(store EStore, id int32) (*[]byte, bool) {
+	offset := BytesPerStore[store] * (id - FirstID)
 	data, ok := re.IO.ReadBytes(FilenameStore[store], offset, BytesPerStore[store])
 	if !ok {
 		logger.Trace.Printf("Object with id = %d cannot be read from file %s", id, FilenameStore[store])
@@ -184,28 +126,33 @@ func (re *RealEngine) GetObjectByID(store EStore, id int32) (*[]byte, bool) {
 	return &data, ok
 }
 
-func (re *RealEngine) GetNodeByID(id int32) (*ENode, bool) {
-	data, ok := re.GetObjectByID(StoreNode, id)
-	if !ok {
-		return nil, false
-	}
-	return parseNode(data, id)
+func notInUse(data *[]byte) bool {
+	return !parseBool((*data)[0])
 }
 
-func (re *RealEngine) GetInUseRecord(id int32) (*EInUseRecord, bool) {
-	data, ok := re.GetObjectByID(StoreInUse, id)
-	if !ok {
-		return nil, false
+// GetObject - loads any object from database by id to passed object
+// Example:
+//	node := &ENode{ID: 12}
+// 	found := re.GetObject(node)
+func (re *RealEngine) GetObject(obj EObject) bool {
+	if obj.getID() < FirstID {
+		logger.Error.Fatalf("Object ID is not set for element of %s ", FilenameStore[obj.getStore()])
 	}
-	return parseInUse(data, id)
+	data, ok := re.getObjectByID(obj.getStore(), obj.getID())
+	if notInUse(data) {
+		return false
+	}
+	obj.fill(data, obj.getID())
+	return ok
 }
 
+// SaveObject - saves any EObject to file
 func (re *RealEngine) SaveObject(obj EObject) bool {
 	return re.saveObject(obj.getStore(), obj.getID(), obj.encode())
 }
 
 func (re *RealEngine) saveObject(store EStore, id int32, data *[]byte) bool {
-	offset := BytesPerStore[store] * id
+	offset := BytesPerStore[store] * (id - FirstID)
 	ok := re.IO.WriteBytes(FilenameStore[store], offset, data)
 	if !ok {
 		logger.Warning.Printf("Failed to save object with id = %d to file %s", id, FilenameStore[store])
@@ -223,7 +170,7 @@ func (re *RealEngine) DeleteObject(obj EObject) bool {
 		return false
 	}
 
-	headRecord, found := re.FindHeadInUseRecord(store)
+	headRecord, found := re.findHeadInUseRecord(store)
 	if !found {
 		return false
 	}
@@ -249,12 +196,13 @@ func (re *RealEngine) DeleteObject(obj EObject) bool {
 	Obtaining free ids
  * ******************** */
 
-func (re *RealEngine) FindHeadInUseRecord(store EStore) (*EInUseRecord, bool) {
+func (re *RealEngine) findHeadInUseRecord(store EStore) (*EInUseRecord, bool) {
 
 	// WARN: there could be problems with concurrency
-	var next = re.GetInUseRecordIterator()
+	var fillNext = re.GetEObjectIterator(StoreInUse)
 
-	for record, ok := next(); ok; record, ok = next() {
+	var record = &EInUseRecord{}
+	for ok := fillNext(record); ok; ok = fillNext(record) {
 		if record.StoreType == store && record.IsHead {
 			return record, true
 		}
@@ -264,15 +212,17 @@ func (re *RealEngine) FindHeadInUseRecord(store EStore) (*EInUseRecord, bool) {
 
 }
 
+// GetAndLockFreeIDForStore - obtains free id for store
 func (re *RealEngine) GetAndLockFreeIDForStore(store EStore) (int32, bool) {
-	record, found := re.FindHeadInUseRecord(store)
+	record, found := re.findHeadInUseRecord(store)
 	if !found {
 		return -1, false
 	}
 
 	if record.NextRecordID != -1 {
 		// Use deleted obj places if they exist
-		nxtRecord, ok := re.GetInUseRecord(record.NextRecordID)
+		nxtRecord := &EInUseRecord{ID: record.NextRecordID}
+		ok := re.GetObject(nxtRecord)
 		if !ok {
 			logger.Error.Printf("Can not get in use record with id = %v", nxtRecord.ID)
 			return -1, false
@@ -298,7 +248,7 @@ func (re *RealEngine) setupInUseFor(store EStore) {
 		ID:           int32(store),
 		StoreType:    store,
 		IsHead:       true,
-		ObjID:        0,
+		ObjID:        FirstID,
 		NextRecordID: -1,
 	}
 	ok := re.SaveObject(inUseRecord)
@@ -309,8 +259,9 @@ func (re *RealEngine) setupInUseFor(store EStore) {
 
 func print32AllRecords(re *RealEngine) {
 	var list []EInUseRecord
-	var next = re.GetInUseRecordIterator()
-	for el, ok := next(); ok; el, ok = next() {
+	var nextFill = re.GetEObjectIterator(StoreInUse)
+	el := &EInUseRecord{}
+	for ok := nextFill(el); ok; ok = nextFill(el) {
 		list = append(list, *el)
 	}
 	logger.Trace.Printf("now: %+v", list)
@@ -332,7 +283,7 @@ func (re *RealEngine) InitDatabase() {
 		ID:           int32(StoreInUse),
 		StoreType:    StoreInUse,
 		IsHead:       true,
-		ObjID:        9,
+		ObjID:        10,
 		NextRecordID: -1,
 	}
 	ok := re.SaveObject(inUseRecord)

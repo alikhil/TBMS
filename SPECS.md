@@ -7,6 +7,10 @@
 * Boolean 1 bit/byte
 * String - variable length, encoding is set by using parameter
 
+IDs start from 1
+
+InUse column is first in everyschema
+
 ## Stores
 
 We store label, relationtype, keys

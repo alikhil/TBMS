@@ -30,6 +30,11 @@ func (rel *ERelationship) encode() *[]byte {
 	panic("not implemented")
 }
 
+func (rel *ELabelString) encode() *[]byte {
+	// TODO: use encodeNode as base and look and SPEC.md
+	panic("not implemented")
+}
+
 func (prop *EProperty) encode() *[]byte {
 	// TODO: use encodeNode as base and look and SPEC.md
 	panic("not implemented")

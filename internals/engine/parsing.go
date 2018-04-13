@@ -19,18 +19,11 @@ func parseBool(b byte) bool {
 	return b > 0
 }
 
-func parseNode(data *[]byte, nodeID int32) (*ENode, bool) {
-
-	var inUse = parseBool((*data)[0])
-	if !inUse {
-		return nil, false
-	}
-	return &ENode{
-		ID:             nodeID,
-		NextLabelID:    parseInt((*data)[1:5]),
-		NextPropertyID: parseInt((*data)[5:9]),
-		NextRelID:      parseInt((*data)[9:13]),
-	}, true
+func (node *ENode) fill(data *[]byte, id int32) {
+	node.ID = id
+	node.NextLabelID = parseInt((*data)[1:5])
+	node.NextPropertyID = parseInt((*data)[5:9])
+	node.NextRelID = parseInt((*data)[9:13])
 }
 
 func parseProperty(data *[]byte) (*EProperty, bool) {
@@ -45,48 +38,30 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 	}, true
 }
 
-func parseLabelString(data *[]byte, id int32) (*ELabelString, bool) {
-	var inUse = parseBool((*data)[0])
-	if !inUse {
-		return nil, false
-	}
+func (l *ELabelString) fill(data *[]byte, id int32) {
 
 	end := bytes.IndexByte(*data, 0)
-	s := string((*data)[1:end])
-	return &ELabelString{ID: id, String: s}, true
+	l.ID = id
+	l.String = string((*data)[1:end])
 }
 
-func parseRelationship(data *[]byte, id int32) (*ERelationship, bool) {
-	var inUse = parseBool((*data)[0])
-	if !inUse {
-		return nil, false
-	}
-
-	return &ERelationship{
-		ID:                 id,
-		FirstInChain:       parseBool((*data)[1]),
-		SecondNode:         parseInt((*data)[2:6]),
-		FirstNodeID:        parseInt((*data)[6:10]),
-		FirstNodeNxtRelID:  parseInt((*data)[10:14]),
-		SecondNodeNxtRelID: parseInt((*data)[14:18]),
-		FirstNodePrvRelID:  parseInt((*data)[18:22]),
-		SecondNodePrvRelID: parseInt((*data)[22:26]),
-		NextPropertyID:     parseInt((*data)[26:30]),
-		TypeID:             parseInt((*data)[30:34]),
-	}, true
+func (rel *ERelationship) fill(data *[]byte, id int32) {
+	rel.ID = id
+	rel.FirstInChain = parseBool((*data)[1])
+	rel.SecondNode = parseInt((*data)[2:6])
+	rel.FirstNodeID = parseInt((*data)[6:10])
+	rel.FirstNodeNxtRelID = parseInt((*data)[10:14])
+	rel.SecondNodeNxtRelID = parseInt((*data)[14:18])
+	rel.FirstNodePrvRelID = parseInt((*data)[18:22])
+	rel.SecondNodePrvRelID = parseInt((*data)[22:26])
+	rel.NextPropertyID = parseInt((*data)[26:30])
+	rel.TypeID = parseInt((*data)[30:34])
 }
 
-func parseInUse(data *[]byte, id int32) (*EInUseRecord, bool) {
-	var inUse = parseBool((*data)[0])
-	if !inUse {
-		return nil, false
-	}
-
-	return &EInUseRecord{
-		ID:           id,
-		StoreType:    EStore((*data)[1]),
-		IsHead:       parseBool((*data)[2]),
-		ObjID:        parseInt((*data)[3:7]),
-		NextRecordID: parseInt((*data)[7:11]),
-	}, true
+func (r *EInUseRecord) fill(data *[]byte, id int32) {
+	r.ID = id
+	r.StoreType = EStore((*data)[1])
+	r.IsHead = parseBool((*data)[2])
+	r.ObjID = parseInt((*data)[3:7])
+	r.NextRecordID = parseInt((*data)[7:11])
 }

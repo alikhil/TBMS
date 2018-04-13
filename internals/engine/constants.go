@@ -57,7 +57,7 @@ var (
 type EStore byte
 
 const (
-	StoreInUse EStore = iota
+	StoreInUse EStore = iota + 1
 	StoreNode
 	StoreRelationship
 	StoreProperty
@@ -67,6 +67,8 @@ const (
 	StoreString
 	StoreRelationshipType
 )
+
+const FirstID = 1
 
 // FilenameStore maps StoreId with filename where it stores
 var FilenameStore = map[EStore]string{
