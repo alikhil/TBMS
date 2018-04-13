@@ -1,6 +1,5 @@
 # Specifications
 
-
 ## Types
 
 * Int - 4 bytes
