@@ -6,21 +6,20 @@ import (
 	"github.com/alikhil/TBMS/internals/logger"
 )
 
-func parseInt(data []byte) int {
-	var ret int32
+func parseInt(data []byte) (ret int32) {
 	buf := bytes.NewBuffer(data)
 	err := binary.Read(buf, ConventionByteOrder, &ret)
 	if err != nil {
 		logger.Error.Printf("Can not parse int %v", err)
 	}
-	return int(ret)
+	return ret
 }
 
 func parseBool(b byte) bool {
 	return b > 0
 }
 
-func parseNode(data *[]byte, nodeID int) (*ENode, bool) {
+func parseNode(data *[]byte, nodeID int32) (*ENode, bool) {
 
 	var inUse = parseBool((*data)[0])
 	if !inUse {
@@ -46,7 +45,7 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 	}, true
 }
 
-func parseLabelString(data *[]byte, id int) (*ELabelString, bool) {
+func parseLabelString(data *[]byte, id int32) (*ELabelString, bool) {
 	var inUse = parseBool((*data)[0])
 	if !inUse {
 		return nil, false
@@ -57,7 +56,7 @@ func parseLabelString(data *[]byte, id int) (*ELabelString, bool) {
 	return &ELabelString{ID: id, String: s}, true
 }
 
-func parseRelationship(data *[]byte, id int) (*ERelationship, bool) {
+func parseRelationship(data *[]byte, id int32) (*ERelationship, bool) {
 	var inUse = parseBool((*data)[0])
 	if !inUse {
 		return nil, false
@@ -77,7 +76,7 @@ func parseRelationship(data *[]byte, id int) (*ERelationship, bool) {
 	}, true
 }
 
-func parseInUse(data *[]byte, id int) (*EInUseRecord, bool) {
+func parseInUse(data *[]byte, id int32) (*EInUseRecord, bool) {
 	var inUse = parseBool((*data)[0])
 	if !inUse {
 		return nil, false

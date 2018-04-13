@@ -4,6 +4,9 @@ import (
 	"encoding/binary"
 )
 
+/**
+Record length for each store
+*/
 const (
 	BytesPerNode         = 13
 	BytesPerRelationship = 34
@@ -78,7 +81,7 @@ var FilenameStore = map[EStore]string{
 	StoreRelationshipType: FNRelationshipTypes,
 }
 
-var BytesPerStore = map[EStore]int{
+var BytesPerStore = map[EStore]int32{
 	StoreNode:             BytesPerNode,
 	StoreRelationship:     BytesPerRelationship,
 	StoreProperty:         BytesPerProperty,

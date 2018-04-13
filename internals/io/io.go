@@ -5,8 +5,8 @@ import (
 )
 
 type IO interface {
-	ReadBytes(file string, offset, count int) (data []byte, ok bool)
-	WriteBytes(file string, offset int, bytes *[]byte) (ok bool)
+	ReadBytes(file string, offset, count int32) (data []byte, ok bool)
+	WriteBytes(file string, offset int32, bytes *[]byte) (ok bool)
 	CreateFile(file string) (ok bool)
 	FileExists(file string) bool
 	DeleteFile(file string) (ok bool)
@@ -19,11 +19,11 @@ type LRUCache struct {
 	baseIO IO
 }
 
-func (c LRUCache) ReadBytes(file string, offset, count int) ([]byte, bool) {
+func (c LRUCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
 	return nil, false
 }
 
-func (c LRUCache) WriteBytes(file string, offset int, bytes *[]byte) bool {
+func (c LRUCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
 	return false
 }
 
@@ -43,7 +43,7 @@ func (c LRUCache) DeleteFile(file string) bool {
 type LocalIO struct {
 }
 
-func (io LocalIO) ReadBytes(filename string, offset, count int) (data []byte, ok bool) {
+func (io LocalIO) ReadBytes(filename string, offset, count int32) (data []byte, ok bool) {
 	if !io.FileExists(filename) {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (io LocalIO) ReadBytes(filename string, offset, count int) (data []byte, ok
 
 }
 
-func (io LocalIO) WriteBytes(filename string, offset int, bytes *[]byte) bool {
+func (io LocalIO) WriteBytes(filename string, offset int32, bytes *[]byte) bool {
 	var file, err = os.OpenFile(filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		return false

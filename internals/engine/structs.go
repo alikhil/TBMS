@@ -7,54 +7,73 @@ type RealEngine struct {
 }
 
 type EIterator struct {
-	ID int
+	ID int32
 }
 
 type ELabel struct {
-	ID int
+	ID int32
 }
 
 type ENode struct {
-	ID             int
-	NextLabelID    int
-	NextPropertyID int
-	NextRelID      int
+	ID             int32
+	NextLabelID    int32
+	NextPropertyID int32
+	NextRelID      int32
 }
 
 type EParser struct {
 }
 
 type EProperty struct {
-	ID               int
-	ValueOrStringPtr int
+	ID               int32
+	ValueOrStringPtr int32
 	Typename         EType
-	KeyStringID      int
+	KeyStringID      int32
 }
 
 type ERelationship struct {
-	ID           int
+	ID           int32
 	FirstInChain bool
 
-	FirstNodeID int
-	SecondNode  int
+	FirstNodeID int32
+	SecondNode  int32
 
-	FirstNodeNxtRelID  int
-	SecondNodeNxtRelID int
-	FirstNodePrvRelID  int
-	SecondNodePrvRelID int
-	NextPropertyID     int
-	TypeID             int
+	FirstNodeNxtRelID  int32
+	SecondNodeNxtRelID int32
+	FirstNodePrvRelID  int32
+	SecondNodePrvRelID int32
+	NextPropertyID     int32
+	TypeID             int32
+}
+
+// GetPart returns needed part of relationship for node
+func (rel *ERelationship) GetPart(nodeID int32) *ERelPart {
+	if rel.FirstNodeID == nodeID {
+		return &ERelPart{
+			NodeNxtRelID:  rel.FirstNodeNxtRelID,
+			NodePrevRelID: rel.FirstNodePrvRelID,
+		}
+	}
+	return &ERelPart{
+		NodeNxtRelID:  rel.SecondNodeNxtRelID,
+		NodePrevRelID: rel.SecondNodePrvRelID,
+	}
+}
+
+type ERelPart struct {
+	NodeNxtRelID  int32
+	NodePrevRelID int32
 }
 
 type ELabelString struct {
-	ID     int
+	ID     int32
 	String string
 }
 
 type EInUseRecord struct {
-	ID           int
+	ID           int32
 	StoreType    EStore
 	IsHead       bool
-	ObjID        int
-	NextRecordID int
+	ObjID        int32
+	NextRecordID int32
 }

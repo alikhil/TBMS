@@ -6,9 +6,9 @@ import (
 	"github.com/alikhil/TBMS/internals/logger"
 )
 
-func encodeInt(val int) []byte {
+func encodeInt(val int32) []byte {
 	buf := new(bytes.Buffer)
-	err := binary.Write(buf, ConventionByteOrder, int32(val))
+	err := binary.Write(buf, ConventionByteOrder, val)
 	if err != nil {
 		logger.Error.Printf("Error on encoding int: %v", err)
 	}
@@ -36,7 +36,7 @@ func encodeProperty(prop *EProperty) *[]byte {
 }
 
 func encodeInUseRecord(record *EInUseRecord) *[]byte {
-	var isHead byte = 0
+	var isHead byte
 	if record.IsHead {
 		isHead = 1
 	}

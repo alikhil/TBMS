@@ -10,9 +10,9 @@ import (
 	 ITERATORS
  * ************** */
 
-func (re *RealEngine) GetLabelIteratorFromId(labelID int) func() (int, bool) {
+func (re *RealEngine) GetLabelIteratorFromId(labelID int32) func() (int32, bool) {
 	// TODO: implement it using GetLabelIterator()
-	return func() (int, bool) {
+	return func() (int32, bool) {
 		return 0, false
 	}
 }
@@ -44,7 +44,7 @@ func (re *RealEngine) GetNodesByLabelIterator(label string) func() (*ENode, bool
 
 func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
 	next := re.GetObjectIterator(StoreNode)
-	i := 0
+	var i int32 = 0
 	return func() (*ENode, bool) {
 
 	iterate:
@@ -64,7 +64,7 @@ func (re *RealEngine) GetNodesIterator() func() (*ENode, bool) {
 
 func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
 	next := re.GetObjectIterator(StoreLabelString)
-	i := 0
+	var i int32 = 0
 	return func() (*ELabelString, bool) {
 
 	iterate:
@@ -83,7 +83,7 @@ func (re *RealEngine) GetLabelStringIterator() func() (*ELabelString, bool) {
 
 func (re *RealEngine) GetRelationshiptIterator() func() (*ERelationship, bool) {
 	next := re.GetObjectIterator(StoreRelationship)
-	i := 0
+	var i int32 = 0
 	return func() (*ERelationship, bool) {
 
 	iterate:
@@ -101,7 +101,7 @@ func (re *RealEngine) GetRelationshiptIterator() func() (*ERelationship, bool) {
 }
 
 func (re *RealEngine) GetObjectIterator(store EStore) func() ([]byte, bool) {
-	curOffset := 0
+	var curOffset int32 = 0
 	return func() (data []byte, ok bool) {
 		data, ok = re.IO.ReadBytes(FilenameStore[store], curOffset, BytesPerStore[store])
 		if ok {
@@ -114,7 +114,7 @@ func (re *RealEngine) GetObjectIterator(store EStore) func() ([]byte, bool) {
 func (re *RealEngine) GetInUseRecordIterator() func() (*EInUseRecord, bool) {
 
 	next := re.GetObjectIterator(StoreInUse)
-	i := 0
+	var i int32 = 0
 	return func() (*EInUseRecord, bool) {
 
 	iterate:
@@ -131,24 +131,51 @@ func (re *RealEngine) GetInUseRecordIterator() func() (*EInUseRecord, bool) {
 	}
 }
 
+// GetNodeRelationshipsIterator return iterator that allows to iterate all rellationship of node
+func (re *RealEngine) GetNodeRelationshipsIterator(nodeID int32) func() (*ERelationship, bool) {
+	node, ok := re.GetNodeByID(nodeID)
+	if !ok {
+		return func() (*ERelationship, bool) { return nil, false }
+	}
+
+	nxtID := node.NextRelID
+
+	return func() (*ERelationship, bool) {
+
+		cur, ok := re.GetRelatationship(nxtID)
+		if !ok {
+			return nil, false
+		}
+		nxtID = cur.GetPart(nodeID).NodeNxtRelID
+		return cur, true
+	}
+}
+
 /* ***************** *
 	Getters/Setters
  * ***************** */
 
-func (re *RealEngine) GetLabelID(label string) (int, bool) {
+func (re *RealEngine) GetRelatationship(id int32) (*ERelationship, bool) {
+	data, ok := re.GetObjectByID(StoreRelationship, id)
+	if !ok {
+		return nil, false
+	}
+
+	return parseRelationship(data, id)
+}
+
+func (re *RealEngine) GetLabelID(label string) (int32, bool) {
 	next := re.GetLabelStringIterator()
-	i := 0
 	for l, ok := next(); ok; l, ok = next() {
 		if ok && label == l.String {
-			return i, true
+			return l.ID, true
 		}
-		i++
 	}
 	return -1, false
 }
 
 // GetObjectByID returns byte record of any object from certain file
-func (re *RealEngine) GetObjectByID(store EStore, id int) (*[]byte, bool) {
+func (re *RealEngine) GetObjectByID(store EStore, id int32) (*[]byte, bool) {
 	offset := BytesPerStore[store] * id
 	data, ok := re.IO.ReadBytes(FilenameStore[store], offset, BytesPerStore[store])
 	if !ok {
@@ -157,7 +184,7 @@ func (re *RealEngine) GetObjectByID(store EStore, id int) (*[]byte, bool) {
 	return &data, ok
 }
 
-func (re *RealEngine) GetNodeByID(id int) (*ENode, bool) {
+func (re *RealEngine) GetNodeByID(id int32) (*ENode, bool) {
 	data, ok := re.GetObjectByID(StoreNode, id)
 	if !ok {
 		return nil, false
@@ -165,7 +192,7 @@ func (re *RealEngine) GetNodeByID(id int) (*ENode, bool) {
 	return parseNode(data, id)
 }
 
-func (re *RealEngine) GetInUseRecord(id int) (*EInUseRecord, bool) {
+func (re *RealEngine) GetInUseRecord(id int32) (*EInUseRecord, bool) {
 	data, ok := re.GetObjectByID(StoreInUse, id)
 	if !ok {
 		return nil, false
@@ -173,7 +200,7 @@ func (re *RealEngine) GetInUseRecord(id int) (*EInUseRecord, bool) {
 	return parseInUse(data, id)
 }
 
-func (re *RealEngine) saveObject(store EStore, id int, data *[]byte) bool {
+func (re *RealEngine) saveObject(store EStore, id int32, data *[]byte) bool {
 	offset := BytesPerStore[store] * id
 	ok := re.IO.WriteBytes(FilenameStore[store], offset, data)
 	if !ok {
@@ -192,7 +219,7 @@ func (re *RealEngine) SaveInUseRecord(record *EInUseRecord) bool {
 	return re.saveObject(StoreInUse, record.ID, data)
 }
 
-func (re *RealEngine) DeleteObject(objID int, store EStore) bool {
+func (re *RealEngine) DeleteObject(objID int32, store EStore) bool {
 	emptyRecord := make([]byte, BytesPerStore[store])
 	saved := re.saveObject(store, objID, &emptyRecord)
 	if !saved {
@@ -241,7 +268,7 @@ func (re *RealEngine) FindHeadInUseRecord(store EStore) (*EInUseRecord, bool) {
 
 }
 
-func (re *RealEngine) GetAndLockFreeIDForStore(store EStore) (int, bool) {
+func (re *RealEngine) GetAndLockFreeIDForStore(store EStore) (int32, bool) {
 	record, found := re.FindHeadInUseRecord(store)
 	if !found {
 		return -1, false
@@ -272,7 +299,7 @@ func (re *RealEngine) GetAndLockFreeIDForStore(store EStore) (int, bool) {
 
 func (re *RealEngine) setupInUseFor(store EStore) {
 	var inUseRecord = &EInUseRecord{
-		ID:           int(store),
+		ID:           int32(store),
 		StoreType:    store,
 		IsHead:       true,
 		ObjID:        0,
@@ -284,7 +311,7 @@ func (re *RealEngine) setupInUseFor(store EStore) {
 	}
 }
 
-func printAllRecords(re *RealEngine) {
+func print32AllRecords(re *RealEngine) {
 	var list []EInUseRecord
 	var next = re.GetInUseRecordIterator()
 	for el, ok := next(); ok; el, ok = next() {
@@ -306,7 +333,7 @@ func (re *RealEngine) InitDatabase() {
 	re.setupInUseFor(StoreString)
 
 	var inUseRecord = &EInUseRecord{
-		ID:           int(StoreInUse),
+		ID:           int32(StoreInUse),
 		StoreType:    StoreInUse,
 		IsHead:       true,
 		ObjID:        9,
