@@ -37,7 +37,7 @@ func TestGetSaveNode(t *testing.T) {
 		NextPropertyID: -1,
 		NextRelID:      -1}
 
-	en.SaveNode(&node)
+	en.SaveObject(&node)
 	defer en.IO.DeleteFile(FNNodes)
 
 	var parsedNode, ok = en.GetNodeByID(0)
@@ -61,7 +61,8 @@ func getAllRecords(re *RealEngine) []EInUseRecord {
 
 func TestEncodeParseInt(t *testing.T) {
 
-	for a := -(1 << 21); a < (1 << 22); a++ {
+	var a int32
+	for a = -(1 << 21); a < (1 << 22); a++ {
 
 		var real = parseInt(encodeInt(a))
 		if real != a {
@@ -100,7 +101,7 @@ func TestGetAndLockFreeID(t *testing.T) {
 			en.DeleteFile(FNNodes)
 		}
 	}()
-	deleted := en.DeleteObject(id, StoreNode)
+	deleted := en.DeleteObject(&ENode{ID: id})
 	if !deleted {
 		t.Fatalf("object is not deleted")
 	}

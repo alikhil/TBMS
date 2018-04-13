@@ -15,7 +15,7 @@ func encodeInt(val int32) []byte {
 	return buf.Bytes()
 }
 
-func encodeNode(node *ENode) *[]byte {
+func (node *ENode) encode() *[]byte {
 	buffer := []byte{1} // Encode InUse
 
 	buffer = append(buffer, encodeInt(node.NextLabelID)...)    // Add NextLabelID
@@ -25,17 +25,17 @@ func encodeNode(node *ENode) *[]byte {
 	return &buffer
 }
 
-func encodeRelationship(rel *ERelationship) *[]byte {
+func (rel *ERelationship) encode() *[]byte {
 	// TODO: use encodeNode as base and look and SPEC.md
 	panic("not implemented")
 }
 
-func encodeProperty(prop *EProperty) *[]byte {
+func (prop *EProperty) encode() *[]byte {
 	// TODO: use encodeNode as base and look and SPEC.md
 	panic("not implemented")
 }
 
-func encodeInUseRecord(record *EInUseRecord) *[]byte {
+func (record *EInUseRecord) encode() *[]byte {
 	var isHead byte
 	if record.IsHead {
 		isHead = 1

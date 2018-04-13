@@ -41,10 +41,10 @@ type EType byte
 TypeNames
 */
 const (
-	EInt EType = iota + 1
-	EString
-	EFloat
-	EBool
+	Eint EType = iota + 1
+	Estring
+	Efloat
+	Ebool
 )
 
 /**

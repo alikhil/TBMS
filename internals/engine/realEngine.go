@@ -200,6 +200,10 @@ func (re *RealEngine) GetInUseRecord(id int32) (*EInUseRecord, bool) {
 	return parseInUse(data, id)
 }
 
+func (re *RealEngine) SaveObject(obj EObject) bool {
+	return re.saveObject(obj.getStore(), obj.getID(), obj.encode())
+}
+
 func (re *RealEngine) saveObject(store EStore, id int32, data *[]byte) bool {
 	offset := BytesPerStore[store] * id
 	ok := re.IO.WriteBytes(FilenameStore[store], offset, data)
@@ -209,17 +213,9 @@ func (re *RealEngine) saveObject(store EStore, id int32, data *[]byte) bool {
 	return ok
 }
 
-func (re *RealEngine) SaveNode(node *ENode) bool {
-	data := encodeNode(node)
-	return re.saveObject(StoreNode, node.ID, data)
-}
-
-func (re *RealEngine) SaveInUseRecord(record *EInUseRecord) bool {
-	data := encodeInUseRecord(record)
-	return re.saveObject(StoreInUse, record.ID, data)
-}
-
-func (re *RealEngine) DeleteObject(objID int32, store EStore) bool {
+func (re *RealEngine) DeleteObject(obj EObject) bool {
+	store := obj.getStore()
+	objID := obj.getID()
 	emptyRecord := make([]byte, BytesPerStore[store])
 	saved := re.saveObject(store, objID, &emptyRecord)
 	if !saved {
@@ -246,7 +242,7 @@ func (re *RealEngine) DeleteObject(objID int32, store EStore) bool {
 	}
 
 	headRecord.NextRecordID = newRecordID
-	return re.SaveInUseRecord(newRecord) && re.SaveInUseRecord(headRecord)
+	return re.SaveObject(newRecord) && re.SaveObject(headRecord)
 }
 
 /* ******************** *
@@ -282,7 +278,7 @@ func (re *RealEngine) GetAndLockFreeIDForStore(store EStore) (int32, bool) {
 			return -1, false
 		}
 		record.NextRecordID = nxtRecord.NextRecordID // Update link to next free id
-		if re.SaveInUseRecord(record) && re.DeleteObject(nxtRecord.ID, StoreInUse) {
+		if re.SaveObject(record) && re.DeleteObject(nxtRecord) {
 			return nxtRecord.ObjID, true
 		}
 		logger.Warning.Printf("Failed to update record(%d) and delete nxtRecord(%d)", record.ID, record.NextRecordID)
@@ -293,7 +289,7 @@ func (re *RealEngine) GetAndLockFreeIDForStore(store EStore) (int32, bool) {
 		newID := record.ObjID
 		record.ObjID++
 
-		return newID, re.SaveInUseRecord(record)
+		return newID, re.SaveObject(record)
 	}
 }
 
@@ -305,7 +301,7 @@ func (re *RealEngine) setupInUseFor(store EStore) {
 		ObjID:        0,
 		NextRecordID: -1,
 	}
-	ok := re.SaveInUseRecord(inUseRecord)
+	ok := re.SaveObject(inUseRecord)
 	if !ok {
 		logger.Error.Fatalf("Can not init InUseStore for %s", FilenameStore[store])
 	}
@@ -339,7 +335,7 @@ func (re *RealEngine) InitDatabase() {
 		ObjID:        9,
 		NextRecordID: -1,
 	}
-	ok := re.SaveInUseRecord(inUseRecord)
+	ok := re.SaveObject(inUseRecord)
 	if !ok {
 		logger.Error.Fatalf("Can not init InUseStore for %s", FilenameStore[StoreInUse])
 	}
