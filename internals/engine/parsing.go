@@ -65,3 +65,13 @@ func (r *EInUseRecord) fill(data *[]byte, id int32) {
 	r.ObjID = parseInt((*data)[3:7])
 	r.NextRecordID = parseInt((*data)[7:11])
 }
+
+func (r *ERelationshipType) fill(data *[]byte, id int32) {
+	// TODO: implement it
+	panic("not implemented")
+}
+
+func (r *EPropertyKey) fill(data *[]byte, id int32) {
+	// TODO: implement it
+	panic("not implemented")
+}

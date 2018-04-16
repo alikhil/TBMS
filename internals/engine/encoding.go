@@ -31,6 +31,25 @@ func (rel *ERelationship) encode() *[]byte {
 }
 
 func (rel *ELabelString) encode() *[]byte {
+
+	// TODO: use encodeNode as base and look and SPEC.md
+	buffer := []byte{1} // In Use byte
+
+	buffer = append(buffer, ([]byte(rel.String))...)
+	buffer = append(buffer, make([]byte, BytesPerLabelString-len(buffer))...) // fill left part with zeros
+
+	if len(buffer) > BytesPerLabelString {
+		logger.Error.Fatalf("Label String length is too big - %s", rel.String)
+	}
+	return &buffer
+}
+
+func (rel *ERelationshipType) encode() *[]byte {
+	// TODO: use encodeNode as base and look and SPEC.md
+	panic("not implemented")
+}
+
+func (rel *EPropertyKey) encode() *[]byte {
 	// TODO: use encodeNode as base and look and SPEC.md
 	panic("not implemented")
 }

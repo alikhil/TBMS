@@ -119,3 +119,36 @@ func TestGetAndLockFreeID(t *testing.T) {
 		t.Fatalf("expected %v but get %v", id, newID)
 	}
 }
+
+func TestFindAndCreate(t *testing.T) {
+	var en = RealEngine{IO: io.LocalIO{}}
+
+	en.InitDatabase()
+	defer en.DeleteFile(FNInUse)
+	defer en.DeleteFile(FNLabelsStrings)
+
+	var label = "mylabel"
+
+	id, ok := en.FindOrCreateObject(StoreLabelString,
+		func(ob EObject) bool { return ob.(*ELabelString).String == label },
+		func(id int32) EObject { return &ELabelString{ID: id, String: label} })
+
+	if !ok {
+		t.Fatalf("Failed to create object")
+	}
+
+	foundID, found := en.FindOrCreateObject(StoreLabelString,
+		func(ob EObject) bool {
+			return ob.(*ELabelString).String == label
+		},
+		func(id int32) EObject { return &ELabelString{ID: id, String: label} })
+
+	if !found {
+		t.Fatalf("Failed to find object")
+	}
+
+	if id != foundID {
+		t.Fatalf("expected to get id = %v but get %v", id, foundID)
+	}
+
+}

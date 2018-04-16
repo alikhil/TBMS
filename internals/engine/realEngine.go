@@ -267,6 +267,35 @@ func print32AllRecords(re *RealEngine) {
 	logger.Trace.Printf("now: %+v", list)
 }
 
+/* ******************** *
+		Advanced
+ * ******************** */
+
+func (re *RealEngine) FindOrCreateObject(store EStore, pred func(EObject) bool, create func(int32) EObject) (int32, bool) {
+	fillNextObj := re.GetEObjectIterator(store)
+	curObj := create(-1)
+
+	for ok := fillNextObj(curObj); ok; ok = fillNextObj(curObj) {
+		if pred(curObj) {
+			objID := curObj.getID()
+			return objID, true
+		}
+	}
+	// if not found, then create new
+	newID, ok := re.GetAndLockFreeIDForStore(store)
+	if !ok {
+		logger.Error.Printf("can not get free id for %s", FilenameStore[store])
+		return -1, false
+	}
+	rel := create(newID)
+	saved := re.SaveObject(rel)
+	if !saved {
+		logger.Error.Printf("failed to save new obj wih id to %s", FilenameStore[store])
+		return -1, false
+	}
+	return newID, true
+}
+
 // InitDatabase should be called to initialize data needed to start database first time
 func (re *RealEngine) InitDatabase() {
 	// Setup InUse Store
