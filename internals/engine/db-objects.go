@@ -16,10 +16,10 @@ type EObject interface {
 }
 
 type EString struct {
-	ID               int32
-	IsDoubleByteChar bool
-	Value            *[]byte
-	NextPartID       int32
+	ID         int32
+	Extra      byte
+	Value      *[]byte
+	NextPartID int32
 }
 
 type ELabel struct {

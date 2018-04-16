@@ -35,9 +35,9 @@ Property - 10 bytes
 
 String - 64 bytes
 
-|  inUse |  extra(ASCII/UTF) |   value  |   nxtPartID |
-|:------:|:-----------------:|:--------:|:-----------:|
-| 1 byte |        1 byte     | 58 bytes |   4 bytes   |
+|  inUse |  extra |   value  |   nxtPartID |
+|:------:|:------:|:--------:|:-----------:|
+| 1 byte | 1 byte | 58 bytes |   4 bytes   |
 
 Labels - 9 bytes
 
