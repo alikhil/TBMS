@@ -10,7 +10,7 @@ Record length for each store
 const (
 	BytesPerNode         = 13
 	BytesPerRelationship = 34
-	BytesPerProperty     = 10
+	BytesPerProperty     = 14
 	BytesPerString       = 64
 	BytesPerLabel        = 9
 	BytesPerLabelString  = 21
