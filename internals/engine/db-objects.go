@@ -47,9 +47,10 @@ type ENode struct {
 
 type EProperty struct {
 	ID               int32
-	ValueOrStringPtr int32
+	ValueOrStringPtr interface{}
 	Typename         EType
 	KeyStringID      int32
+	NextPropertyID   int32
 }
 
 type ERelationship struct {
