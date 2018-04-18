@@ -27,17 +27,17 @@ We store label, relationtype, keys
 |:------:|:-------------:|:------------:|:-----------:|:-----------------:|:-------------------:|:-----------------:|:------------------:|:-------------:|:---------:|
 | 1 byte |     1 byte    |    4 bytes   |    4 bytes  |       4 bytes     | 4 bytes             | 4 bytes           | 4 bytes            | 4 bytes       | 4 bytes   |
 
-Property - 10 bytes
+Property - 14 bytes
 
-|  inUse |  type  | keyStringId | valueOrStrPtr |
-|:------:|:------:|:-----------:|:-------------:|
-| 1 byte | 1 byte | 4 bytes     | 4 bytes       |
+|  inUse |  type  | keyStringId | nextPropertyID | valueOrStrPtr |
+|:------:|:------:|:-----------:|:--------------:|:-------------:|
+| 1 byte | 1 byte | 4 bytes     |    4 bytes     | 4 bytes       |
 
 String - 64 bytes
 
-|  inUse |  extra |   value  |   nxtPartID |
-|:------:|:------:|:--------:|:-----------:|
-| 1 byte | 1 byte | 58 bytes |   4 bytes   |
+|  inUse |  extra |   nxtPartID |   value  |
+|:------:|:------:|:-----------:|:--------:|
+| 1 byte | 1 byte |   4 bytes   | 58 bytes |
 
 Labels - 9 bytes
 
