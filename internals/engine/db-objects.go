@@ -175,3 +175,43 @@ func (o *ERelationshipType) getID() int32 {
 func (o *EString) getID() int32 {
 	return o.ID
 }
+
+// String functions
+func (s *EString) LoadString(re *RealEngine) string {
+	str := string(*s.Value)
+	for s.NextPartID != -1 {
+		s.ID = s.NextPartID
+		ok := re.GetObject(s)
+		if !ok {
+			panic("can not load str " + string(s.ID))
+		}
+		str += string(*s.Value)
+	}
+	return str
+}
+
+func (re *RealEngine) CreateStringAndReturnFirstChunk(s string) *EString {
+	data := []byte(s)
+	lb := 58
+	var nxtPart *EString = &EString{ID: -1}
+	for len(data) > lb {
+		id, ok := re.GetAndLockFreeIDForStore(StoreString)
+		if !ok {
+			panic("can not create string: " + s)
+		}
+		var part = data[len(data)-lb:]
+		data = data[:len(data)-lb]
+		nxtPart = &EString{ID: id, Value: &part, NextPartID: nxtPart.ID}
+		saved := re.SaveObject(nxtPart)
+		if !saved {
+			panic("failed to save parts of str - " + s)
+		}
+	}
+	id, ok := re.GetAndLockFreeIDForStore(StoreString)
+	if !ok {
+		panic("can not create string: " + s)
+	}
+	head := &EString{ID: id, Value: &data, NextPartID: nxtPart.ID}
+	re.SaveObject(head)
+	return head
+}

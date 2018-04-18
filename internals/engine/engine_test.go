@@ -152,3 +152,21 @@ func TestFindAndCreate(t *testing.T) {
 	}
 
 }
+
+func TestCreateAndLoadString(t *testing.T) {
+	var en = RealEngine{IO: io.LocalIO{}}
+
+	en.InitDatabase()
+	defer en.DeleteFile(FNInUse)
+	defer en.DeleteFile(FNStrings)
+
+	var stringsForTest = []string{"shortString", "veryVeryLOOOOOOOOOooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooveryVeryLOOOOOOOOOoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongString"}
+	for _, str := range stringsForTest {
+		es := en.CreateStringAndReturnFirstChunk(str)
+
+		laoded := es.LoadString(&en)
+		if laoded != str {
+			t.Errorf("expected str '%s' but get '%s'", str, laoded)
+		}
+	}
+}
