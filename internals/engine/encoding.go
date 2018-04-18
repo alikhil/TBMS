@@ -59,6 +59,16 @@ func (prop *EProperty) encode() *[]byte {
 	panic("not implemented")
 }
 
+func (str *EString) encode() *[]byte {
+
+	buffer := []byte{1, str.Extra}
+
+	buffer = append(buffer, encodeInt(str.NextPartID)...)
+	buffer = append(buffer, *str.Value...)
+
+	return &buffer
+}
+
 func (record *EInUseRecord) encode() *[]byte {
 	var isHead byte
 	if record.IsHead {

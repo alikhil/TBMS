@@ -71,6 +71,13 @@ func (r *ERelationshipType) fill(data *[]byte, id int32) {
 	panic("not implemented")
 }
 
+func (r *EString) fill(data *[]byte, id int32) {
+	r.Extra = (*data)[1]
+	r.NextPartID = parseInt((*data)[2:6])
+	buf := (*data)[6:64]
+	r.Value = &buf
+}
+
 func (r *EPropertyKey) fill(data *[]byte, id int32) {
 	// TODO: implement it
 	panic("not implemented")
