@@ -170,3 +170,30 @@ func TestCreateAndLoadString(t *testing.T) {
 		}
 	}
 }
+
+func TestFindObject(t *testing.T) {
+
+	var en = RealEngine{IO: io.LocalIO{}}
+
+	en.InitDatabase()
+	defer en.DeleteFile(FNInUse)
+	defer en.DeleteFile(FNNodes)
+
+	var node = &ENode{
+		ID:             FirstID,
+		NextLabelID:    -1,
+		NextPropertyID: 2,
+		NextRelID:      -1}
+
+	en.SaveObject(node)
+
+	var res = &ENode{}
+	found := en.FindObject(StoreNode, func(obj EObject) bool { return obj.(*ENode).NextPropertyID == 2 }, res)
+
+	if !found {
+		t.Errorf("can not found object when it should")
+	} else if *res != *node {
+		t.Errorf("Expected %v but get %v", node, res)
+	}
+
+}

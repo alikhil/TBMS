@@ -272,14 +272,11 @@ func print32AllRecords(re *RealEngine) {
  * ******************** */
 
 func (re *RealEngine) FindOrCreateObject(store EStore, pred func(EObject) bool, create func(int32) EObject) (int32, bool) {
-	fillNextObj := re.GetEObjectIterator(store)
+	// fillNextObj := re.GetEObjectIterator(store)
 	curObj := create(-1)
 
-	for ok := fillNextObj(curObj); ok; ok = fillNextObj(curObj) {
-		if pred(curObj) {
-			objID := curObj.getID()
-			return objID, true
-		}
+	if re.FindObject(store, pred, curObj) {
+		return curObj.getID(), true
 	}
 	// if not found, then create new
 	newID, ok := re.GetAndLockFreeIDForStore(store)
@@ -294,6 +291,17 @@ func (re *RealEngine) FindOrCreateObject(store EStore, pred func(EObject) bool, 
 		return -1, false
 	}
 	return newID, true
+}
+
+func (re *RealEngine) FindObject(store EStore, pred func(EObject) bool, res EObject) bool {
+	fillNextObj := re.GetEObjectIterator(store)
+
+	for ok := fillNextObj(res); ok; ok = fillNextObj(res) {
+		if pred(res) {
+			return true
+		}
+	}
+	return false
 }
 
 // InitDatabase should be called to initialize data needed to start database first time
