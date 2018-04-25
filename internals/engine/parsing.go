@@ -48,7 +48,7 @@ func (l *ELabelString) fill(data *[]byte, id int32) {
 func (rel *ERelationship) fill(data *[]byte, id int32) {
 	rel.ID = id
 	rel.FirstInChain = parseBool((*data)[1])
-	rel.SecondNode = parseInt((*data)[2:6])
+	rel.SecondNodeID = parseInt((*data)[2:6])
 	rel.FirstNodeID = parseInt((*data)[6:10])
 	rel.FirstNodeNxtRelID = parseInt((*data)[10:14])
 	rel.SecondNodeNxtRelID = parseInt((*data)[14:18])

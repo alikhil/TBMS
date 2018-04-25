@@ -1,6 +1,9 @@
 package engine
 
-import "github.com/alikhil/TBMS/internals/io"
+import (
+	"fmt"
+	"github.com/alikhil/TBMS/internals/io"
+)
 
 // TODO: not sure about storing it here
 type RealEngine struct {
@@ -57,8 +60,8 @@ type ERelationship struct {
 	ID           int32
 	FirstInChain bool //TODO: how it's used
 
-	FirstNodeID int32
-	SecondNode  int32
+	FirstNodeID  int32
+	SecondNodeID int32
 
 	FirstNodeNxtRelID  int32
 	SecondNodeNxtRelID int32
@@ -97,6 +100,16 @@ func (rel *ERelationship) GetPart(nodeID int32) *ERelPart {
 	return &ERelPart{
 		NodeNxtRelID:  rel.SecondNodeNxtRelID,
 		NodePrevRelID: rel.SecondNodePrvRelID,
+	}
+}
+
+func (rel *ERelationship) SetNextRelationshipID(nodeID, relID int32) {
+	if rel.FirstNodeID == nodeID {
+		rel.FirstNodeNxtRelID = relID
+	} else if rel.SecondNodeID == nodeID {
+		rel.SecondNodeNxtRelID = relID
+	} else {
+		panic(fmt.Sprintf("there is no such nodeID(%v) in relationship(%v)", nodeID, *rel))
 	}
 }
 
