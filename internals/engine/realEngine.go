@@ -80,6 +80,19 @@ func (re *RealEngine) GetEObjectIterator(store EStore) func(EObject) bool {
 	}
 }
 
+func (re *RealEngine) GetNodeRelationshipsIteratorStartingFrom(nodeID int32, nxtRelID int32) func() (*ERelationship, bool) {
+	return func() (*ERelationship, bool) {
+
+		cur := &ERelationship{ID: nxtRelID}
+		ok := re.GetObject(cur)
+		if !ok {
+			return nil, false
+		}
+		nxtRelID = cur.GetPart(nodeID).NodeNxtRelID
+		return cur, true
+	}
+}
+
 // GetNodeRelationshipsIterator return iterator that allows to iterate all rellationship of node
 func (re *RealEngine) GetNodeRelationshipsIterator(nodeID int32) func() (*ERelationship, bool) {
 	node := &ENode{ID: nodeID}
@@ -90,16 +103,7 @@ func (re *RealEngine) GetNodeRelationshipsIterator(nodeID int32) func() (*ERelat
 
 	nxtID := node.NextRelID
 
-	return func() (*ERelationship, bool) {
-
-		cur := &ERelationship{ID: nxtID}
-		ok := re.GetObject(cur)
-		if !ok {
-			return nil, false
-		}
-		nxtID = cur.GetPart(nodeID).NodeNxtRelID
-		return cur, true
-	}
+	return re.GetNodeRelationshipsIteratorStartingFrom(nodeID, nxtID)
 }
 
 /* ***************** *
