@@ -55,7 +55,7 @@ type EProperty struct {
 
 type ERelationship struct {
 	ID           int32
-	FirstInChain bool
+	FirstInChain bool //TODO: how it's used
 
 	FirstNodeID int32
 	SecondNode  int32
