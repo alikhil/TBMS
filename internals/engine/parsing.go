@@ -41,6 +41,9 @@ func parseProperty(data *[]byte) (*EProperty, bool) {
 func (l *ELabelString) fill(data *[]byte, id int32) {
 
 	end := bytes.IndexByte(*data, 0)
+	if end == -1 {
+		end = len(*data)
+	}
 	l.ID = id
 	l.String = string((*data)[1:end])
 }
@@ -67,8 +70,12 @@ func (r *EInUseRecord) fill(data *[]byte, id int32) {
 }
 
 func (r *ERelationshipType) fill(data *[]byte, id int32) {
-	// TODO: implement it
-	panic("not implemented")
+	r.ID = id
+	end := bytes.IndexByte(*data, 0)
+	if end == -1 {
+		end = len(*data)
+	}
+	r.TypeString = string((*data)[1:end])
 }
 
 func (r *EString) fill(data *[]byte, id int32) {

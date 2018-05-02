@@ -15,6 +15,13 @@ func encodeInt(val int32) []byte {
 	return buf.Bytes()
 }
 
+func boolToByte(b bool) byte {
+	if b {
+		return 1
+	}
+	return 0
+}
+
 func (node *ENode) encode() *[]byte {
 	buffer := []byte{1} // Encode InUse
 
@@ -26,13 +33,21 @@ func (node *ENode) encode() *[]byte {
 }
 
 func (rel *ERelationship) encode() *[]byte {
-	// TODO: use encodeNode as base and look and SPEC.md
-	panic("not implemented")
+	buffer := []byte{1, boolToByte(rel.FirstInChain)} // Encode InUse
+
+	buffer = append(buffer, encodeInt(rel.SecondNodeID)...)
+	buffer = append(buffer, encodeInt(rel.FirstNodeID)...)
+	buffer = append(buffer, encodeInt(rel.FirstNodeNxtRelID)...)
+	buffer = append(buffer, encodeInt(rel.SecondNodeNxtRelID)...)
+	buffer = append(buffer, encodeInt(rel.FirstNodePrvRelID)...)
+	buffer = append(buffer, encodeInt(rel.SecondNodePrvRelID)...)
+	buffer = append(buffer, encodeInt(rel.NextPropertyID)...)
+	buffer = append(buffer, encodeInt(rel.TypeID)...)
+	return &buffer
 }
 
 func (rel *ELabelString) encode() *[]byte {
 
-	// TODO: use encodeNode as base and look and SPEC.md
 	buffer := []byte{1} // In Use byte
 
 	buffer = append(buffer, ([]byte(rel.String))...)
@@ -45,8 +60,15 @@ func (rel *ELabelString) encode() *[]byte {
 }
 
 func (rel *ERelationshipType) encode() *[]byte {
-	// TODO: use encodeNode as base and look and SPEC.md
-	panic("not implemented")
+	buffer := []byte{1} // In Use byte
+
+	buffer = append(buffer, ([]byte(rel.TypeString))...)
+	buffer = append(buffer, make([]byte, BytesPerRelType-len(buffer))...) // fill left part with zeros
+
+	if len(buffer) > BytesPerRelType {
+		logger.Error.Fatalf("Label String length is too big - %s", rel.TypeString)
+	}
+	return &buffer
 }
 
 func (rel *EPropertyKey) encode() *[]byte {
@@ -70,11 +92,8 @@ func (str *EString) encode() *[]byte {
 }
 
 func (record *EInUseRecord) encode() *[]byte {
-	var isHead byte
-	if record.IsHead {
-		isHead = 1
-	}
-	buffer := []byte{1, byte(record.StoreType), isHead}
+
+	buffer := []byte{1, byte(record.StoreType), boolToByte(record.IsHead)}
 
 	buffer = append(buffer, encodeInt(record.ObjID)...)
 	buffer = append(buffer, encodeInt(record.NextRecordID)...)
