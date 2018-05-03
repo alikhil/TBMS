@@ -16,6 +16,15 @@ func parseInt(data []byte) (ret int32) {
 	return ret
 }
 
+func parse(data []byte) (ret interface{}) {
+	buf := bytes.NewBuffer(data)
+	err := binary.Read(buf, ConventionByteOrder, &ret)
+	if err != nil {
+		logger.Error.Printf("Can not parse interface{} %v", err)
+	}
+	return ret
+}
+
 func parseBool(b byte) bool {
 	return b > 0
 }

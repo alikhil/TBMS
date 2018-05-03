@@ -15,6 +15,15 @@ func encodeInt(val int32) []byte {
 	return buf.Bytes()
 }
 
+func encode(val interface{}) []byte {
+	buf := new(bytes.Buffer)
+	err := binary.Write(buf, ConventionByteOrder, val)
+	if err != nil {
+		logger.Error.Printf("Error on encoding interface{}: %v", err)
+	}
+	return buf.Bytes()
+}
+
 func boolToByte(b bool) byte {
 	if b {
 		return 1
@@ -51,7 +60,7 @@ func (rel *ELabelString) encode() *[]byte {
 	buffer := []byte{1} // In Use byte
 
 	buffer = append(buffer, ([]byte(rel.String))...)
-	buffer = append(buffer, make([]byte, BytesPerLabelString-len(buffer))...) // fill left part with zeros
+	buffer = append(buffer, make([]byte, BytesPerLabelString-len(buffer))...) // fill remaining part with zeros
 
 	if len(buffer) > BytesPerLabelString {
 		logger.Error.Fatalf("Label String length is too big - %s", rel.String)
@@ -63,7 +72,7 @@ func (rel *ERelationshipType) encode() *[]byte {
 	buffer := []byte{1} // In Use byte
 
 	buffer = append(buffer, ([]byte(rel.TypeString))...)
-	buffer = append(buffer, make([]byte, BytesPerRelType-len(buffer))...) // fill left part with zeros
+	buffer = append(buffer, make([]byte, BytesPerRelType-len(buffer))...) // fill remaining part with zeros
 
 	if len(buffer) > BytesPerRelType {
 		logger.Error.Fatalf("Label String length is too big - %s", rel.TypeString)
@@ -72,13 +81,25 @@ func (rel *ERelationshipType) encode() *[]byte {
 }
 
 func (rel *EPropertyKey) encode() *[]byte {
-	// TODO: use encodeNode as base and look and SPEC.md
-	panic("not implemented")
+	buffer := []byte{1} // In User byte
+	buffer = append(buffer, ([]byte(rel.KeyString))...)
+	buffer = append(buffer, make([]byte, BytesPerPropertyKey-len(buffer))...) // fill remaining part with zeros
+
+	if len(buffer) > BytesPerPropertyKey {
+		logger.Error.Fatalf("Property key length is too big - %s", rel.KeyString)
+
+	}
+	return &buffer
 }
 
 func (prop *EProperty) encode() *[]byte {
-	// TODO: use encodeNode as base and look and SPEC.md
-	panic("not implemented")
+	buffer := []byte{1, byte(prop.Typename)} //In Use
+
+	buffer = append(buffer, encodeInt(prop.KeyStringID)...)
+	buffer = append(buffer, encodeInt(prop.NextPropertyID)...)
+	buffer = append(buffer, encode(prop.ValueOrStringPtr)...)
+
+	return &buffer
 }
 
 func (str *EString) encode() *[]byte {
