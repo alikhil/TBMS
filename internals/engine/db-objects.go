@@ -1,6 +1,7 @@
 package engine
 
 import (
+	"bytes"
 	"fmt"
 	"github.com/alikhil/TBMS/internals/io"
 )
@@ -191,14 +192,23 @@ func (o *EString) getID() int32 {
 
 // String functions
 func (s *EString) LoadString(re *RealEngine) string {
-	str := string(*s.Value)
+	end := bytes.IndexByte(*s.Value, 0)
+	if end == -1 {
+		end = len(*s.Value)
+	}
+	str := string((*s.Value)[:end])
+
 	for s.NextPartID != -1 {
 		s.ID = s.NextPartID
 		ok := re.GetObject(s)
 		if !ok {
 			panic("can not load str " + string(s.ID))
 		}
-		str += string(*s.Value)
+		end = bytes.IndexByte(*s.Value, 0)
+		if end == -1 {
+			end = len(*s.Value)
+		}
+		str += string((*s.Value)[:end])
 	}
 	return str
 }

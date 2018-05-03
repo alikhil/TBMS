@@ -16,9 +16,25 @@ func parseInt(data []byte) (ret int32) {
 	return ret
 }
 
-func parse(data []byte) (ret interface{}) {
+func parse(data []byte, typ EType) (ret interface{}) {
 	buf := bytes.NewBuffer(data)
-	err := binary.Read(buf, ConventionByteOrder, &ret)
+	var err error
+	if typ == Estring || typ == Eint {
+		var i32 int32 = 4
+		err = binary.Read(buf, ConventionByteOrder, &i32)
+		ret = i32
+	} else if typ == Ebool {
+		var iret int32 = 0
+		err = binary.Read(buf, ConventionByteOrder, &iret)
+		ret = true
+		if iret == 0 {
+			ret = false
+		}
+	} else if typ == Efloat {
+		var il float32 = 4.0
+		err = binary.Read(buf, ConventionByteOrder, &il)
+		ret = il
+	}
 	if err != nil {
 		logger.Error.Printf("Can not parse interface{} %v", err)
 	}
@@ -35,18 +51,6 @@ func (node *ENode) fill(data *[]byte, id int32) {
 	node.NextPropertyID = parseInt((*data)[5:9])
 	node.NextRelID = parseInt((*data)[9:13])
 }
-
-//func parseProperty(data *[]byte) (*EProperty, bool) {
-//	var inUse = parseBool((*data)[0])
-//	if !inUse {
-//		return nil, false
-//	}
-//	return &EProperty{
-//		Typename:         EType((*data)[1]),
-//		KeyStringID:      parseInt((*data)[2:6]),
-//		ValueOrStringPtr: parseInt((*data)[6:10]),
-//	}, true
-//}
 
 func (l *ELabelString) fill(data *[]byte, id int32) {
 
@@ -101,7 +105,7 @@ func (r *EProperty) fill(data *[]byte, id int32) {
 	r.Typename = EType((*data)[1])
 	r.KeyStringID = parseInt((*data)[2:6])
 	r.NextPropertyID = parseInt((*data)[6:10])
-	r.ValueOrStringPtr = parse((*data)[10:])
+	r.ValueOrStringPtr = parse((*data)[10:], r.Typename)
 }
 
 func (r *EPropertyKey) fill(data *[]byte, id int32) {

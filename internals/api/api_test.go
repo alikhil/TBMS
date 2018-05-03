@@ -93,17 +93,47 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 	if !re.SaveObject(nodeA) || !re.SaveObject(nodeB) {
 		t.Errorf("failed to save")
 	}
-
+	var ival int32 = 2015
+	var fval float32 = 3.3
 	rel, ok := CreateRelationship(&Node{nodeA}, &Node{nodeB}, "knows",
-		tuple.NewTupleFromItems("since", 2015),
+		tuple.NewTupleFromItems("since", ival),
 		tuple.NewTupleFromItems("met in", "kazan"),
-		tuple.NewTupleFromItems("met_after", true))
+		tuple.NewTupleFromItems("met_after", true),
+		tuple.NewTupleFromItems("double_val", fval))
 	if !ok {
 		t.Errorf("failed to create relationship")
 	}
 
 	if rel.ID != en.FirstID {
 		t.Errorf("created invalid relationship")
+	}
+
+	if rel.NextPropertyID == -1 {
+		t.Errorf("No properties found!")
+	}
+
+	propsRef, foundProps := getProperties(rel.NextPropertyID)
+	if !foundProps {
+		t.Errorf("Can not load properties!")
+	}
+
+	props := *propsRef
+
+	if props["since"] != ival {
+		t.Errorf("Expected %v but got %v", ival, props["since"])
+	}
+
+	if props["met in"] != "kazan" {
+		t.Errorf("Expected %v but got %v", "kazan", props["met in"])
+	}
+
+	if props["met_after"] != true {
+		t.Errorf("Expected %v but got %v", true, props["met_after"])
+	}
+
+	if props["double_val"] != fval {
+		t.Errorf("Expected %v but got %v", fval, props["double_val"])
+
 	}
 
 }
