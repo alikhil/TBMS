@@ -3,6 +3,7 @@ package engine
 import (
 	"bytes"
 	"encoding/binary"
+
 	"github.com/alikhil/TBMS/internals/logger"
 )
 
@@ -79,6 +80,7 @@ func (r *ERelationshipType) fill(data *[]byte, id int32) {
 }
 
 func (r *EString) fill(data *[]byte, id int32) {
+	r.ID = id
 	r.Extra = (*data)[1]
 	r.NextPartID = parseInt((*data)[2:6])
 	buf := (*data)[6:64]
@@ -86,6 +88,15 @@ func (r *EString) fill(data *[]byte, id int32) {
 }
 
 func (r *EPropertyKey) fill(data *[]byte, id int32) {
-	// TODO: implement it
-	panic("not implemented")
+	end := bytes.IndexByte(*data, 0)
+	if end == -1 {
+		end = len(*data)
+	}
+	r.ID = id
+	r.KeyString = string((*data)[1:end])
+}
+
+func (r *ELabel) fill(data *[]byte, id int32) {
+	r.ID = id
+
 }

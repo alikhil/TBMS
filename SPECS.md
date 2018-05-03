@@ -39,7 +39,7 @@ String - 64 bytes
 |:------:|:------:|:-----------:|:--------:|
 | 1 byte | 1 byte |   4 bytes   | 58 bytes |
 
-Labels - 9 bytes
+Label - 9 bytes
 
 |  inUse |   labelStringId | nxtLabelID |
 |:------:|:---------------:|:----------:|
@@ -53,13 +53,13 @@ InUse - 11 bytes
 
 LabelString - 21 bytes
 
-|  inUse |  labelString |
+|  inUse |  String |
 |:------:|:------------:|
 | 1 byte |    20 bytes  |
 
 PropertyKey - 21 bytes
 
-|  inUse |  propertyKey |
+|  inUse |  KeyString |
 |:------:|:------------:|
 | 1 byte |    20 bytes  |
 
