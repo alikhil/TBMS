@@ -121,3 +121,12 @@ func (record *EInUseRecord) encode() *[]byte {
 
 	return &buffer
 }
+
+func (lab *ELabel) encode() *[]byte {
+	buffer := []byte{1}
+
+	buffer = append(buffer, encodeInt(lab.LabelStringID)...)
+	buffer = append(buffer, encodeInt(lab.NextLabelID)...)
+
+	return &buffer
+}
