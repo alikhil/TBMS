@@ -17,7 +17,7 @@ func createFile(c IO, t *testing.T) {
 func readWriteFile(c IO, t *testing.T) {
 	fname := "testfile"
 	data := []byte{0, 1, 2, 3, 4}
-	offset := 42
+	var offset int32 = 42
 
 	_ = c.CreateFile(fname)
 	defer c.DeleteFile(fname)
