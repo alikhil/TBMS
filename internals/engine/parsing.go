@@ -36,17 +36,17 @@ func (node *ENode) fill(data *[]byte, id int32) {
 	node.NextRelID = parseInt((*data)[9:13])
 }
 
-func parseProperty(data *[]byte) (*EProperty, bool) {
-	var inUse = parseBool((*data)[0])
-	if !inUse {
-		return nil, false
-	}
-	return &EProperty{
-		Typename:         EType((*data)[1]),
-		KeyStringID:      parseInt((*data)[2:6]),
-		ValueOrStringPtr: parseInt((*data)[6:10]),
-	}, true
-}
+//func parseProperty(data *[]byte) (*EProperty, bool) {
+//	var inUse = parseBool((*data)[0])
+//	if !inUse {
+//		return nil, false
+//	}
+//	return &EProperty{
+//		Typename:         EType((*data)[1]),
+//		KeyStringID:      parseInt((*data)[2:6]),
+//		ValueOrStringPtr: parseInt((*data)[6:10]),
+//	}, true
+//}
 
 func (l *ELabelString) fill(data *[]byte, id int32) {
 
@@ -96,6 +96,14 @@ func (r *EString) fill(data *[]byte, id int32) {
 	r.Value = &buf
 }
 
+func (r *EProperty) fill(data *[]byte, id int32) {
+	r.ID = id
+	r.Typename = EType((*data)[1])
+	r.KeyStringID = parseInt((*data)[2:6])
+	r.NextPropertyID = parseInt((*data)[6:10])
+	r.ValueOrStringPtr = parse((*data)[10:])
+}
+
 func (r *EPropertyKey) fill(data *[]byte, id int32) {
 	end := bytes.IndexByte(*data, 0)
 	if end == -1 {
@@ -108,4 +116,6 @@ func (r *EPropertyKey) fill(data *[]byte, id int32) {
 func (r *ELabel) fill(data *[]byte, id int32) {
 	r.ID = id
 
+	r.LabelStringID = parseInt((*data)[1:5])
+	r.NextLabelID = parseInt((*data)[5:])
 }
