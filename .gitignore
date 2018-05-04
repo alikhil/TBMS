@@ -12,3 +12,4 @@ debug
 
 // database files
 *.store
+.DS_Store
