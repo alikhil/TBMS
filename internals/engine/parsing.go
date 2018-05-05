@@ -39,7 +39,7 @@ func (node *ENode) fill(data *[]byte, id int32) {
 //func parseProperty(data *[]byte) (*EProperty, bool) {
 //	var inUse = parseBool((*data)[0])
 //	if !inUse {
-//		return nil, false
+//		return nil	, false
 //	}
 //	return &EProperty{
 //		Typename:         EType((*data)[1]),

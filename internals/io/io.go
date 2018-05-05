@@ -15,31 +15,6 @@ type IO interface {
 // there should be 3 types:
 // LocalIO, DistributedIO, and Cache
 
-type LRUCache struct {
-	baseIO IO
-}
-
-func (c LRUCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
-	return nil, false
-}
-
-func (c LRUCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
-	return false
-}
-
-func (c LRUCache) CreateFile(file string) bool {
-	c.baseIO.CreateFile(file)
-	return true
-}
-
-func (c LRUCache) FileExists(file string) bool {
-	return c.baseIO.FileExists(file)
-}
-
-func (c LRUCache) DeleteFile(file string) bool {
-	return c.baseIO.DeleteFile(file)
-}
-
 type LocalIO struct {
 }
 
@@ -52,6 +27,9 @@ func (io LocalIO) ReadBytes(filename string, offset, count int32) (data []byte, 
 	if err != nil {
 		return nil, false
 	}
+	/**
+		Two counts?
+	 */
 	data = make([]byte, count, count)
 	var _, er = file.ReadAt(data, int64(offset))
 	if er != nil {
