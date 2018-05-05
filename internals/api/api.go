@@ -19,6 +19,24 @@ func findOrCreateRelationType(relTypeString string) (relTypeID int32, ok bool) {
 		func(id int32) en.EObject { return &en.ERelationshipType{ID: id, TypeString: relTypeString} })
 }
 
+func CreateNodeLabel(nodeLabel string) (nodeLabelID int32, ok bool) {
+	// label string can already exists
+	labelStringID, ok := findOrCreateLabelString(nodeLabel)
+	if !ok {
+		return -1, false
+	}
+
+	// but label for the new node must be new
+	return engine.CreateObject(en.StoreLabel,
+		func(id int32) en.EObject { return &en.ELabel{ID: id, LabelStringID: labelStringID, NextLabelID: -1} })
+}
+
+func findOrCreateLabelString(labelString string) (labelStringID int32, ok bool) {
+	return engine.FindOrCreateObject(en.StoreLabelString,
+		func(ob en.EObject) bool { return ob.(*en.ELabelString).String == labelString },
+		func(id int32) en.EObject { return &en.ELabelString{ID: id, String: labelString} })
+}
+
 func validateProps(props []*tuple.Tuple) (*[]string, *[]interface{}, bool) {
 	propsCnt := len(props)
 	keys := make([]string, propsCnt)
@@ -171,6 +189,33 @@ func getLastRelationship(node *en.ENode) (*en.ERelationship, bool) {
 
 }
 
+func CreateNode(nodeLabel string, properties ...*tuple.Tuple) (*Node, bool) {
+	nodeLabelID, ok := CreateNodeLabel(nodeLabel)
+	if !ok {
+		return nil, false
+	}
+
+	nextPropertyID, ok := fillProperties(properties)
+	if !ok {
+		return nil, false
+	}
+
+	nodeID, ok := engine.GetAndLockFreeIDForStore(en.StoreNode)
+	if !ok {
+		return nil, false
+	}
+
+	node := &en.ENode{
+		ID:             nodeID,
+		NextRelID:      -1,
+		NextPropertyID: nextPropertyID,
+		NextLabelID:    nodeLabelID,
+	}
+
+	engine.SaveObject(node)
+	return &Node{node}, true
+}
+
 func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) (*Relationship, bool) {
 
 	if a == nil || b == nil {
@@ -188,7 +233,6 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 	if !ok {
 		return nil, false
 	}
-	// for each property key check and obtain id
 
 	relID, ok := engine.GetAndLockFreeIDForStore(en.StoreRelationship)
 	if !ok {
