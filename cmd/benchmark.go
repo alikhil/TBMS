@@ -26,7 +26,7 @@ func strToAuthorParam(text string) []*tuple.Tuple {
 
 	logger.Info.Printf("Read: " + strconv.Itoa(id) + " -> " + name)
 	params := []*tuple.Tuple{
-		tuple.NewTupleFromItems("id", id),
+		tuple.NewTupleFromItems("id", int32(id)),
 		tuple.NewTupleFromItems("name", name)}
 	return params
 
@@ -42,12 +42,12 @@ func strToPaperParam(text string) []*tuple.Tuple {
 
 	logger.Info.Printf("Read: " + strconv.Itoa(id) + " -> " + title)
 	params := []*tuple.Tuple{
-		tuple.NewTupleFromItems("id", id),
+		tuple.NewTupleFromItems("id", int32(id)),
 		tuple.NewTupleFromItems("title", title)}
 	return params
 }
 
-func scanParamFromFile(filepath string, fn strToParam) {
+func createObjsFromFile(filepath string, fn func(string) []*tuple.Tuple, create func([]*tuple.Tuple) bool) {
 	inFile, _ := os.Open(filepath)
 	defer inFile.Close()
 	scanner := bufio.NewScanner(inFile)
@@ -55,7 +55,10 @@ func scanParamFromFile(filepath string, fn strToParam) {
 
 	for scanner.Scan() {
 		params := fn(scanner.Text())
-		logger.Info.Printf("%v", (*params[1]).Get(1))
+		ok := create(params)
+		if !ok {
+			panic("Didn't succeed to apply function")
+		}
 	}
 }
 
@@ -66,9 +69,24 @@ func runBenchmark() {
 	logger.Info.Printf("from benchmark")
 
 	var path = "../test_data/1000/authors.in"
-	scanParamFromFile(path, strToAuthorParam)
+	createObjsFromFile(path, strToAuthorParam,
+		func(properties []*tuple.Tuple) bool {
+			id, ok := api.CreateNode("Author", properties...)
+			logger.Info.Printf("Author added to id: %v", id)
+			return ok
+		})
 	path = "../test_data/1000/papers.in"
-	scanParamFromFile(path, strToPaperParam)
+	createObjsFromFile(path, strToAuthorParam,
+		func(properties []*tuple.Tuple) bool {
+			id, ok := api.CreateNode("Paper", properties...)
+			logger.Info.Printf("Paper added to id: %v", id)
+			return ok
+		})
+	// createObjsFromFile(path, strToPaperParam,
+	// 	func(properties []*tuple.Tuple) bool {
+
+	// 	}
+	// )
 
 	// var author = api.createNode()   // (type = "Author", properties = {id: 1; name: "andrew NG"})
 	// var article1 = api.createNode() // (type = "Paper", properties = {id: 10; title: "Bitcons for breakfast"})
