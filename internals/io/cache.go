@@ -8,8 +8,11 @@ type LRUCache struct {
 	regionSize int32
 }
 
-func (c *LRUCache) Init(baseIO IO, fileToRecordSize map[string]int32) {
-	for k, v := range fileToRecordSize {
+func (c *LRUCache) Init(baseIO IO, fileToRecordSize *map[string]int32) {
+	c.lruCache = make(map[string]*SUBCache)
+
+	for k, v := range *fileToRecordSize {
+		c.lruCache[k] = &SUBCache{}
 		c.lruCache[k].init(k, c.regionSize, v, baseIO)
 	}
 	a := c.lruCache["nodes.store"]
@@ -64,7 +67,7 @@ func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
 		//region offset
 		ofst := regionId * c.recordSize
 		data, isOk := c.baseIO.ReadBytes(file, ofst, c.regionSize)
-		if (isOk) {
+		if isOk {
 			c.addToCache(regionId, data)
 			return c.getFromCache(regionId, offset), true
 		} else {
@@ -139,7 +142,7 @@ func (c *SUBCache) getFromCache(regionId int32, offset int32) []byte {
 }
 
 func (c *SUBCache) addToCache(regionId int32, data []byte) {
-	if (int32(len(c.cache)) < c.maxCacheSize) {
+	if int32(len(c.cache)) < c.maxCacheSize {
 		c.cache[regionId] = &data
 		c.cacheUsage[regionId] = c.maxUse
 	} else {
