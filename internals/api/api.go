@@ -275,25 +275,109 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 	return &Relationship{relationship}, true
 }
 
-func SelectNodesWhere(condition func(*Node) bool) ([]*Node, error) {
+func SelectNodesWhere(condition func(*Node) bool) ([]*Node, bool) {
+	fillNextObj := engine.GetEObjectIterator(en.StoreNode)
+
+	result := make([]*Node, 0)
+
+	res := &en.ENode{}
+
+	for ok := fillNextObj(res); ok; ok = fillNextObj(res) {
+		a := Node{res}
+		if condition(&a) {
+			result = append(result, &Node{res})
+		}
+	}
+	return result, true
 
 }
 
-func SelectRelationshipWhere(condition func(*Relationship) bool) ([]*Relationship, error) {
+func SelectRelationshipWhere(condition func(*Relationship) bool) ([]*Relationship, bool) {
+	fillNextObj := engine.GetEObjectIterator(en.StoreRelationship)
 
+	result := make([]*Relationship, 0)
+
+	res := &en.ERelationship{}
+
+	for ok := fillNextObj(res); ok; ok = fillNextObj(res) {
+		a := Relationship{res}
+		if condition(&a) {
+			result = append(result, &Relationship{res})
+		}
+	}
+	return result, true
 }
 
 type Node struct {
 	*en.ENode
 }
 
-func (*Node) GetLabels() *[]string {
+// GetLabels returns all labels of the given node
+func (node *Node) GetLabels() *[]string {
 
+	res := make([]string, 0)
+	label := &en.ELabel{ID: node.NextLabelID}
+	for engine.GetObject(label) {
+		labelStr := &en.ELabelString{ID: label.LabelStringID}
+		engine.GetObject(labelStr)
+		res = append(res, labelStr.String)
+		if label.NextLabelID != -1 {
+			label = &en.ELabel{ID: label.NextLabelID}
+		}
+	}
+
+	return &res
+}
+
+// GetProperty returns property value by key, if exists, else return false in bool
+func (node *Node) GetProperty(key string) (interface{}, bool) {
+	p, ok := node.GetProperties()
+	prop := *p
+	if !ok {
+		return nil, false
+	}
+	obj, ok := prop[key]
+	return obj, ok
+}
+
+// GetProperties returns all properties as a map
+func (node *Node) GetProperties() (*map[string]interface{}, bool) {
+	return getProperties(node.NextPropertyID)
+}
+
+// GetRelationships returns pointer to a slice of all relationships, this node belonges to
+func (*Node) GetRelationships() *[]Relationship {
+	panic("not implemented")
+	return nil
 }
 
 type Relationship struct {
 	*en.ERelationship
 	// GetProperties() ?
+}
+
+// GetFrom returns node from wich relationship starts
+func (*Relationship) GetFrom() *Node {
+	panic("not implemented")
+	return nil
+}
+
+// GetTo returns node with which relationship ends
+func (*Relationship) GetTo() *Node {
+	panic("not implemented")
+	return nil
+}
+
+// GetType returns type of the relationship
+func (*Relationship) GetType() string {
+	panic("not implemented")
+	return ""
+}
+
+// GetProperty returns property value by key, if exists, else return false in bool
+func (*Relationship) GetProperty(key string) (interface{}, bool) {
+	panic("not implemented")
+	return nil, false
 }
 
 func Contains(list *[]interface{}, obj interface{}) bool {

@@ -121,6 +121,10 @@ func (re *RealEngine) GetLabelID(label string) (int32, bool) {
 	return -1, false
 }
 
+func (re *RealEngine) GetObjectByID(store EStore, id int32) (*[]byte, bool) {
+	return re.getObjectByID(store, id)
+}
+
 func (re *RealEngine) getObjectByID(store EStore, id int32) (*[]byte, bool) {
 	offset := BytesPerStore[store] * (id - FirstID)
 	data, ok := re.IO.ReadBytes(FilenameStore[store], offset, BytesPerStore[store])
