@@ -16,15 +16,15 @@ func createFile(c IO, t *testing.T) {
 
 func readWriteFile(c IO, t *testing.T) {
 	fname := "nodes.store"
-	data := []byte{0, 1, 2, 3, 4}
-	var offset int32 = 42
+	data := []byte{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+	var offset int32 = 0
 
 	_ = c.CreateFile(fname)
 	defer c.DeleteFile(fname)
 
 	c.WriteBytes(fname, offset, &data)
 
-	readData, _ := c.ReadBytes(fname, offset, 5)
+	readData, _ := c.ReadBytes(fname, offset, 13 )
 
 	if !bytes.Equal(data, readData) {
 		t.Errorf("Expected %v but got %v", data, readData)
@@ -52,7 +52,7 @@ func TestCacheReadWrite(t *testing.T) {
 		"relationshiptypes.store": 34,
 	}
 	cache := LRUCache{}
-	cache.Init(LocalIO{}, &mapa)
+	cache.Init(LocalIO{}, &mapa, 2)
 	readWriteFile(&cache, t)
 }
 

@@ -8,7 +8,8 @@ type LRUCache struct {
 	regionSize int32
 }
 
-func (c *LRUCache) Init(baseIO IO, fileToRecordSize *map[string]int32) {
+func (c *LRUCache) Init(baseIO IO, fileToRecordSize *map[string]int32, regionSize int32) {
+	c.regionSize = regionSize
 	c.lruCache = make(map[string]*SUBCache)
 
 	for k, v := range *fileToRecordSize {
@@ -49,13 +50,13 @@ type SUBCache struct {
 	recordSize   int32
 }
 
-func (c *SUBCache) init(file string, regionSize int32, recordSize int32, baseIO IO) {
+func (c *SUBCache) init(file string, numOfRecordsInRegion int32, recordSize int32, baseIO IO) {
 	c.baseIO = baseIO
 	c.cache = make(map[int32]*[]byte)
 	c.cacheUsage = make(map[int32]int32)
-	c.regionSize = regionSize
-	c.maxUse = regionSize
+	c.maxUse = numOfRecordsInRegion
 	c.recordSize = recordSize
+	c.regionSize = numOfRecordsInRegion * c.recordSize
 }
 
 func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
@@ -65,7 +66,8 @@ func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
 		return c.getFromCache(regionId, offset), true
 	} else {
 		//region offset
-		ofst := regionId * c.recordSize
+		regionId = offset / c.regionSize
+		ofst := regionId * c.regionSize
 		data, isOk := c.baseIO.ReadBytes(file, ofst, c.regionSize)
 		if isOk {
 			c.addToCache(regionId, data)
@@ -85,7 +87,8 @@ func (c *SUBCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
 		regionId, ok := c.isInCache(recordId)
 		if !ok {
 			//region offset
-			ofst := regionId * c.recordSize
+			regionId = offset / c.regionSize
+			ofst := regionId * c.regionSize
 			data, isOk := c.baseIO.ReadBytes(file, ofst, c.regionSize)
 			if isOk {
 				c.addToCache(regionId, data)
@@ -146,7 +149,7 @@ func (c *SUBCache) addToCache(regionId int32, data []byte) {
 		c.cache[regionId] = &data
 		c.cacheUsage[regionId] = c.maxUse
 	} else {
-		c.gc()
+		//c.gc()
 		c.cache[regionId] = &data
 		c.cacheUsage[regionId] = c.maxUse
 	}
