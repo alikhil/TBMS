@@ -47,14 +47,14 @@ func strToPaperParam(text string) []*tuple.Tuple {
 	return params
 }
 
-func createObjsFromFile(filepath string, fn func(string) []*tuple.Tuple, create func([]*tuple.Tuple) bool) {
+func createObjsFromFile(filepath string, parse strToParam, create func([]*tuple.Tuple) bool) {
 	inFile, _ := os.Open(filepath)
 	defer inFile.Close()
 	scanner := bufio.NewScanner(inFile)
 	scanner.Split(bufio.ScanLines)
 
 	for scanner.Scan() {
-		params := fn(scanner.Text())
+		params := parse(scanner.Text())
 		ok := create(params)
 		if !ok {
 			panic("Didn't succeed to apply function")
