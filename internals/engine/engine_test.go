@@ -1,12 +1,19 @@
 package engine
 
 import (
+	"fmt"
 	io "github.com/alikhil/TBMS/internals/io"
+	"github.com/alikhil/distributed-fs/utils"
 	"testing"
 )
 
-func TestGetLabelID(t *testing.T) {
-	rw := io.LocalIO{}
+func wrap(fnc func(*testing.T, io.IO), i io.IO) func(*testing.T) {
+	return func(t *testing.T) {
+		fnc(t, i)
+	}
+}
+
+func testGetLabelID(t *testing.T, rw io.IO) {
 	filename := FNLabelsStrings
 	labelStr := "testLabelStr"
 
@@ -29,8 +36,8 @@ func TestGetLabelID(t *testing.T) {
 
 }
 
-func TestGetSaveNode(t *testing.T) {
-	var en = RealEngine{IO: io.LocalIO{}}
+func testGetSaveNode(t *testing.T, IO io.IO) {
+	var en = RealEngine{IO}
 	var node = ENode{
 		ID:             FirstID,
 		NextLabelID:    -1,
@@ -73,8 +80,8 @@ func TestEncodeParseInt(t *testing.T) {
 	}
 }
 
-func TestInitDatabase(t *testing.T) {
-	var en = RealEngine{IO: io.LocalIO{}}
+func testInitDatabase(t *testing.T, IO io.IO) {
+	var en = RealEngine{IO}
 
 	en.InitDatabase()
 	print32AllRecords(&en)
@@ -88,8 +95,8 @@ func TestInitDatabase(t *testing.T) {
 	}
 }
 
-func TestGetAndLockFreeID(t *testing.T) {
-	var en = RealEngine{IO: io.LocalIO{}}
+func testGetAndLockFreeID(t *testing.T, IO io.IO) {
+	var en = RealEngine{IO}
 
 	en.InitDatabase()
 	defer en.DeleteFile(FNInUse)
@@ -120,8 +127,8 @@ func TestGetAndLockFreeID(t *testing.T) {
 	}
 }
 
-func TestFindAndCreate(t *testing.T) {
-	var en = RealEngine{IO: io.LocalIO{}}
+func testFindAndCreate(t *testing.T, IO io.IO) {
+	var en = RealEngine{IO}
 
 	en.InitDatabase()
 	defer en.DeleteFile(FNInUse)
@@ -153,8 +160,8 @@ func TestFindAndCreate(t *testing.T) {
 
 }
 
-func TestCreateAndLoadString(t *testing.T) {
-	var en = RealEngine{IO: io.LocalIO{}}
+func testCreateAndLoadString(t *testing.T, IO io.IO) {
+	var en = RealEngine{IO}
 
 	en.InitDatabase()
 	defer en.DeleteFile(FNInUse)
@@ -171,9 +178,9 @@ func TestCreateAndLoadString(t *testing.T) {
 	}
 }
 
-func TestFindObject(t *testing.T) {
+func testFindObject(t *testing.T, IO io.IO) {
 
-	var en = RealEngine{IO: io.LocalIO{}}
+	var en = RealEngine{IO}
 
 	en.InitDatabase()
 	defer en.DeleteFile(FNInUse)
@@ -196,4 +203,66 @@ func TestFindObject(t *testing.T) {
 		t.Errorf("Expected %v but get %v", node, res)
 	}
 
+}
+
+func testPack(t *testing.T, getIO func() io.IO) {
+	t.Run("TestFindObject", wrap(testFindObject, getIO()))
+	t.Run("TestCreateAndLoadString", wrap(testCreateAndLoadString, getIO()))
+	t.Run("TestFindAndCreate", wrap(testFindAndCreate, getIO()))
+	t.Run("TestGetAndLockFreeID", wrap(testGetAndLockFreeID, getIO()))
+	t.Run("TestInitDatabase", wrap(testInitDatabase, getIO()))
+	t.Run("TestGetSaveNode", wrap(testGetSaveNode, getIO()))
+	t.Run("TestGetLabelID", wrap(testGetLabelID, getIO()))
+}
+
+func TestEngineWithLocalIO(t *testing.T) {
+	testPack(t, func() io.IO { return &io.LocalIO{} })
+}
+
+func TestEngineWithCache(t *testing.T) {
+
+	var mapa = map[string]int32{
+		"nodes.store":             13,
+		"labels.store":            9,
+		"labelsStrings.store":     21,
+		"relationships.store":     34,
+		"properties.store":        14,
+		"strings.store":           64,
+		"inuse.store":             11,
+		"propertykeys.store":      21,
+		"relationshiptypes.store": 34,
+	}
+
+	creator := func() io.IO {
+
+		cache := io.LRUCache{}
+		cache.Init(io.LocalIO{}, &mapa, 2)
+		return &cache
+	}
+
+	testPack(t, creator)
+}
+
+func TestEngineWithDFS(t *testing.T) {
+
+	var mapa = map[string]int32{
+		"nodes.store":             13,
+		"labels.store":            9,
+		"labelsStrings.store":     21,
+		"relationships.store":     34,
+		"properties.store":        14,
+		"strings.store":           64,
+		"inuse.store":             11,
+		"propertykeys.store":      21,
+		"relationshiptypes.store": 34,
+	}
+
+	client, ok := utils.GetRemoteClient(fmt.Sprintf("%s:5001", utils.GetIPAddress()))
+	if !ok {
+		t.Error("failed to connect to remote client")
+	}
+	dfs := utils.DFSClient{Client: client}
+	dfs.InitRecordMappings(&mapa)
+
+	testPack(t, func() io.IO { return &dfs })
 }

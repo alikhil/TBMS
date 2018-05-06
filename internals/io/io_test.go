@@ -128,7 +128,7 @@ func TestCacheComplete(t *testing.T) {
 		"relationshiptypes.store": 34,
 	}
 	cache := LRUCache{}
-	cache.Init(LocalIO{}, &mapa, 2)
+	cache.Init(LocalIO{}, &mapa, 5)
 	completeTest(&cache, t)
 }
 
