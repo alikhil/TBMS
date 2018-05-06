@@ -61,31 +61,33 @@ func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
 	recordID := offset / c.recordSize
 	regionID, ok := c.isInCache(recordID)
 	if ok {
-		return c.getFromCache(regionID, offset), true
+		return c.getFromCache(regionID, offset, count), true
 	} else {
 		//region offset
 		regionID = offset / c.regionSize
-		ofst := regionID * c.regionSize
-		data, isOk := c.baseIO.ReadBytes(file, ofst, c.regionSize)
+		regionOffset := regionID * c.regionSize
+		data, isOk := c.baseIO.ReadBytes(file, regionOffset, c.regionSize)
 		if isOk {
 			c.addToCache(regionID, data)
-			return c.getFromCache(regionID, offset), true
+			return c.getFromCache(regionID, offset, count), true
 		} else {
 			// we assume that the error is caused by EOF
-			resultData := make([]byte, 0, count)
-			for i := 0; int32(i) <= int32(count)/c.recordSize; i++ {
+			resultData := make([]byte, 0, c.regionSize)
+			for i := 0; int32(i) <= int32(c.regionSize)/c.recordSize; i++ {
 				data = make([]byte, c.recordSize, c.recordSize)
-				data, isOk := c.baseIO.ReadBytes(file, offset+c.recordSize*int32(i), c.recordSize)
+				data, isOk := c.baseIO.ReadBytes(file, regionOffset+c.recordSize*int32(i), c.recordSize)
 				if !isOk {
 					data = make([]byte, cap(resultData)-len(resultData), cap(resultData)-len(resultData))
-					return append(resultData, (data)...), true
+					resultData = append(resultData, (data)...)
+					break
+				} else {
+					resultData = append(resultData, (data)...)
 				}
-				resultData = append(resultData, (data)...)
 			}
-
+			c.addToCache(regionID, resultData)
+			return c.getFromCache(regionID, offset, count), true
 		}
 	}
-	return nil, false
 }
 
 func (c *SUBCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
@@ -146,11 +148,11 @@ func (c *SUBCache) isInCache(id int32) (int32, bool) {
 	return -1, false
 }
 
-func (c *SUBCache) getFromCache(regionId int32, offset int32) []byte {
+func (c *SUBCache) getFromCache(regionId int32, offset, count int32) []byte {
 	c.cacheUsage[regionId]++
 	region := c.cache[regionId]
 	position := offset % c.regionSize
-	return (*region)[position : position+c.recordSize]
+	return (*region)[position : position+count]
 }
 
 func (c *SUBCache) addToCache(regionId int32, data []byte) {
@@ -158,7 +160,7 @@ func (c *SUBCache) addToCache(regionId int32, data []byte) {
 		c.cache[regionId] = &data
 		c.cacheUsage[regionId] = c.maxUse
 	} else {
-		//c.gc()
+		c.gc()
 		c.cache[regionId] = &data
 		c.cacheUsage[regionId] = c.maxUse
 	}
