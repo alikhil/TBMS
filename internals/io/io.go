@@ -31,18 +31,6 @@ func (io LocalIO) ReadBytes(filename string, offset, count int32) (data []byte, 
 	data = make([]byte, count, count)
 	var _, er = file.ReadAt(data, int64(offset))
 	if er != nil {
-		if er.Error() == "EOF" {
-			resultData := make([]byte, 0, count)
-			for i := 0; int32(i) <= int32(count)/recordSize; i++ {
-				data = make([]byte, recordSize, recordSize)
-				var _, error = file.ReadAt(data, int64(offset+recordSize*int32(i)))
-				if error != nil {
-					data = make([]byte, cap(resultData)-len(resultData), cap(resultData)-len(resultData))
-						return append(resultData, (data)...), true
-				}
-				resultData = append(resultData, (data)...)
-			}
-		}
 		return nil, false
 	}
 	return data, true

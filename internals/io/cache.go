@@ -73,7 +73,18 @@ func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
 			c.addToCache(regionId, data)
 			return c.getFromCache(regionId, offset), true
 		} else {
-			return nil, false
+
+			resultData := make([]byte, 0, count)
+			for i := 0; int32(i) <= int32(count)/c.recordSize; i++ {
+				data = make([]byte, c.recordSize, c.recordSize)
+				data, isOk := c.baseIO.ReadBytes(file, offset+c.recordSize*int32(i), c.recordSize)
+				if !isOk {
+					data = make([]byte, cap(resultData)-len(resultData), cap(resultData)-len(resultData))
+					return append(resultData, (data)...), true
+				}
+				resultData = append(resultData, (data)...)
+			}
+
 		}
 	}
 	return nil, false
@@ -89,7 +100,7 @@ func (c *SUBCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
 			//region offset
 			regionId = offset / c.regionSize
 			ofst := regionId * c.regionSize
-			data, isOk := c.baseIO.ReadBytes(file, ofst, c.regionSize)
+			data, isOk := c.ReadBytes(file, ofst, c.regionSize)
 			if isOk {
 				c.addToCache(regionId, data)
 			}
