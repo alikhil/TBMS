@@ -35,7 +35,7 @@ func (c *LRUCache) FileExists(file string) bool {
 }
 
 func (c *LRUCache) DeleteFile(file string) bool {
-	return c.lruCache[file].FileExists(file)
+	return c.lruCache[file].DeleteFile(file)
 }
 
 type SUBCache struct {
