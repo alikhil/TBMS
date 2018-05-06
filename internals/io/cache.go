@@ -16,8 +16,6 @@ func (c *LRUCache) Init(baseIO IO, fileToRecordSize *map[string]int32, regionSiz
 		c.lruCache[k] = &SUBCache{}
 		c.lruCache[k].init(k, c.regionSize, v, baseIO)
 	}
-	a := c.lruCache["nodes.store"]
-	print(a.maxUse)
 }
 
 func (c *LRUCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
@@ -60,20 +58,20 @@ func (c *SUBCache) init(file string, numOfRecordsInRegion int32, recordSize int3
 }
 
 func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
-	recordId := offset / c.recordSize
-	regionId, ok := c.isInCache(recordId)
+	recordID := offset / c.recordSize
+	regionID, ok := c.isInCache(recordID)
 	if ok {
-		return c.getFromCache(regionId, offset), true
+		return c.getFromCache(regionID, offset), true
 	} else {
 		//region offset
-		regionId = offset / c.regionSize
-		ofst := regionId * c.regionSize
+		regionID = offset / c.regionSize
+		ofst := regionID * c.regionSize
 		data, isOk := c.baseIO.ReadBytes(file, ofst, c.regionSize)
 		if isOk {
-			c.addToCache(regionId, data)
-			return c.getFromCache(regionId, offset), true
+			c.addToCache(regionID, data)
+			return c.getFromCache(regionID, offset), true
 		} else {
-
+			// we assume that the error is caused by EOF
 			resultData := make([]byte, 0, count)
 			for i := 0; int32(i) <= int32(count)/c.recordSize; i++ {
 				data = make([]byte, c.recordSize, c.recordSize)
@@ -94,15 +92,15 @@ func (c *SUBCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
 	ok := c.baseIO.WriteBytes(file, offset, bytes)
 	if ok {
 		//добавлять регион
-		recordId := offset / c.recordSize
-		regionId, ok := c.isInCache(recordId)
+		recordID := offset / c.recordSize
+		regionID, ok := c.isInCache(recordID)
 		if !ok {
 			//region offset
-			regionId = offset / c.regionSize
-			ofst := regionId * c.regionSize
+			regionID = offset / c.regionSize
+			ofst := regionID * c.regionSize
 			data, isOk := c.ReadBytes(file, ofst, c.regionSize)
 			if isOk {
-				c.addToCache(regionId, data)
+				c.addToCache(regionID, data)
 			}
 		}
 		return true
