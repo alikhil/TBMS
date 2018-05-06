@@ -52,7 +52,7 @@ func completeTest(c IO, t *testing.T) {
 
 	orders := [n]int32{0, 2, 1, 4, 3, 10, 9, 8, 13, 4, 2, 8, 1, 15, 14, 4, 5, 10, 3}
 
-	for _, i := range orders {
+	for j, i := range orders {
 		localOffset := i * int32(recordSize)
 		to := localOffset + int32(recordSize)
 		dt, ok := c.ReadBytes(fname, localOffset, int32(recordSize))
@@ -63,7 +63,7 @@ func completeTest(c IO, t *testing.T) {
 		rdt := data[localOffset:to]
 
 		if !bytes.Equal(dt, rdt) {
-			t.Errorf("expected %v but get %v", rdt, dt)
+			t.Errorf("step %v(%v) expected %v but get %v", j, i, rdt, dt)
 		}
 
 	}
