@@ -47,14 +47,14 @@ func strToPaperParam(text string) []*tuple.Tuple {
 	return params
 }
 
-func createObjsFromFile(filepath string, parse strToParam, create func([]*tuple.Tuple) bool) {
+func createObjsFromFile(filepath string, fn func(string) []*tuple.Tuple, create func([]*tuple.Tuple) bool) {
 	inFile, _ := os.Open(filepath)
 	defer inFile.Close()
 	scanner := bufio.NewScanner(inFile)
 	scanner.Split(bufio.ScanLines)
 
 	for scanner.Scan() {
-		params := parse(scanner.Text())
+		params := fn(scanner.Text())
 		ok := create(params)
 		if !ok {
 			panic("Didn't succeed to apply function")
@@ -98,7 +98,7 @@ func runBenchmark() {
 	// 	tuple.NewTupleFromItems("id", 2),
 	// 	tuple.NewTupleFromItems("title", "Bitcons for lunch"))
 
-	api.CreateRelationship(node1, node2, "cites")
+	rel, _ := api.CreateRelationship(node1, node2, "cites")
 	// api.CreateRelationship(author, article1, "wrote")
 	// api.CreateRelationship(author, article2, "wrote")
 
@@ -110,5 +110,116 @@ func runBenchmark() {
 	// api.CreateRelationship(paper1, paper2, "cites")
 
 	// var nodes = api.search() // ???
+
+
+
+	// script
+
+	//x2
+	node1, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("id", 1), tuple.NewTupleFromItems("title", "Bitcons for breakfast"))
+
+	//x1
+	rel, _ := api.CreateRelationship(node1, node2, "cites")
+
+	//---------------------
+	// select *
+
+	allNodes := api.SelectNodesWhere(func (node *api.Node) bool {
+		return true
+	})
+
+	// select where
+	allPapers := api.SelectNodesWhere(func (node *api.Node) bool {
+		return api.Contains((node.GetLabels(), "Paper")
+	})
+
+	// select where parameter.title == computer
+	allPapersAboutComputers := api.SelectNodesWhere(func (node *api.Node) bool {
+		if !api.Contains((node.GetLabels(), "Paper") {
+			return false
+		}
+
+		title, ok := node.GetProperty("title")
+
+		if ok {
+			if strings.Contains("computer", strings.ToLower(title)) {
+				return true
+			}
+		}
+		return false
+	})
+
+	// select where links to papers from author nodes > 1
+	allProductiveAuthors := api.SelectNodesWhere(func (node *api.Node) bool {
+		if !api.Contains((node.GetLabels(), "Author") {
+			return false
+		}
+
+		relationships := node.GetRelationships()
+
+		count := 0
+
+		for _, r := range relationships {
+			if r.GetType() == "wrote" {
+				count++
+			}
+		}
+
+		return count > 1
+
+	})
+
+	// select where 
+	allComputerScientist := api.SelectNodesWhere(func (node *api.Node) bool {
+		if !api.Contains((node.GetLabels(), "Author") {
+			return false
+		}
+
+		relationships := node.GetRelationships()
+
+		for _, r := range relationships {
+			paper := r.GetTo()
+
+			title, ok := paper.GetProperty("title")
+
+			if ok {
+				if strings.Contains("computer", strings.ToLower(title)) {
+					return true
+				}
+			}
+		}
+
+		return false
+	}
+
+	// select all Mazzara coauthors
+
+	MazzaraName := "Manuel Mazzara"
+	coauthors := make([]string, 0)
+
+	Mazzara := api.SelectNodesWhere(func (node *api.Node) bool {
+		if api.Contains((node.GetLabels(), "Author") {
+			name, ok := node.GetProperty("name")
+			if ok {
+				return name == MazzaraName
+			}
+		}
+		return false
+	})[0]
+
+	allMazzaraRels := Mazzara.GetRelationships()
+	for _,r := range allMazzaraRels {
+		if r.GetType() == "wrote" {
+			links := r.GetTo().GetRelationships()
+			for _, rr := range links {
+				if rr.GetType() == "wrote" {
+					name, ok := rr.GetFrom().GetProperty("name")
+					if ok && name != MazzaraName {
+						coauthors = append(coauthors, name)
+					}
+				}
+			}
+		}
+	}
 
 }
