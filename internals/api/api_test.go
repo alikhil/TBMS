@@ -4,6 +4,7 @@ import (
 	en "github.com/alikhil/TBMS/internals/engine"
 	io "github.com/alikhil/TBMS/internals/io"
 	"github.com/kmanley/golang-tuple"
+	"log"
 	"testing"
 )
 
@@ -77,6 +78,10 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 	defer re.DeleteFile(en.FNNodes)
 	defer re.DeleteFile(en.FNRelationships)
 	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
+	// TODO: check bug
+	defer re.DeleteFile(en.FNStrings)
 
 	nodeA := &en.ENode{
 		ID:             en.FirstID,
@@ -110,6 +115,12 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 
 	if rel.NextPropertyID == -1 {
 		t.Errorf("No properties found!")
+	}
+
+	fnext := engine.GetEObjectIterator(en.StoreProperty)
+	prop := &en.EProperty{}
+	for ok := fnext(prop); ok; ok = fnext(prop) {
+		log.Printf("%v", prop)
 	}
 
 	propsRef, foundProps := getProperties(rel.NextPropertyID)
