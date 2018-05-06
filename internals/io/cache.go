@@ -58,13 +58,12 @@ func (c *SUBCache) init(file string, numOfRecordsInRegion int32, recordSize int3
 }
 
 func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
-	recordID := offset / c.recordSize
-	regionID, ok := c.isInCache(recordID)
+	regionID := c.recordIDToRegionID(offset)
+	ok := c.isInCache(regionID)
 	if ok {
 		return c.getFromCache(regionID, offset, count), true
 	} else {
 		//region offset
-		regionID = offset / c.regionSize
 		regionOffset := regionID * c.regionSize
 		data, isOk := c.baseIO.ReadBytes(file, regionOffset, c.regionSize)
 		if isOk {
@@ -94,13 +93,12 @@ func (c *SUBCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
 	ok := c.baseIO.WriteBytes(file, offset, bytes)
 	if ok {
 		//добавлять регион
-		recordID := offset / c.recordSize
-		regionID, ok := c.isInCache(recordID)
+		regionID := c.recordIDToRegionID(offset)
+		ok := c.isInCache(regionID)
 		if !ok {
-			//region offset
 			regionID = offset / c.regionSize
-			ofst := regionID * c.regionSize
-			data, isOk := c.ReadBytes(file, ofst, c.regionSize)
+			regionOffset := regionID * c.regionSize
+			data, isOk := c.ReadBytes(file, regionOffset, c.regionSize)
 			if isOk {
 				c.addToCache(regionID, data)
 			}
@@ -141,11 +139,15 @@ func (c *SUBCache) getRegionId(id int32) int32 {
 	return id / c.regionSize
 }
 
-func (c *SUBCache) isInCache(id int32) (int32, bool) {
-	if _, ok := c.cache[id]; ok {
-		return c.getRegionId(id), ok
+func (c *SUBCache) recordIDToRegionID(recordID int32) int32 {
+	return recordID / c.regionSize
+}
+
+func (c *SUBCache) isInCache(regionID int32) bool {
+	if _, ok := c.cache[regionID]; ok {
+		return ok
 	}
-	return -1, false
+	return false
 }
 
 func (c *SUBCache) getFromCache(regionId int32, offset, count int32) []byte {
