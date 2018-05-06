@@ -19,6 +19,24 @@ func findOrCreateRelationType(relTypeString string) (relTypeID int32, ok bool) {
 		func(id int32) en.EObject { return &en.ERelationshipType{ID: id, TypeString: relTypeString} })
 }
 
+func CreateNodeLabel(nodeLabel string) (nodeLabelID int32, ok bool) {
+	// label string can already exists
+	labelStringID, ok := findOrCreateLabelString(nodeLabel)
+	if !ok {
+		return -1, false
+	}
+
+	// but label for the new node must be new
+	return engine.CreateObject(en.StoreLabel,
+		func(id int32) en.EObject { return &en.ELabel{ID: id, LabelStringID: labelStringID, NextLabelID: -1} })
+}
+
+func findOrCreateLabelString(labelString string) (labelStringID int32, ok bool) {
+	return engine.FindOrCreateObject(en.StoreLabelString,
+		func(ob en.EObject) bool { return ob.(*en.ELabelString).String == labelString },
+		func(id int32) en.EObject { return &en.ELabelString{ID: id, String: labelString} })
+}
+
 func validateProps(props []*tuple.Tuple) (*[]string, *[]interface{}, bool) {
 	propsCnt := len(props)
 	keys := make([]string, propsCnt)
@@ -42,6 +60,45 @@ func validateProps(props []*tuple.Tuple) (*[]string, *[]interface{}, bool) {
 	return &keys, &vals, true
 }
 
+func getProperties(nextPropertyID int32) (*map[string]interface{}, bool) {
+	dict := make(map[string]interface{})
+
+	if nextPropertyID == -1 {
+		return &dict, true
+	}
+
+	property := &en.EProperty{ID: nextPropertyID}
+	for ok := engine.GetObject(property); ok; ok = engine.GetObject(property) {
+		pkey := &en.EPropertyKey{ID: property.KeyStringID}
+		pkeyFound := engine.GetObject(pkey)
+
+		if !pkeyFound {
+			logger.Error.Printf("Can not load property key with id %v", property.KeyStringID)
+			return nil, false
+		}
+		dict[pkey.KeyString] = property.ValueOrStringPtr
+
+		if property.Typename == en.Estring {
+			str := &en.EString{ID: property.ValueOrStringPtr.(int32)}
+			valStrFound := engine.GetObject(str)
+
+			if !valStrFound {
+				logger.Error.Printf("Can not found value of string with id %v", str.ID)
+				return nil, false
+			}
+
+			dict[pkey.KeyString] = str.LoadString(&engine)
+		}
+
+		property.ID = property.NextPropertyID
+		if property.ID == -1 {
+			break
+		}
+	}
+
+	return &dict, true
+}
+
 func fillPropertyValue(prop *en.EProperty, val interface{}) (ok bool) {
 	ok = true
 	switch t := val.(type) {
@@ -53,11 +110,16 @@ func fillPropertyValue(prop *en.EProperty, val interface{}) (ok bool) {
 		prop.ValueOrStringPtr = t
 	case bool:
 		prop.Typename = en.Ebool
-		prop.ValueOrStringPtr = t
+		prop.ValueOrStringPtr = int32(1)
+		if !t {
+			prop.ValueOrStringPtr = int32(0)
+		}
 	case string:
 		prop.Typename = en.Estring
 		prop.ValueOrStringPtr, ok = engine.FindOrCreateObject(en.StoreString,
-			func(ob en.EObject) bool { return ob.(*en.EString).LoadString(&engine) == t },
+			func(ob en.EObject) bool {
+				return ob.(*en.EString).LoadString(&engine) == t
+			},
 			func(id int32) en.EObject { return engine.CreateStringAndReturnFirstChunk(t) })
 	}
 	return ok
@@ -94,7 +156,12 @@ func fillProperties(props []*tuple.Tuple) (int32, bool) {
 			return -1, false
 		}
 		property = &en.EProperty{ID: id, KeyStringID: propKeyIDs[i], NextPropertyID: property.ID}
-		fillPropertyValue(property, (*values)[i])
+		filled := fillPropertyValue(property, (*values)[i])
+		if !filled {
+			logger.Error.Printf("some shit happened!!! failed to fill property!")
+			return -1, false
+		}
+		engine.SaveObject(property)
 	}
 
 	return property.ID, true
@@ -122,6 +189,33 @@ func getLastRelationship(node *en.ENode) (*en.ERelationship, bool) {
 
 }
 
+func CreateNode(nodeLabel string, properties ...*tuple.Tuple) (*Node, bool) {
+	nodeLabelID, ok := CreateNodeLabel(nodeLabel)
+	if !ok {
+		return nil, false
+	}
+
+	nextPropertyID, ok := fillProperties(properties)
+	if !ok {
+		return nil, false
+	}
+
+	nodeID, ok := engine.GetAndLockFreeIDForStore(en.StoreNode)
+	if !ok {
+		return nil, false
+	}
+
+	node := &en.ENode{
+		ID:             nodeID,
+		NextRelID:      -1,
+		NextPropertyID: nextPropertyID,
+		NextLabelID:    nodeLabelID,
+	}
+
+	engine.SaveObject(node)
+	return &Node{node}, true
+}
+
 func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) (*Relationship, bool) {
 
 	if a == nil || b == nil {
@@ -139,7 +233,6 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 	if !ok {
 		return nil, false
 	}
-	// for each property key check and obtain id
 
 	relID, ok := engine.GetAndLockFreeIDForStore(en.StoreRelationship)
 	if !ok {

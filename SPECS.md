@@ -65,6 +65,6 @@ PropertyKey - 21 bytes
 
 RelationshipType - 21 bytes
 
-|  inUse |  relType  |
-|:------:|:---------:|
-| 1 byte | 20 bytes  |
+|  inUse |  TypeString  |
+|:------:|:------------:|
+| 1 byte |  20 bytes  |

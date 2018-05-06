@@ -275,6 +275,7 @@ func print32AllRecords(re *RealEngine) {
 		Advanced
  * ******************** */
 
+// FindOrCreateObject ...
 func (re *RealEngine) FindOrCreateObject(store EStore, pred func(EObject) bool, create func(int32) EObject) (int32, bool) {
 	// fillNextObj := re.GetEObjectIterator(store)
 	curObj := create(-1)
@@ -282,16 +283,24 @@ func (re *RealEngine) FindOrCreateObject(store EStore, pred func(EObject) bool, 
 	if re.FindObject(store, pred, curObj) {
 		return curObj.getID(), true
 	}
-	// if not found, then create new
+
+	return re.CreateObject(store, create)
+}
+
+// CreateObject ...
+func (re *RealEngine) CreateObject(store EStore, create func(int32) EObject) (int32, bool) {
+
 	newID, ok := re.GetAndLockFreeIDForStore(store)
 	if !ok {
 		logger.Error.Printf("can not get free id for %s", FilenameStore[store])
 		return -1, false
 	}
-	rel := create(newID)
-	saved := re.SaveObject(rel)
+
+	nObj := create(newID)
+	saved := re.SaveObject(nObj)
+
 	if !saved {
-		logger.Error.Printf("failed to save new obj wih id to %s", FilenameStore[store])
+		logger.Error.Printf("failed to save new obj wih id %v to %s", newID, FilenameStore[store])
 		return -1, false
 	}
 	return newID, true
