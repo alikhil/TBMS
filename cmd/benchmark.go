@@ -68,30 +68,37 @@ func runBenchmark() {
 	api.Init(re)
 	logger.Info.Printf("from benchmark")
 
-	var path = "../test_data/1000/authors.in"
-	createObjsFromFile(path, strToAuthorParam,
-		func(properties []*tuple.Tuple) bool {
-			id, ok := api.CreateNode("Author", properties...)
-			logger.Info.Printf("Author added to id: %v", id)
-			return ok
-		})
-	path = "../test_data/1000/papers.in"
-	createObjsFromFile(path, strToAuthorParam,
-		func(properties []*tuple.Tuple) bool {
-			id, ok := api.CreateNode("Paper", properties...)
-			logger.Info.Printf("Paper added to id: %v", id)
-			return ok
-		})
+	// var path = "../test_data/1000/authors.in"
+	// createObjsFromFile(path, strToAuthorParam,
+	// 	func(properties []*tuple.Tuple) bool {
+	// 		id, ok := api.CreateNode("Author", properties...)
+	// 		logger.Info.Printf("Author added to id: %v", id)
+	// 		return ok
+	// 	})
+	// path = "../test_data/1000/papers.in"
+	// createObjsFromFile(path, strToAuthorParam,
+	// 	func(properties []*tuple.Tuple) bool {
+	// 		id, ok := api.CreateNode("Paper", properties...)
+	// 		logger.Info.Printf("Paper added to id: %v", id)
+	// 		return ok
+	// 	})
+
 	// createObjsFromFile(path, strToPaperParam,
 	// 	func(properties []*tuple.Tuple) bool {
 
 	// 	}
 	// )
 
-	// var author = api.createNode()   // (type = "Author", properties = {id: 1; name: "andrew NG"})
-	// var article1 = api.createNode() // (type = "Paper", properties = {id: 10; title: "Bitcons for breakfast"})
-	// var article2 = api.createNode() // (type = "Paper", properties = {id: 15; title: "Bitcons for lunch"})
+	// var author = api.createNode(("Author", {
+	// 	tuple.NewTupleFromItems("id", 1),
+	// 	tuple.NewTupleFromItems("name", "Einshtein")})
+	node1, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("id", 1), tuple.NewTupleFromItems("title", "Bitcons for breakfast"))
+	node2, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("id", 1), tuple.NewTupleFromItems("title", "Bitcons for lunch"))
+	// var article2 = api.CreateNode("Paper",
+	// 	tuple.NewTupleFromItems("id", 2),
+	// 	tuple.NewTupleFromItems("title", "Bitcons for lunch"))
 
+	api.CreateRelationship(node1, node2, "cites")
 	// api.CreateRelationship(author, article1, "wrote")
 	// api.CreateRelationship(author, article2, "wrote")
 
