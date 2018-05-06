@@ -170,7 +170,7 @@ func (c *SUBCache) addToCache(regionId int32, data []byte) {
 }
 
 func (c *SUBCache) decreaseVals() {
-	for _, v := range c.cacheUsage {
-		v--
+	for k := range c.cacheUsage {
+		c.cacheUsage[k]--
 	}
 }
