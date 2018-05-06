@@ -1,6 +1,8 @@
 package api
 
 import (
+	"reflect"
+
 	en "github.com/alikhil/TBMS/internals/engine"
 	"github.com/alikhil/TBMS/internals/logger"
 	"github.com/kmanley/golang-tuple"
@@ -273,11 +275,32 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 	return &Relationship{relationship}, true
 }
 
+func SelectNodesWhere(condition func(*Node) bool) ([]*Node, error) {
+
+}
+
+func SelectRelationshipWhere(condition func(*Relationship) bool) ([]*Relationship, error) {
+
+}
+
 type Node struct {
 	*en.ENode
+}
+
+func (*Node) GetLabels() *[]string {
+
 }
 
 type Relationship struct {
 	*en.ERelationship
 	// GetProperties() ?
+}
+
+func Contains(list *[]interface{}, obj interface{}) bool {
+	for _, a := range *list {
+		if reflect.DeepEqual(a, obj) {
+			return true
+		}
+	}
+	return false
 }
