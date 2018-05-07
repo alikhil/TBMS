@@ -11,8 +11,8 @@ import (
 	"github.com/kmanley/golang-tuple"
 )
 
-func TestCreateRelationship(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testCreateRelationship(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 
 	re.InitDatabase()
 	defer re.DropDatabase()
@@ -68,8 +68,8 @@ func TestCreateRelationship(t *testing.T) {
 	}
 
 }
-func TestCreateRelationshipWithProperties(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testCreateRelationshipWithProperties(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 
 	re.InitDatabase()
 	defer re.DropDatabase()
@@ -140,8 +140,8 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 	}
 
 }
-func TestGetLabels(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetLabels(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 	Init(re)
@@ -159,8 +159,8 @@ func TestGetLabels(t *testing.T) {
 
 }
 
-func TestGetNodeProperty(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetNodeProperty(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 	Init(re)
@@ -187,8 +187,8 @@ func TestGetNodeProperty(t *testing.T) {
 	}
 
 }
-func TestGetFromRelationship(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetFromRelationship(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 	Init(re)
@@ -208,8 +208,8 @@ func TestGetFromRelationship(t *testing.T) {
 	}
 }
 
-func TestGetToRelationship(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetToRelationship(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 	Init(re)
@@ -229,8 +229,8 @@ func TestGetToRelationship(t *testing.T) {
 	}
 }
 
-func TestGetRelationshipType(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetRelationshipType(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 
@@ -248,8 +248,8 @@ func TestGetRelationshipType(t *testing.T) {
 	}
 }
 
-func TestGetRelationshipProperty(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetRelationshipProperty(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 
@@ -275,8 +275,8 @@ func TestGetRelationshipProperty(t *testing.T) {
 	}
 }
 
-func TestSelectNodesWhere(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testSelectNodesWhere(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 
@@ -306,8 +306,8 @@ func TestSelectNodesWhere(t *testing.T) {
 
 }
 
-func TestSelectRelationshipsWhere(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testSelectRelationshipsWhere(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 
@@ -340,8 +340,8 @@ func TestSelectRelationshipsWhere(t *testing.T) {
 
 }
 
-func TestGetRelationships(t *testing.T) {
-	var re = &en.RealEngine{IO: io.LocalIO{}}
+func testGetRelationships(t *testing.T, IO io.IO) {
+	var re = &en.RealEngine{IO}
 	re.InitDatabase()
 	defer re.DropDatabase()
 
@@ -373,4 +373,40 @@ func TestGetRelationships(t *testing.T) {
 		t.Errorf("Expected lenght: 4, get: %v", len(relationships))
 	}
 
+}
+
+/// LocalIO tests
+
+func TestCreateRelationshipWithLocalIO(t *testing.T) {
+	testCreateRelationship(t, &io.LocalIO{})
+}
+func TestCreateRelationshipWithPropertiesWithLocalIO(t *testing.T) {
+	testCreateRelationshipWithProperties(t, &io.LocalIO{})
+}
+func TestGetLabelsWithLocalIO(t *testing.T) {
+	testGetLabels(t, &io.LocalIO{})
+}
+func TestGetNodePropertyWithLocalIO(t *testing.T) {
+	testGetNodeProperty(t, &io.LocalIO{})
+}
+func TestGetFromRelationshipWithLocalIO(t *testing.T) {
+	testGetFromRelationship(t, &io.LocalIO{})
+}
+func TestGetToRelationshipWithLocalIO(t *testing.T) {
+	testGetToRelationship(t, &io.LocalIO{})
+}
+func TestGetRelationshipTypeWithLocalIO(t *testing.T) {
+	testGetRelationshipType(t, &io.LocalIO{})
+}
+func TestGetRelationshipPropertyWithLocalIO(t *testing.T) {
+	testGetRelationshipProperty(t, &io.LocalIO{})
+}
+func TestSelectNodesWhereWithLocalIO(t *testing.T) {
+	testSelectNodesWhere(t, &io.LocalIO{})
+}
+func TestSelectRelationshipsWhereWithLocalIO(t *testing.T) {
+	testSelectRelationshipsWhere(t, &io.LocalIO{})
+}
+func TestGetRelationshipsWithLocalIO(t *testing.T) {
+	testGetRelationships(t, &io.LocalIO{})
 }
