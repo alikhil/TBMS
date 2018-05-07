@@ -272,6 +272,7 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 		}
 	} else {
 		a.NextRelID = relID
+		engine.SaveObject(a)
 	}
 
 	if foundB {
@@ -282,6 +283,7 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 		}
 	} else {
 		b.NextRelID = relID
+		engine.SaveObject(b)
 	}
 
 	engine.SaveObject(relationship)
