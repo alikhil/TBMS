@@ -16,6 +16,8 @@ import (
 	"github.com/alikhil/TBMS/internals/logger"
 )
 
+var makeProperty = tuple.NewTupleFromItems
+
 func runExample() {
 	var re = &en.RealEngine{IO: &io.LocalIO{}}
 	re.InitDatabase()
@@ -24,16 +26,16 @@ func runExample() {
 	defer re.DropDatabase()
 
 	// Create authors
-	RobertoLucchi, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Roberto Lucchi"))
-	ClaudioGuidi, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Claudio Guidi"))
-	IvanLanese, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Ivan Lanese"))
-	ManuelMazzara, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Manuel Mazzara"))
+	RobertoLucchi, _ := api.CreateNode("Author", makeProperty("name", "Roberto Lucchi"))
+	ClaudioGuidi, _ := api.CreateNode("Author", makeProperty("name", "Claudio Guidi"))
+	IvanLanese, _ := api.CreateNode("Author", makeProperty("name", "Ivan Lanese"))
+	ManuelMazzara, _ := api.CreateNode("Author", makeProperty("name", "Manuel Mazzara"))
 
 	// Create papers
-	paper1, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A pi-calculus based semantics for WS-BPEL"))
-	paper2, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A formal framework for web services coordination"))
-	paper3, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Towards a unifying theory for web services composition"))
-	paper4, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Timing issues in web services composition"))
+	paper1, _ := api.CreateNode("Paper", makeProperty("title", "A pi-calculus based semantics for WS-BPEL"))
+	paper2, _ := api.CreateNode("Paper", makeProperty("title", "A formal framework for web services coordination"))
+	paper3, _ := api.CreateNode("Paper", makeProperty("title", "Towards a unifying theory for web services composition"))
+	paper4, _ := api.CreateNode("Paper", makeProperty("title", "Timing issues in web services composition"))
 
 	// Create relationships
 	api.CreateRelationship(RobertoLucchi, paper1, "wrote")
