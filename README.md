@@ -1,5 +1,5 @@
 # TBMS
-TBM BadAss Management System 
+TBM BadAss Management System - Simple Graph Database
 
 
 ## Dev dependencies
