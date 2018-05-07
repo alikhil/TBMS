@@ -104,6 +104,9 @@ func getProperties(nextPropertyID int32) (*map[string]interface{}, bool) {
 func fillPropertyValue(prop *en.EProperty, val interface{}) (ok bool) {
 	ok = true
 	switch t := val.(type) {
+	case int:
+		prop.Typename = en.Eint
+		prop.ValueOrStringPtr = int32(t)
 	case int32:
 		prop.Typename = en.Eint
 		prop.ValueOrStringPtr = t
@@ -118,11 +121,15 @@ func fillPropertyValue(prop *en.EProperty, val interface{}) (ok bool) {
 		}
 	case string:
 		prop.Typename = en.Estring
-		prop.ValueOrStringPtr, ok = engine.FindOrCreateObject(en.StoreString,
+		str := &en.EString{ID: -1}
+		found := engine.FindObject(en.StoreString,
 			func(ob en.EObject) bool {
 				return ob.(*en.EString).LoadString(&engine) == t
-			},
-			func(id int32) en.EObject { return engine.CreateStringAndReturnFirstChunk(t) })
+			}, str)
+		if !found {
+			str = engine.CreateStringAndReturnFirstChunk(t)
+		}
+		prop.ValueOrStringPtr = str.ID
 	}
 	return ok
 }
