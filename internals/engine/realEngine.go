@@ -354,6 +354,7 @@ func (re *RealEngine) DropDatabase() {
 
 	re.DeleteFile(FNLabels)
 	re.DeleteFile(FNLabelsStrings)
+	re.DeleteFile(FNStrings)
 	re.DeleteFile(FNProperties)
 	re.DeleteFile(FNPropertyKeys)
 }
