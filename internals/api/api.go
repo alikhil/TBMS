@@ -1,7 +1,9 @@
 package api
 
 import (
+	"fmt"
 	"reflect"
+	"strings"
 
 	en "github.com/alikhil/TBMS/internals/engine"
 	"github.com/alikhil/TBMS/internals/logger"
@@ -432,4 +434,26 @@ func Contains(list *[]interface{}, obj interface{}) bool {
 		}
 	}
 	return false
+}
+
+func (node *Node) String() string {
+	props, ok := node.GetProperties()
+	strB := strings.Builder{}
+	if ok {
+		strB.WriteString(" { ")
+		for key, value := range *props {
+			strB.WriteString(fmt.Sprintf("'%s': %v", key, value))
+		}
+		strB.WriteString(" } ")
+	}
+
+	labels := *node.GetLabels()
+
+	strBLabels := strings.Builder{}
+
+	for _, label := range labels {
+		strBLabels.WriteString(fmt.Sprintf(" #%s ", label))
+	}
+
+	return fmt.Sprintf("[ID: %v] %s %s", node.ID, strB.String(), strBLabels.String())
 }
