@@ -149,7 +149,7 @@ func runBenchmark() {
 		title, ok := node.GetProperty("title")
 
 		if ok {
-			if strings.Contains("services", strings.ToLower(title.(string))) {
+			if strings.Contains(strings.ToLower(title.(string)), "services") {
 				return true
 			}
 		}
@@ -173,11 +173,13 @@ func runBenchmark() {
 			return false
 		}
 
+		logger.Info.Printf("author node")
 		relationships := node.GetRelationships()
-
+		logger.Info.Printf("length %v", len(*relationships))
 		count := 0
 
 		for _, r := range *relationships {
+			logger.Info.Printf("type of relationship: %v", r.GetType())
 			if r.GetType() == "wrote" {
 				count++
 			}
@@ -187,7 +189,7 @@ func runBenchmark() {
 
 	})
 
-	logger.Info.Printf("Print all producntive authors:")
+	logger.Info.Printf("Print all productive authors (papers count > 1):")
 	for _, node := range allProductiveAuthors {
 		logger.Info.Printf("Node: %v", node)
 	}
@@ -210,9 +212,8 @@ func runBenchmark() {
 			paper := r.GetTo()
 
 			title, ok := paper.GetProperty("title")
-
 			if ok {
-				if strings.Contains("services", strings.ToLower(title.(string))) {
+				if strings.Contains(strings.ToLower(title.(string)), "services") {
 					return true
 				}
 			}

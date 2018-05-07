@@ -71,7 +71,6 @@ func TestCreateRelationship(t *testing.T) {
 	}
 
 }
-
 func TestCreateRelationshipWithProperties(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 
@@ -151,7 +150,6 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 	}
 
 }
-
 func TestGetLabels(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
@@ -213,7 +211,6 @@ func TestGetNodeProperty(t *testing.T) {
 	}
 
 }
-
 func TestGetFromRelationship(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
@@ -401,6 +398,35 @@ func TestSelectRelationshipsWhere(t *testing.T) {
 		if label != "show" {
 			t.Errorf("Returns wrong node: %v with id %v", label, p)
 		}
+	}
+
+}
+
+func TestGetRelationships(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
+
+	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
+	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
+
+	CreateRelationship(node1, node2, "show")
+	CreateRelationship(node1, node2, "show")
+	CreateRelationship(node1, node2, "dont_show")
+	CreateRelationship(node1, node2, "dont_show")
+
+	relationships := *node1.GetRelationships()
+
+	if len(relationships) != 4 {
+		t.Errorf("Expected lenght: 4, get: %v", len(relationships))
 	}
 
 }
