@@ -323,6 +323,8 @@ func (node *Node) GetLabels() *[]string {
 		res = append(res, labelStr.String)
 		if label.NextLabelID != -1 {
 			label = &en.ELabel{ID: label.NextLabelID}
+		} else {
+			break
 		}
 	}
 

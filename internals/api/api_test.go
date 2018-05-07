@@ -1,11 +1,12 @@
 package api
 
 import (
+	"log"
+	"testing"
+
 	en "github.com/alikhil/TBMS/internals/engine"
 	io "github.com/alikhil/TBMS/internals/io"
 	"github.com/kmanley/golang-tuple"
-	"log"
-	"testing"
 )
 
 func TestCreateRelationship(t *testing.T) {
@@ -146,5 +147,79 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 		t.Errorf("Expected %v but got %v", fval, props["double_val"])
 
 	}
+
+}
+
+func TestGetLabels(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+
+	node, _ := CreateNode("test_label")
+
+	labels := *node.GetLabels()
+	if len(labels) > 1 || len(labels) < 1 {
+		t.Errorf("Wrong number of labels")
+	}
+
+	if labels[0] != "test_label" {
+		t.Errorf("wrong label")
+	}
+
+}
+
+func TestGetNodeProperty(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+
+	node, _ := CreateNode("test_label",
+		tuple.NewTupleFromItems("test_prop1", int32(1)),
+		tuple.NewTupleFromItems("test_prop2", int32(2)))
+
+	pr, ok := node.GetProperties()
+	if !ok {
+		t.Errorf("Can't get properties")
+	}
+	properties := *pr
+
+	if !ok {
+		t.Errorf("can't get properties")
+	}
+
+	if properties["test_prop1"] != int32(1) {
+		t.Errorf("wrong 1st property: expected 1, get %v", properties["test_prop1"])
+	}
+	if properties["test_prop2"] != int32(2) {
+		t.Errorf("wrong 2nd property: expected 2, get %v", properties["test_prop2"])
+	}
+
+}
+
+func TestGetNodeProperties(t *testing.T) {
+
+}
+
+func TestGetFromRelationship(t *testing.T) {
+
+}
+
+func TestGetToRelationship(t *testing.T) {
+
+}
+
+func TestGetRelationshipType(t *testing.T) {
+
+}
+
+func TestGetRelationshipProperty(t *testing.T) {
 
 }

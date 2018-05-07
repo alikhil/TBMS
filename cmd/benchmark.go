@@ -83,33 +83,6 @@ func runBenchmark() {
 	// 		return ok
 	// 	})
 
-	// createObjsFromFile(path, strToPaperParam,
-	// 	func(properties []*tuple.Tuple) bool {
-
-	// 	}
-	// )
-
-	// var author = api.createNode(("Author", {
-	// 	tuple.NewTupleFromItems("id", 1),
-	// 	tuple.NewTupleFromItems("name", "Einshtein")})
-	node1, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("id", 1), tuple.NewTupleFromItems("title", "Bitcons for breakfast"))
-	node2, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("id", 1), tuple.NewTupleFromItems("title", "Bitcons for lunch"))
-	// var article2 = api.CreateNode("Paper",
-	// 	tuple.NewTupleFromItems("id", 2),
-	// 	tuple.NewTupleFromItems("title", "Bitcons for lunch"))
-
-	rel, _ := api.CreateRelationship(node1, node2, "cites")
-	// api.CreateRelationship(author, article1, "wrote")
-	// api.CreateRelationship(author, article2, "wrote")
-
-	// var id = 10
-	// var id = 15
-	// var paper1 = api.getNodeByTypeParameter() // (type="Paper", parameter={"id" == 10})
-	// var paper2 = api.getNodeByID()            // (type="Paper", parameter={"id" == 15})
-
-	// api.CreateRelationship(paper1, paper2, "cites")
-
-	// var nodes = api.search() // ???
 
 
 
