@@ -109,6 +109,13 @@ func (str *EString) encode() *[]byte {
 	buffer = append(buffer, encodeInt(str.NextPartID)...)
 	buffer = append(buffer, *str.Value...)
 
+	buffer = append(buffer, make([]byte, BytesPerString-len(buffer))...) // fill remaining part with zeros
+
+	if len(buffer) > BytesPerString {
+		logger.Error.Fatalf("String length is too big - %v", str.Value)
+
+	}
+
 	return &buffer
 }
 

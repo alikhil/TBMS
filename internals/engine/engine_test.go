@@ -215,12 +215,33 @@ func testPack(t *testing.T, getIO func() io.IO) {
 	t.Run("TestGetLabelID", wrap(testGetLabelID, getIO()))
 }
 
+func TestFindObjectWithCache(t *testing.T) {
+	testFindObject(t, getCache())
+}
+func TestCreateAndLoadStringWithCache(t *testing.T) {
+	testCreateAndLoadString(t, getCache())
+}
+func TestFindAndCreateWithCache(t *testing.T) {
+	testFindAndCreate(t, getCache())
+}
+func TestGetAndLockFreeIDWithCache(t *testing.T) {
+	testGetAndLockFreeID(t, getCache())
+}
+func TestInitDatabaseWithCache(t *testing.T) {
+	testInitDatabase(t, getCache())
+}
+func TestGetSaveNodeWithCache(t *testing.T) {
+	testGetSaveNode(t, getCache())
+}
+func TestGetLabelIDWithCache(t *testing.T) {
+	testGetLabelID(t, getCache())
+}
+
 func TestEngineWithLocalIO(t *testing.T) {
 	testPack(t, func() io.IO { return &io.LocalIO{} })
 }
 
-func TestEngineWithCache(t *testing.T) {
-
+func getCache() io.IO {
 	var mapa = map[string]int32{
 		"nodes.store":             13,
 		"labels.store":            9,
@@ -233,14 +254,14 @@ func TestEngineWithCache(t *testing.T) {
 		"relationshiptypes.store": 34,
 	}
 
-	creator := func() io.IO {
+	cache := io.LRUCache{}
+	cache.Init(io.LocalIO{}, &mapa, 5)
+	return &cache
+}
 
-		cache := io.LRUCache{}
-		cache.Init(io.LocalIO{}, &mapa, 2)
-		return &cache
-	}
+func TestEngineWithCache(t *testing.T) {
 
-	testPack(t, creator)
+	testPack(t, getCache)
 }
 
 func TestEngineWithDFS(t *testing.T) {
