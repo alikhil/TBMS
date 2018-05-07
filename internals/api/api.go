@@ -270,6 +270,8 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 		if !engine.SaveObject(aLastRel) {
 			panic("failed to save object")
 		}
+	} else {
+		a.NextRelID = relID
 	}
 
 	if foundB {
@@ -278,6 +280,8 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 		if !engine.SaveObject(bLastRel) {
 			panic("failed to save object")
 		}
+	} else {
+		b.NextRelID = relID
 	}
 
 	engine.SaveObject(relationship)
@@ -456,4 +460,18 @@ func (node *Node) String() string {
 	}
 
 	return fmt.Sprintf("[ID: %v] %s %s", node.ID, strB.String(), strBLabels.String())
+}
+
+func (rel *Relationship) String() string {
+	propsBuilder := strings.Builder{}
+	props, ok := rel.GetProperties()
+
+	if ok && len(*props) > 0 {
+		propsBuilder.WriteString(" | ")
+		for key, value := range *props {
+			propsBuilder.WriteString(fmt.Sprintf("'%s': %v", key, value))
+		}
+	}
+
+	return fmt.Sprintf("[ID %v] >--[%s%s]--> [ID %v]", rel.FirstNodeID, rel.GetType(), propsBuilder.String(), rel.SecondNodeID)
 }
