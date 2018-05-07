@@ -380,8 +380,7 @@ func TestSelectRelationshipsWhere(t *testing.T) {
 	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
 
-	rel, _ := CreateRelationship(node1, node2, "show")
-	rel.ID
+	CreateRelationship(node1, node2, "show")
 	CreateRelationship(node1, node2, "show")
 	CreateRelationship(node1, node2, "dont_show")
 	CreateRelationship(node1, node2, "dont_show")
@@ -421,10 +420,22 @@ func TestGetRelationships(t *testing.T) {
 	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
 
-	CreateRelationship(node1, node2, "show")
-	CreateRelationship(node1, node2, "show")
-	CreateRelationship(node1, node2, "dont_show")
-	CreateRelationship(node1, node2, "dont_show")
+	_, ok := CreateRelationship(node1, node2, "show1")
+	if !ok {
+		t.Errorf("Could not create show 1")
+	}
+	_, ok = CreateRelationship(node1, node2, "show2")
+	if !ok {
+		t.Errorf("Could not create show 2")
+	}
+	_, ok = CreateRelationship(node1, node2, "show3")
+	if !ok {
+		t.Errorf("Could not create show 3")
+	}
+	_, ok = CreateRelationship(node1, node2, "show4")
+	if !ok {
+		t.Errorf("Could not create show 4")
+	}
 
 	relationships := *node1.GetRelationships()
 
