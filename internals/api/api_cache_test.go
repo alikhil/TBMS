@@ -17,7 +17,7 @@ func getCache() io.IO {
 		"strings.store":           64,
 		"inuse.store":             11,
 		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
+		"relationshiptypes.store": 21,
 	}
 
 	cache := io.LRUCache{}

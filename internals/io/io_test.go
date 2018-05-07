@@ -91,7 +91,7 @@ func TestCacheReadWrite(t *testing.T) {
 		"strings.store":           64,
 		"inuse.store":             11,
 		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
+		"relationshiptypes.store": 21,
 	}
 	cache := LRUCache{}
 	cache.Init(LocalIO{}, &mapa, 20)
@@ -108,7 +108,7 @@ func TestCacheCreateFile(t *testing.T) {
 		"strings.store":           64,
 		"inuse.store":             11,
 		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
+		"relationshiptypes.store": 21,
 	}
 	cache := LRUCache{}
 	cache.Init(LocalIO{}, &mapa, 2)
@@ -125,7 +125,7 @@ func TestCacheComplete(t *testing.T) {
 		"strings.store":           64,
 		"inuse.store":             11,
 		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
+		"relationshiptypes.store": 21,
 	}
 	cache := LRUCache{}
 	cache.Init(LocalIO{}, &mapa, 5)

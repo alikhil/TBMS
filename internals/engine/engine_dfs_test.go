@@ -17,7 +17,7 @@ func getDFS() io.IO {
 		"strings.store":           64,
 		"inuse.store":             11,
 		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
+		"relationshiptypes.store": 21,
 	}
 
 	client, ok := utils.GetRemoteClient(fmt.Sprintf("%s:5001", utils.GetIPAddress()))
@@ -62,7 +62,7 @@ func TestEngineWithDFS(t *testing.T) {
 		"strings.store":           64,
 		"inuse.store":             11,
 		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
+		"relationshiptypes.store": 21,
 	}
 
 	client, ok := utils.GetRemoteClient(fmt.Sprintf("%s:5001", utils.GetIPAddress()))
