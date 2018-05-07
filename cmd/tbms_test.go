@@ -20,9 +20,11 @@ func BenchmarkLocalIO(b *testing.B) {
 
 func benchmarkCreate(i io.IO, b *testing.B) {
 	var re = &en.RealEngine{IO: i}
-	re.InitDatabase()
-	api.Init(re)
-	re.DropDatabase()
+	b.Run("init_db", func(b *testing.B) {
+		re.InitDatabase()
+		api.Init(re)
+		re.DropDatabase()
+	})
 }
 
 func benchmarkInsert(i io.IO, b *testing.B) {
