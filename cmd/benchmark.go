@@ -83,8 +83,27 @@ func runBenchmark() {
 	// 		return ok
 	// 	})
 
+	// Create authors
+	RobertoLucchi, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Roberto Lucchi"))
+	ClaudioGuidi, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Claudio Guidi"))
+	IvanLanese, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Ivan Lanese"))
+	ManuelMazzara, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Manuel Mazzara"))
 
+	// Create papers
+	paper1, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A pi-calculus based semantics for WS-BPEL"))
+	paper2, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A formal framework for web services coordination"))
+	paper3, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Towards a unifying theory for web services composition"))
+	paper4, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Timing issues in web services composition"))
 
+	// Create relationships
+	api.CreateRelationship(RobertoLucchi, paper1, "wrote")
+	api.CreateRelationship(RobertoLucchi, paper3, "wrote")
+	api.CreateRelationship(ClaudioGuidi, paper2, "wrote")
+	api.CreateRelationship(IvanLanese, paper3, "wrote")
+	api.CreateRelationship(ManuelMazzara, paper1, "wrote")
+	api.CreateRelationship(ManuelMazzara, paper2, "wrote")
+	api.CreateRelationship(ManuelMazzara, paper3, "wrote")
+	api.CreateRelationship(ManuelMazzara, paper4, "wrote")
 
 	// script
 
@@ -106,7 +125,7 @@ func runBenchmark() {
 		return api.Contains((node.GetLabels(), "Paper")
 	})
 
-	// select where parameter.title == computer
+	// select where parameter.title contains == services
 	allPapersAboutComputers := api.SelectNodesWhere(func (node *api.Node) bool {
 		if !api.Contains((node.GetLabels(), "Paper") {
 			return false
@@ -115,7 +134,7 @@ func runBenchmark() {
 		title, ok := node.GetProperty("title")
 
 		if ok {
-			if strings.Contains("computer", strings.ToLower(title)) {
+			if strings.Contains("services", strings.ToLower(title)) {
 				return true
 			}
 		}
@@ -156,7 +175,7 @@ func runBenchmark() {
 			title, ok := paper.GetProperty("title")
 
 			if ok {
-				if strings.Contains("computer", strings.ToLower(title)) {
+				if strings.Contains("services", strings.ToLower(title)) {
 					return true
 				}
 			}
@@ -166,7 +185,6 @@ func runBenchmark() {
 	}
 
 	// select all Mazzara coauthors
-
 	MazzaraName := "Manuel Mazzara"
 	coauthors := make([]string, 0)
 
