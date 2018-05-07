@@ -1,6 +1,7 @@
 package api
 
 import (
+	en "github.com/alikhil/TBMS/internals/engine"
 	io "github.com/alikhil/TBMS/internals/io"
 	"testing"
 )
@@ -8,20 +9,10 @@ import (
 /// Cache Tests
 
 func getCache() io.IO {
-	var mapa = map[string]int32{
-		"nodes.store":             13,
-		"labels.store":            9,
-		"labelsStrings.store":     21,
-		"relationships.store":     34,
-		"properties.store":        14,
-		"strings.store":           64,
-		"inuse.store":             11,
-		"propertykeys.store":      21,
-		"relationshiptypes.store": 21,
-	}
+	var mapa = en.GetFileToBytesMap()
 
 	cache := io.LRUCache{}
-	cache.Init(io.LocalIO{}, &mapa, 5)
+	cache.Init(io.LocalIO{}, mapa, 5)
 	return &cache
 }
 

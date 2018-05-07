@@ -94,3 +94,12 @@ var BytesPerStore = map[EStore]int32{
 	StoreRelationshipType: BytesPerRelType,
 	StoreInUse:            BytesPerInUse,
 }
+
+func GetFileToBytesMap() *map[string]int32 {
+
+	var fileToBytes = make(map[string]int32)
+	for store, file := range FilenameStore {
+		fileToBytes[file] = BytesPerStore[store]
+	}
+	return &fileToBytes
+}

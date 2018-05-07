@@ -8,24 +8,14 @@ import (
 )
 
 func getDFS() io.IO {
-	var mapa = map[string]int32{
-		"nodes.store":             13,
-		"labels.store":            9,
-		"labelsStrings.store":     21,
-		"relationships.store":     34,
-		"properties.store":        14,
-		"strings.store":           64,
-		"inuse.store":             11,
-		"propertykeys.store":      21,
-		"relationshiptypes.store": 21,
-	}
+	var mapa = GetFileToBytesMap()
 
 	client, ok := utils.GetRemoteClient(fmt.Sprintf("%s:5001", utils.GetIPAddress()))
 	if !ok {
 		panic("failed to connect to remote client")
 	}
 	dfs := utils.DFSClient{Client: client}
-	dfs.InitRecordMappings(&mapa)
+	dfs.InitRecordMappings(mapa)
 	return &dfs
 }
 
@@ -53,24 +43,14 @@ func TestGetLabelIDWithDFS(t *testing.T) {
 
 func TestEngineWithDFS(t *testing.T) {
 
-	var mapa = map[string]int32{
-		"nodes.store":             13,
-		"labels.store":            9,
-		"labelsStrings.store":     21,
-		"relationships.store":     34,
-		"properties.store":        14,
-		"strings.store":           64,
-		"inuse.store":             11,
-		"propertykeys.store":      21,
-		"relationshiptypes.store": 21,
-	}
+	var mapa = GetFileToBytesMap()
 
 	client, ok := utils.GetRemoteClient(fmt.Sprintf("%s:5001", utils.GetIPAddress()))
 	if !ok {
 		t.Error("failed to connect to remote client")
 	}
 	dfs := utils.DFSClient{Client: client}
-	dfs.InitRecordMappings(&mapa)
+	dfs.InitRecordMappings(mapa)
 
 	testPack(t, func() io.IO { return &dfs })
 }
