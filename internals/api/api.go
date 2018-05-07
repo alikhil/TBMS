@@ -406,7 +406,7 @@ func (rel *Relationship) GetType() string {
 	if engine.GetObject(relType) {
 		return relType.TypeString
 	}
-	logger.Error.Print("Node doesn't exists")
+	logger.Error.Print("Relationship type doesn't exists")
 	return ""
 }
 
