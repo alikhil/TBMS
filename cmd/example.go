@@ -1,6 +1,8 @@
 package main
 
 import (
+	// "fmt"
+	// "github.com/alikhil/distributed-fs/utils"
 	"strings"
 
 	"github.com/kmanley/golang-tuple"
@@ -14,6 +16,22 @@ import (
 var makeProperty = tuple.NewTupleFromItems
 
 func runExample() {
+
+	// masterEndpoint := fmt.Sprintf("%s:%v", utils.GetIPAddress(), 5001)
+	// var mapping = en.GetFileToBytesMap()
+
+	// client, ok := utils.GetRemoteClient(masterEndpoint)
+	// if !ok {
+	// 	panic("failed to connect to remote client")
+	// }
+	// dfs := utils.DFSClient{Client: client}
+	// dfs.InitRecordMappings(mapping)
+
+	// cache := io.LRUCache{}
+	// cache.Init(&dfs, mapping, 5)
+
+	// var re = &en.RealEngine{IO: &cache}
+
 	var re = &en.RealEngine{IO: &io.LocalIO{}}
 	re.InitDatabase()
 	api.Init(re)
