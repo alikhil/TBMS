@@ -173,13 +173,10 @@ func runBenchmark() {
 			return false
 		}
 
-		logger.Info.Printf("author node")
 		relationships := node.GetRelationships()
-		logger.Info.Printf("length %v", len(*relationships))
 		count := 0
 
 		for _, r := range *relationships {
-			logger.Info.Printf("type of relationship: %v", r.GetType())
 			if r.GetType() == "wrote" {
 				count++
 			}
