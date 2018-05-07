@@ -346,9 +346,20 @@ func (node *Node) GetProperties() (*map[string]interface{}, bool) {
 }
 
 // GetRelationships returns pointer to a slice of all relationships, this node belonges to
-func (*Node) GetRelationships() *[]Relationship {
-	panic("not implemented")
-	return nil
+func (node *Node) GetRelationships() *[]Relationship {
+
+	relationships := make([]Relationship, 0)
+	if node.NextRelID == -1 {
+		return &relationships
+	}
+
+	fillNext := engine.GetNodeRelationshipsIteratorStartingFrom(node.ID, node.NextRelID)
+
+	for res, ok := fillNext(); ok; res, ok = fillNext() {
+		relationships = append(relationships, Relationship{res})
+	}
+
+	return &relationships
 }
 
 type Relationship struct {
@@ -357,27 +368,48 @@ type Relationship struct {
 }
 
 // GetFrom returns node from wich relationship starts
-func (*Relationship) GetFrom() *Node {
-	panic("not implemented")
+func (rel *Relationship) GetFrom() *Node {
+	node := &en.ENode{ID: rel.FirstNodeID}
+	if engine.GetObject(node) {
+		return &Node{node}
+	}
+	logger.Error.Print("Node doesn't exists")
 	return nil
 }
 
 // GetTo returns node with which relationship ends
-func (*Relationship) GetTo() *Node {
-	panic("not implemented")
+func (rel *Relationship) GetTo() *Node {
+	node := &en.ENode{ID: rel.SecondNodeID}
+	if engine.GetObject(node) {
+		return &Node{node}
+	}
+	logger.Error.Print("Node doesn't exists")
 	return nil
 }
 
 // GetType returns type of the relationship
-func (*Relationship) GetType() string {
-	panic("not implemented")
+func (rel *Relationship) GetType() string {
+	relType := &en.ERelationshipType{ID: rel.TypeID}
+	if engine.GetObject(relType) {
+		return relType.TypeString
+	}
+	logger.Error.Print("Node doesn't exists")
 	return ""
 }
 
 // GetProperty returns property value by key, if exists, else return false in bool
-func (*Relationship) GetProperty(key string) (interface{}, bool) {
-	panic("not implemented")
-	return nil, false
+func (rel *Relationship) GetProperty(key string) (interface{}, bool) {
+	p, ok := rel.GetProperties()
+	prop := *p
+	if !ok {
+		return nil, false
+	}
+	obj, ok := prop[key]
+	return obj, ok
+}
+
+func (rel *Relationship) GetProperties() (*map[string]interface{}, bool) {
+	return getProperties(rel.NextPropertyID)
 }
 
 func Contains(list *[]interface{}, obj interface{}) bool {
