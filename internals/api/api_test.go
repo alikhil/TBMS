@@ -380,8 +380,7 @@ func TestSelectRelationshipsWhere(t *testing.T) {
 	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
 
-	rel, _ := CreateRelationship(node1, node2, "show")
-	rel.ID
+	CreateRelationship(node1, node2, "show")
 	CreateRelationship(node1, node2, "show")
 	CreateRelationship(node1, node2, "dont_show")
 	CreateRelationship(node1, node2, "dont_show")
