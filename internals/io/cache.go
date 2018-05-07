@@ -59,12 +59,14 @@ func (c *SUBCache) init(file string, numOfRecordsInRegion int32, recordSize int3
 	c.maxCacheSize = 10
 }
 
-func (c *SUBCache) baseIOReadRegionSafely(file string, regionID int32) *[]byte {
+func (c *SUBCache) baseIOReadRegionSafely(file string, regionID int32) (*[]byte, bool) {
 	regionOffset := regionID * c.regionSize
 	resultData := make([]byte, 0, c.regionSize)
+	safe := false
 	for i := 0; int32(i) <= int32(c.regionSize)/c.recordSize; i++ {
 		data := make([]byte, c.recordSize, c.recordSize)
 		data, isOk := c.baseIO.ReadBytes(file, regionOffset+c.recordSize*int32(i), c.recordSize)
+		safe = isOk || safe // we call it safe if there was successfull read in the beginning
 		if !isOk {
 			data = make([]byte, cap(resultData)-len(resultData), cap(resultData)-len(resultData))
 			resultData = append(resultData, (data)...)
@@ -73,7 +75,7 @@ func (c *SUBCache) baseIOReadRegionSafely(file string, regionID int32) *[]byte {
 			resultData = append(resultData, (data)...)
 		}
 	}
-	return &resultData
+	return &resultData, safe
 }
 
 func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
@@ -89,7 +91,10 @@ func (c *SUBCache) ReadBytes(file string, offset, count int32) ([]byte, bool) {
 			return c.getFromCache(regionID, offset, count), true
 		} else {
 			// we assume that the error is caused by EOF
-			resultData := c.baseIOReadRegionSafely(file, regionID)
+			resultData, safe := c.baseIOReadRegionSafely(file, regionID)
+			if !safe {
+				return nil, false
+			}
 			c.addToCache(regionID, *resultData)
 			return c.getFromCache(regionID, offset, count), true
 		}
@@ -105,7 +110,12 @@ func (c *SUBCache) WriteBytes(file string, offset int32, bytes *[]byte) bool {
 			regionOffset := regionID * c.regionSize
 			data, isOk := c.baseIO.ReadBytes(file, regionOffset, c.regionSize)
 			if !isOk {
-				data = *c.baseIOReadRegionSafely(file, regionID)
+				ddata, safe := c.baseIOReadRegionSafely(file, regionID)
+				// WARN: is it possible?
+				if !safe {
+					return false
+				}
+				data = *ddata
 			}
 			c.addToCache(regionID, data)
 		}
