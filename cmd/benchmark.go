@@ -84,16 +84,16 @@ func runBenchmark() {
 	// 	})
 
 	// Create authors
-	RobertoLucchi, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Roberto Lucchi"))
-	ClaudioGuidi, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Claudio Guidi"))
-	IvanLanese, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Ivan Lanese"))
-	ManuelMazzara, ok := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Manuel Mazzara"))
+	RobertoLucchi, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Roberto Lucchi"))
+	ClaudioGuidi, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Claudio Guidi"))
+	IvanLanese, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Ivan Lanese"))
+	ManuelMazzara, _ := api.CreateNode("Author", tuple.NewTupleFromItems("name", "Manuel Mazzara"))
 
 	// Create papers
-	paper1, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A pi-calculus based semantics for WS-BPEL"))
-	paper2, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A formal framework for web services coordination"))
-	paper3, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Towards a unifying theory for web services composition"))
-	paper4, ok := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Timing issues in web services composition"))
+	paper1, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A pi-calculus based semantics for WS-BPEL"))
+	paper2, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "A formal framework for web services coordination"))
+	paper3, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Towards a unifying theory for web services composition"))
+	paper4, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("title", "Timing issues in web services composition"))
 
 	// Create relationships
 	api.CreateRelationship(RobertoLucchi, paper1, "wrote")
@@ -107,43 +107,69 @@ func runBenchmark() {
 
 	// script
 
-	//x2
-	node1, _ := api.CreateNode("Paper", tuple.NewTupleFromItems("id", 1), tuple.NewTupleFromItems("title", "Bitcons for breakfast"))
-
-	//x1
-	rel, _ := api.CreateRelationship(node1, node2, "cites")
-
 	//---------------------
 	// select *
 
-	allNodes := api.SelectNodesWhere(func (node *api.Node) bool {
+	allNodes, _ := api.SelectNodesWhere(func(node *api.Node) bool {
 		return true
 	})
 
+	logger.Info.Printf("Print all nodes:")
+	for _, node := range allNodes {
+		logger.Info.Printf("Node: %v", node)
+	}
+
 	// select where
-	allPapers := api.SelectNodesWhere(func (node *api.Node) bool {
-		return api.Contains((node.GetLabels(), "Paper")
+	allPapers, _ := api.SelectNodesWhere(func(node *api.Node) bool {
+		labels := node.GetLabels()
+		l := make([]interface{}, 0)
+		for _, label := range *labels {
+			l = append(l, label)
+		}
+		return api.Contains(&l, "Paper")
 	})
 
+	logger.Info.Printf("Print all papers:")
+	for _, node := range allPapers {
+		logger.Info.Printf("Node: %v", node)
+	}
+
 	// select where parameter.title contains == services
-	allPapersAboutComputers := api.SelectNodesWhere(func (node *api.Node) bool {
-		if !api.Contains((node.GetLabels(), "Paper") {
+	allPapersAboutServices, _ := api.SelectNodesWhere(func(node *api.Node) bool {
+		labels := node.GetLabels()
+		l := make([]interface{}, 0)
+		for _, label := range *labels {
+			l = append(l, label)
+		}
+
+		if !api.Contains(&l, "Paper") {
 			return false
 		}
 
 		title, ok := node.GetProperty("title")
 
 		if ok {
-			if strings.Contains("services", strings.ToLower(title)) {
+			if strings.Contains("services", strings.ToLower(title.(string))) {
 				return true
 			}
 		}
 		return false
 	})
 
+	logger.Info.Printf("Print all papers about services:")
+	for _, node := range allPapersAboutServices {
+		logger.Info.Printf("Node: %v", node)
+	}
+
 	// select where links to papers from author nodes > 1
-	allProductiveAuthors := api.SelectNodesWhere(func (node *api.Node) bool {
-		if !api.Contains((node.GetLabels(), "Author") {
+	allProductiveAuthors, _ := api.SelectNodesWhere(func(node *api.Node) bool {
+		labels := node.GetLabels()
+		l := make([]interface{}, 0)
+		for _, label := range *labels {
+			l = append(l, label)
+		}
+
+		if !api.Contains(&l, "Author") {
 			return false
 		}
 
@@ -151,7 +177,7 @@ func runBenchmark() {
 
 		count := 0
 
-		for _, r := range relationships {
+		for _, r := range *relationships {
 			if r.GetType() == "wrote" {
 				count++
 			}
@@ -161,56 +187,82 @@ func runBenchmark() {
 
 	})
 
-	// select where 
-	allComputerScientist := api.SelectNodesWhere(func (node *api.Node) bool {
-		if !api.Contains((node.GetLabels(), "Author") {
+	logger.Info.Printf("Print all producntive authors:")
+	for _, node := range allProductiveAuthors {
+		logger.Info.Printf("Node: %v", node)
+	}
+
+	// select where
+	allComputerScientist, _ := api.SelectNodesWhere(func(node *api.Node) bool {
+		labels := node.GetLabels()
+		l := make([]interface{}, 0)
+		for _, label := range *labels {
+			l = append(l, label)
+		}
+
+		if !api.Contains(&l, "Author") {
 			return false
 		}
 
 		relationships := node.GetRelationships()
 
-		for _, r := range relationships {
+		for _, r := range *relationships {
 			paper := r.GetTo()
 
 			title, ok := paper.GetProperty("title")
 
 			if ok {
-				if strings.Contains("services", strings.ToLower(title)) {
+				if strings.Contains("services", strings.ToLower(title.(string))) {
 					return true
 				}
 			}
 		}
-
 		return false
+	})
+
+	logger.Info.Printf("Print all authors about services:")
+	for _, node := range allComputerScientist {
+		logger.Info.Printf("Node: %v", node)
 	}
 
 	// select all Mazzara coauthors
 	MazzaraName := "Manuel Mazzara"
 	coauthors := make([]string, 0)
 
-	Mazzara := api.SelectNodesWhere(func (node *api.Node) bool {
-		if api.Contains((node.GetLabels(), "Author") {
+	m, _ := api.SelectNodesWhere(func(node *api.Node) bool {
+		labels := node.GetLabels()
+		l := make([]interface{}, 0)
+		for _, label := range *labels {
+			l = append(l, label)
+		}
+		if api.Contains(&l, "Author") {
 			name, ok := node.GetProperty("name")
 			if ok {
 				return name == MazzaraName
 			}
 		}
 		return false
-	})[0]
+	})
+	Mazzara := *m[0]
 
 	allMazzaraRels := Mazzara.GetRelationships()
-	for _,r := range allMazzaraRels {
+	for _, r := range *allMazzaraRels {
 		if r.GetType() == "wrote" {
 			links := r.GetTo().GetRelationships()
-			for _, rr := range links {
+			for _, rr := range *links {
 				if rr.GetType() == "wrote" {
 					name, ok := rr.GetFrom().GetProperty("name")
 					if ok && name != MazzaraName {
-						coauthors = append(coauthors, name)
+						coauthors = append(coauthors, name.(string))
 					}
 				}
 			}
 		}
+	}
+
+	logger.Info.Printf("Print all Mazzara couathors:")
+	for _, node := range coauthors {
+		logger.Info.Printf("Node: %v", node)
 	}
 
 }
