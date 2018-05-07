@@ -83,6 +83,9 @@ func (re *RealEngine) GetEObjectIterator(store EStore) func(EObject) bool {
 func (re *RealEngine) GetNodeRelationshipsIteratorStartingFrom(nodeID int32, nxtRelID int32) func() (*ERelationship, bool) {
 	return func() (*ERelationship, bool) {
 
+		if nxtRelID == -1 {
+			return nil, false
+		}
 		cur := &ERelationship{ID: nxtRelID}
 		ok := re.GetObject(cur)
 		if !ok {
