@@ -344,3 +344,16 @@ func (re *RealEngine) InitDatabase() {
 		logger.Error.Fatalf("Can not init InUseStore for %s", FilenameStore[StoreInUse])
 	}
 }
+
+// DropDatabase - removes all database files
+func (re *RealEngine) DropDatabase() {
+	re.DeleteFile(FNInUse)
+	re.DeleteFile(FNNodes)
+	re.DeleteFile(FNRelationships)
+	re.DeleteFile(FNRelationshipTypes)
+
+	re.DeleteFile(FNLabels)
+	re.DeleteFile(FNLabelsStrings)
+	re.DeleteFile(FNProperties)
+	re.DeleteFile(FNPropertyKeys)
+}

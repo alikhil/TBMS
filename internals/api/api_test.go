@@ -153,15 +153,8 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 func TestGetLabels(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node, _ := CreateNode("test_label")
 
@@ -179,15 +172,8 @@ func TestGetLabels(t *testing.T) {
 func TestGetNodeProperty(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node, _ := CreateNode("test_label",
 		tuple.NewTupleFromItems("test_prop1", 1),
@@ -214,71 +200,51 @@ func TestGetNodeProperty(t *testing.T) {
 func TestGetFromRelationship(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
 
 	rel, _ := CreateRelationship(node1, node2, "link")
 
-	retrived_node := *rel.GetFrom()
+	retrivedNode := *rel.GetFrom()
 
-	old_id, _ := node1.GetProperty("id")
-	new_id, _ := retrived_node.GetProperty("id")
+	oldID, _ := node1.GetProperty("id")
+	newID, _ := retrivedNode.GetProperty("id")
 
-	if old_id != new_id {
-		t.Errorf("expected to be equal, but get %v and %v", old_id, new_id)
+	if oldID != newID {
+		t.Errorf("expected to be equal, but get %v and %v", oldID, newID)
 	}
 }
 
 func TestGetToRelationship(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
 
 	rel, _ := CreateRelationship(node1, node2, "link")
 
-	retrived_node := *rel.GetTo()
+	retrivedNode := *rel.GetTo()
 
-	old_id, _ := node2.GetProperty("id")
-	new_id, _ := retrived_node.GetProperty("id")
+	oldID, _ := node2.GetProperty("id")
+	newID, _ := retrivedNode.GetProperty("id")
 
-	if old_id != new_id {
-		t.Errorf("expected to be equal, but get %v and %v", old_id, new_id)
+	if oldID != newID {
+		t.Errorf("expected to be equal, but get %v and %v", oldID, newID)
 	}
 }
 
 func TestGetRelationshipType(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
+
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
@@ -295,16 +261,9 @@ func TestGetRelationshipType(t *testing.T) {
 func TestGetRelationshipProperty(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
+
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
-	defer re.DeleteFile(en.FNStrings)
 
 	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
@@ -329,16 +288,9 @@ func TestGetRelationshipProperty(t *testing.T) {
 func TestSelectNodesWhere(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
+
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
-	defer re.DeleteFile(en.FNStrings)
 
 	CreateNode("show", tuple.NewTupleFromItems("id", 1))
 	CreateNode("show", tuple.NewTupleFromItems("id", 2))
@@ -367,15 +319,9 @@ func TestSelectNodesWhere(t *testing.T) {
 func TestSelectRelationshipsWhere(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
+
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
@@ -407,15 +353,9 @@ func TestSelectRelationshipsWhere(t *testing.T) {
 func TestGetRelationships(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 	re.InitDatabase()
+	defer re.DropDatabase()
+
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNLabels)
-	defer re.DeleteFile(en.FNLabelsStrings)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))

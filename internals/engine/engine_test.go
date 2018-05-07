@@ -43,7 +43,7 @@ func testGetSaveNode(t *testing.T, IO io.IO) {
 		NextRelID:      -1}
 
 	en.SaveObject(&node)
-	defer en.IO.DeleteFile(FNNodes)
+	defer en.DropDatabase()
 
 	var parsedNode = &ENode{ID: FirstID}
 	ok := en.GetObject(parsedNode)
@@ -82,8 +82,9 @@ func testInitDatabase(t *testing.T, IO io.IO) {
 	var en = RealEngine{IO}
 
 	en.InitDatabase()
-	print32AllRecords(&en)
-	defer en.DeleteFile(FNInUse)
+	defer en.DropDatabase()
+
+	// print32AllRecords(&en)
 
 	for i := 2; i <= 9; i++ {
 		id, ok := en.GetAndLockFreeIDForStore(EStore(i))
@@ -97,18 +98,12 @@ func testGetAndLockFreeID(t *testing.T, IO io.IO) {
 	var en = RealEngine{IO}
 
 	en.InitDatabase()
-	defer en.DeleteFile(FNInUse)
+	defer en.DropDatabase()
 
 	id, ok := en.GetAndLockFreeIDForStore(StoreNode)
 	if !ok {
 		t.Fatalf("can not lock id for %s", FilenameStore[StoreNode])
 	}
-
-	defer func() {
-		if en.FileExists(FNNodes) {
-			en.DeleteFile(FNNodes)
-		}
-	}()
 	deleted := en.DeleteObject(&ENode{ID: id})
 	if !deleted {
 		t.Fatalf("object is not deleted")
@@ -129,8 +124,7 @@ func testFindAndCreate(t *testing.T, IO io.IO) {
 	var en = RealEngine{IO}
 
 	en.InitDatabase()
-	defer en.DeleteFile(FNInUse)
-	defer en.DeleteFile(FNLabelsStrings)
+	defer en.DropDatabase()
 
 	var label = "mylabel"
 
@@ -162,8 +156,7 @@ func testCreateAndLoadString(t *testing.T, IO io.IO) {
 	var en = RealEngine{IO}
 
 	en.InitDatabase()
-	defer en.DeleteFile(FNInUse)
-	defer en.DeleteFile(FNStrings)
+	defer en.DropDatabase()
 
 	var stringsForTest = []string{"shortString", "veryVeryLOOOOOOOOOooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooveryVeryLOOOOOOOOOoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongString"}
 	for _, str := range stringsForTest {
@@ -181,8 +174,7 @@ func testFindObject(t *testing.T, IO io.IO) {
 	var en = RealEngine{IO}
 
 	en.InitDatabase()
-	defer en.DeleteFile(FNInUse)
-	defer en.DeleteFile(FNNodes)
+	defer en.DropDatabase()
 
 	var node = &ENode{
 		ID:             FirstID,
