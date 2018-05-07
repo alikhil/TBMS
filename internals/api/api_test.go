@@ -187,6 +187,7 @@ func TestGetNodeProperty(t *testing.T) {
 	defer re.DeleteFile(en.FNLabels)
 	defer re.DeleteFile(en.FNLabelsStrings)
 	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNStrings)
 	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node, _ := CreateNode("test_label",
