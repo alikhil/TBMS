@@ -1,1556 +1,1556 @@
-0 Apostolis Salkintzis
-1 Sushil Jajodia
-2 John Odam
-3 David D. Busch
-4 Daniel L. Feedback
-5 Vinton A. Dearing
-6 Doherty Eamon Patrick
-7 Jonathan S. Harbour
-8 Mitsuru Ishizuka
-9 Alvaro Euzebio Hernandez
-10 Zhaohui Wu
-11 Cass Lewart
-12 William M. Farmer
-13 William Y. C. Wang
-14 Benoít Naegel
-15 Tom Wolsky
-16 Erica Lindy
-17 Stanley Boorman
-18 Meinhard Schmidt
-19 Carlos Alberto Maziero
-20 Alexander Neiman
-21 Isabelle Simplot-Ryl
-22 Marcus Heege
-23 Cheryl E. Marx
-24 Staff
-25 Maurice Charbit
-26 James Lu
-27 David M. Bourg
-28 Dan Oja
-29 Yoshifumi Kitamura
-30 Steve Sinchak
-31 K. Chew
-32 Ron Palma
-33 Jose Antonio Tajadura Zapirain
-34 Ofer Rahat
-35 Shan Rajegopal
-36 Bill Ball
-37 Baum
-38 Francis Cheng
-39 Don Towsley
-40 Ling Pi
-41 Gavin J. T. Powell
-42 Giovanni Vigna
-43 Jinsong Fan
-44 Marcin Detyniecki
-45 Vojin G. Oklobdzija
-46 Jerry Daniels
-47 Alex Galis
-48 Michael J. Flynn
-49 R. Giladi
-50 Deborah Morley
-51 Dong-Jian Wang
-52 David Webster
-53 Adrian Brown
-54 Robert W. Harris
-55 Morgan Skinner
-56 Joan Serrat-Fernandez
-57 Vlad Pirogov
-58 Nicolas Sanchez-biezma
-59 Akira Namatame
-60 Zeynep Kiziltan
-61 Benedetto Intrigila
-62 Lipika Dey
-63 Margaret Burnett
-64 Richard Dal Porto
-65 Marc Orchant
-66 Nikos Passas
-67 Vladimir Astakhov
-68 Stephen G. Klink
-69 R. Y. Shukla
-70 Charles A. Brooks
-71 Kathy Ivens
-72 Nico Pfeifer
-73 George Omura
-74 Jenny Preece
-75 Yi Wang
-76 C. O'Neill
-77 J. Randell
-78 Masaru Kitsuregawa
-79 Nacer Boudjlida
-80 Martin J. Miller
-81 Pieter Wesseling
-82 Judith L. Stern
-83 Theodore J. Anagnoson
-84 Ruth Maran
-85 Erland Jonsson
-86 Pedro Cuenca
-87 V. Saxena
-88 Michael Cloran
-89 Mark Wilson
-90 Haym Hirsh
-91 Sunggu Lee
-92 Jeri R. Hanly
-93 Igor Melatti
-94 Elizabeth L. Corbett
-95 C. H. Leung
-96 Denise O'Connor
-97 Jean Andrews
-98 Thomas Waldraff
-99 William J. Weiland
-100 David Cassady
-101 Philip J. Pratt
-102 H. Christiaans
-103 Alessandro Aurigi
-104 Thomas Tolxdoff
-105 Robert R. Hoffman
-106 Malolan Chetlur
-107 Denise Seguin
-108 Min Qiu
-109 Wayne L. Winston
-110 Clemens Gröpl
-111 Naba Barkakati
-112 Laurence A. Wolsey
-113 Brenden Munnelly
-114 Seung Eun Lee
-115 Ana García Armada
-116 Kohei Hasegawa
-117 Eitan Frachtenberg
-118 C. V. Hollot
-119 Rui Camacho
-120 Oliver Schruffer
-121 Jason Eckert
-122 George Allen England
-123 J. S. Yang
-124 Oliver Kohlbacher
-125 Rusel Demaria
-126 David Cassidy
-127 Palle Agermark
-128 Angela B. Shiflet
-129 Victor A. Skormin
-130 Olof Widlund
-131 John Maeda
-132 Alexander Bick
-133 David Sánchez
-134 Maria Hybinette
-135 Stanley Habib
-136 Jocelyn Robert
-137 Mani Kishore Vajipeyajula
-138 S. Dantchev
-139 Alexi Pozdnukhov
-140 Xingshe Zhou
-141 Sung-Yang Bang
-142 Patricia Gomez
-143 Christian Ronse
-144 Anson Call
-145 Laurie Ulrich
-146 Alice Redmond-neal
-147 Russell Drummond
-148 Michael Fruergaard Pontoppidan
-149 J. A. Grant
-150 Greg Perry
-151 J. Weimert
-152 John Low
-153 Shirley Lacy
-154 Dario Pescador
-155 Cheryl Price
-156 Dimitrios Nikolaou Serpanos
-157 Dipak L. Sengupta
-158 Thomas G. Dietterich
-159 David Isern
-160 Sushmita Mitra
-161 Rick F. van der Lans
-162 Yves Deswarte
-163 Adrienne Tommy
-164 Urubatan Neto
-165 Robert Ferrett
-166 Johnny Hujol
-167 Robert J. Hoekstra
-168 Dima Sonkin
-169 Barry L. Sherman
-170 Marisa Venturini Zilli
-171 Ram K. Krishnamurthy
-172 Ness B. Shroff
-173 Barak Raveh
-174 Hirokazu Yanagihara
-175 David J. Horntrop
-176 Karli Watson
-177 Nate Perkins
-178 Sudipto Mukherjee
-179 Jan Nordström
-180 Paul E. Harris
-181 Eliot Van Buskirk
-182 Carlos Miguez Perez
-183 David J. Carmichael
-184 Rosa Meo
-185 Peter W. Glynn
-186 Bernd Carsten Stahl
-187 Fernando Picouto Ramos
-188 Bill Evjen
-189 Tom Murray
-190 Yves Pochet
-191 Julio Gonzalo
-192 William R. Higgins
-193 Ken Bluttman
-194 John VanDyk
-195 Ryutaro Maeda
-196 Robert Bishop
-197 Duska Rosenberg
-198 Alexander Horsch
-199 Jean-Marie R. Fiechter
-200 Frank L. Lewis
-201 Wolfgang Nejdl
-202 Jesse Liberty
-203 Carol Yacht
-204 Ralph Stelzer
-205 Yoonyoung Jin
-206 Jon Jagger
-207 Yong Rui
-208 Toru Kaneko
-209 Jason Eisner
-210 Giuseppe Della Penna
-211 Pavel Brazdil
-212 Behrouz A. Forouzan
-213 Ricardo Reis
-214 Gary B. Lamont
-215 Huzefa Rangwala
-216 Scott Kelby
-217 O. C. L. Haas
-218 Blackwood Algernon
-219 Ignas Niemeegers
-220 Scott M. Shafer
-221 William T. Niu
-222 Csaba Szepesvári
-223 D. H. Howitt
-224 Stuart J. Stuple
-225 Tammy Fox
-226 Alípio Jorge
-227 G Khadanga
-228 Steve Honeywell
-229 James O. Hamblen
-230 Christian Rössl
-231 Anthony V. Chiarella
-232 Fritz J. Messere
-233 Michael Smick
-234 Mike Welch
-235 Jonathan Turkanis
-236 Luke Welling
-237 Hans Eveking
-238 Axel Bucker
-239 Horst Bunke
-240 Daniel Cremers
-241 Mário Marques Freire
-242 Lars Dragheim Olsen
-243 Maryann Barber
-244 Janice Mazidi
-245 Joseph Rubin
-246 Libby Foster
-247 Jon Phillips
-248 Jeremy Keith
-249 Philip A. Wilsey
-250 Ramakrishnan Srikant
-251 Robert Samuel Heathcote
-252 Giuseppe Liotta
-253 Rick Smith
-254 Robert L. Hale
-255 Roque Marín
-256 Witold Pedrycz
-257 Quan Z. Sheng
-258 Gunther Brenner
-259 Neil Randall
-260 J. H. Goodband
-261 Daeyeol Lee
-262 James F. Peters
-263 Michael Rosenblum
-264 Ludmila Cherkasova
-265 David Thompson
-266 Mitchell Rosen
-267 Michael Schrenk
-268 Kenneth Miller
-269 Vincent Mooney
-270 Danny Goodman
-271 Mikael Rousson
-272 Colleen Garton
-273 Xavier Fischer
-274 Arthur Greef
-275 Shelley Gaskin
-276 Sonia Fahmy
-277 Darril R. Gibson
-278 Sally Garrington
-279 P. Martegani
-280 Jim Krause
-281 Christine S. M. Currie
-282 Arkangel Cast
-283 Kenneth C. Laudon
-284 Eric Quinn
-285 J. A. Mills
-286 Zakaaria Maamar
-287 Adrian Frutiger
-288 Saadia Malik
-289 Silvia T. Acuna
-290 Marjorie M. K. Hlava
-291 Yasushi Inoguchi
-292 Perry Nuffer
-293 Uffe Andersen
-294 K. Preston White
-295 Enrique Campos-Náñnez
-296 Brent W. Knapp
-297 Robert Grauer
-298 James E. Tomakyo
-299 Tao Tao
-300 Chieko Matsumoto
-301 Magdalena Salazar-Palma
-302 Honorée Corpron
-303 Takaaki Fujita
-304 Christopher Kruegel
-305 Amy R. Suchowski
-306 Thomson South-Western Educational Publishing
-307 Uwe Schwiegelshohn
-308 Peter Lavin
-309 R. Roth-Berghofe
-310 John Preston
-311 Eva Onaindía
-312 James Waller
-313 Tsuhan Chen
-314 Louise H. Jones
-315 Elizabeth M. Hollinger
-316 Jeanne Aarhus
-317 Harshawardhan Bal
-318 Rick Barba
-319 Juan Maria Sanchez Peral
-320 Deborah L. Bence
-321 Lay Christopher Fox
-322 Graham Hutton
-323 Patricia J. Fewell
-324 S. J. Owen
-325 Sarah Zelikovitz
-326 Jonathan M. Borwein
-327 Mounia Lalmas
-328 Doug Walsh
-329 John T. Omohundro
-330 Mohammad Dadfar
-331 H. W. J. Lee
-332 Nicolas Passat
-333 John C Hughes
-334 Yoichi Murakoshi
-335 Jairo Vieira Cordeiro
-336 Bronis R. De Supinski
-337 Arto Tapani Juhola
-338 George Grätzer
-339 Jeffrey P. Fisher
-340 Zhiping Chen
-341 Jorge Linhares
-342 Charlotte K. Lowrie
-343 P. Fiddelaers
-344 Peter Wells
-345 Chen-Chuan Pan
-346 Samuel J. Mantel
-347 Trey Nash
-348 Lynn Sorensen Sutton
-349 Yonggang Wang
-350 Yuuji Aruka
-351 A. M. Tekalp
-352 Michael T. Goodrich
-353 Valerie Feldmann
-354 David Pogue
-355 A. H. S. Solberg
-356 S. Huanye
-357 Günther Nürnberger
-358 Lawrence M. Leemis
-359 Alan Pipes
-360 Jeannette Cabanis-Brewin
-361 Salem Benferhat
-362 Eddie Kohler
-363 Vahid Tarokh
-364 William R. Hersh
-365 Boaz Livny
-366 Svetlana Cicmil
-367 John R. Mick
-368 Shinto Eguchi
-369 Philipp Anokhin
-370 Rajat Khare
-371 Susumu Sugiyama
-372 Till Schummer
-373 Mike Crawford
-374 Chao Rong
-375 Scott Spence
-376 Alan Simpson
-377 Patti M. Jansen
-378 Norbert Egger
-379 Johanna Moore
-380 Dave Prochnow
-381 Chris Botello
-382 Noboru Ohta
-383 David Sawyer McFarland
-384 David M. Lane
-385 Philip McGuin
-386 A. Ecer
-387 C. Conti
-388 Joseph Payne Brennan
-389 Carl Timm
-390 Michael Price
-391 Randy Medoff
-392 Peter Weddle
-393 Martin H. Weik
-394 Sarah Hutchinson-Clifford
-395 David S. Moore
-396 Dongming Wang
-397 York Sure
-398 Joe Fawcett
-399 Amir Ahmad
-400 Elliot B. Koffman
-401 João Gabriel Silva
-402 Wei Li
-403 Donna Ulmer
-404 Steve Holzner
-405 J. Steven Jones
-406 Rolin McKinlay
-407 Katsumi Morikawa
-408 Brian Kahin
-409 Ben Raphael
-410 Keith Mulbery
-411 Fernando Pelayo
-412 Nolan Hester
-413 Rachel Andrew
-414 Charles N. Fischer
-415 K. Shimada
-416 Allan Hunkin
-417 George C. Diezel
-418 Xiaohui Long
-419 William E. Burr
-420 Justo Perez Agudin
-421 Xiuzhen Cheng
-422 Srikant Nalatwad
-423 Michael Raheem
-424 Riccardo Poli
-425 Elizabeth Drake
-426 Nancy Buchanan
-427 Raghu Machiraju
-428 August Derleth
-429 David C. Planchard
-430 P. E. Taylor
-431 Norman Poh
-432 Soren Sonntag
-433 Masahiro Inuiguchi
-434 Martin F Krafft
-435 Jianqiang Shen
-436 Will M. Wright
-437 Kenneth E. Corey
-438 Jon A. McConnell
-439 Dmitry Bokotey
-440 T. Stover
-441 Thomas Kissell
-442 Edward C. Lin
-443 Larry Metzelaar
-444 Takayuki Aoki
-445 Alberto Bugarín
-446 Rick Segel
-447 Velda L. Largen
-448 Woody Leonhard
-449 Armin Wolf
-450 Gideon Kunda
-451 Takashi Seo
-452 Daniel Minoli
-453 Fabio Gasparetti
-454 Stephen Cawood
-455 Norbert Meyer
-456 Robert T. Grauer
-457 Elise Moss
-458 Jesse M. Torres
-459 Barry D. Lewis
-460 Marshall Ashby
-461 Jack W. Plunkett
-462 Doug Stuns
-463 Prima Development
-464 David Robinson
-465 Yiping Yao
-466 Cheryl Boche
-467 Frank W. Liou
-468 John Neufeld
-469 Dror Feitelson
-470 David S. Evans
-471 Yohsuke Imai
-472 Robert Firebaugh
-473 Damien Stolarz
-474 Kazuya Fujioka
-475 John E. Gamble
-476 Casey Loe
-477 A. K. Athula Wijewickrama
-478 R. Srikant
-479 Ramon M. Chorda
-480 Faithe Wempen
-481 Michael D. Furman
-482 Hiroshi Sako
-483 Huaizhong Han
-484 Darpan Dinker
-485 Peter A. Markowich
-486 Sommawan Khumpuang
-487 G. L. Margolin
-488 David A. Wiley
-489 Robert L. Dixon
-490 John H. E. Taplin
-491 John Copas
-492 Jaydeep Marathe
-493 Bayro-Corrochano Eduardo
-494 Lawrence Chung
-495 Sharad Maheshwari
-496 A. Krzyzak
-497 Catholijn M. Jonker
-498 Doug Addison
-499 Jörg Schulze
-500 Rudolph Langer
-501 Hernan P. Awad
-502 Christian Scheideler
-503 Christian Peter
-504 Jose A. Lozano
-505 Edward E. Klink
-506 Debasish Jana
-507 John R. Harrald
-508 Huaimin Wang
-509 David Fox
-510 Tom Lancaster
-511 Chris Patmore
-512 Susumu Horiguchi
-513 N. Satofuka
-514 Jeremy McPeak
-515 Chi-Jie Lu
-516 Danny Raz
-517 Jim Woodcock
-518 Arvind Tripathi
-519 Joao Batista De Jesus
-520 Tad Hammer
-521 Margaret M. Sutton
-522 Cathy Clarke
-523 Peter Lourekas
-524 Toby Skandier
-525 A. W. K. Tang
-526 Edwin H. Jacox
-527 A. J. Strickland
-528 Gunnar Pall Thorisson
-529 Don Tica
-530 Jada Brock-Soldavini
-531 Dominique Foray
-532 Souhila Kaci
-533 Eric Debes
-534 Tommi Tulisalo
-535 J. Douglas Jefferys
-536 J. Richard Swenson
-537 Janice Cuny
-538 J. M. House
-539 Tarek El-Ghazawi
-540 Marco Dorigo
-541 Hans-Peter Meinzer
-542 Micki Krause
-543 Stephen R. Barley
-544 R. Lowe
-545 Pierre Comtois
-546 B. A. Schmitt
-547 Rajkumar Roy
-548 Jim Griffith
-549 James J Balding
-550 Anita Kesavan
-551 C. Priami
-552 Keenan Newton
-553 Daniel C. Wood
-554 Jeong-woo Sohn
-555 Leon Petrosjan
-556 Laura Bryan
-557 Howard A. Anton
-558 Sally A. Mckee
-559 Junko Sekine
-560 Jerri L. Ledford
-561 Joseph Feller
-562 Nary Subramanian
-563 X. Li
-564 Hitoshi Takeda
-565 Pratul K. Ajmera
-566 Karin Diler-Manning
-567 Hans J. Skovgaard
-568 Osvaldo Cairo Battistutti
-569 Buquan Liu
-570 Chengqi Zhang
-571 Fumio Kishino
-572 Robert Garfinkel
-573 Patrick Wiegand
-574 Serge Vaudenay
-575 Kerry Sheldon
-576 Gideon Schreiber
-577 Rob A. Rutenbar
-578 Vladimir Gorodetsky
-579  III
-580 José Santos
-581 Tony Hu
-582 Preston Gralla
-583 Eric Skagerberg
-584 Laila M. Dawson
-585 Ali Emrouznejad
-586 Ole Schulz-Trieglaff
-587 W. R. Quadros
-588 Conrad Mewton
-589 Laura Bement
-590 Arlene L. Eis
-591 Xuanhui Wang
-592 Carlos Juiz
-593 Harry L. Phillips
-594 Steve Renals
-595 Daniel Coutellier
-596 Amitabha Bagchi
-597 Felipe Cucker
-598 Pascal Lorenz
-599 Yootai Kim
-600 Kathleen M. Iverson
-601 Sandro Corsaro
-602 Phillip Marcus
-603 Jiming Liu
-604 Hugo C. Pribor
-605 Judy Kay
-606 Laura Parkinson
-607 Katrin Muhlfeld
-608 M. Nakanishi
-609 David A. Marca
-610 Przemyslaw Grzegorzewski
-611 Julie Dorsey
-612 Saeed V. Vaseghi
-613 Deepali Srivastava
-614 Leandro Indrusiak
-615 Bill Jelen
-616 John Domingue
-617 Scott A. Hutchinson
-618 Masaharu Takahashi
-619 Lingyu Wang
-620 Xudong Wang
-621 Mario Köppen
-622 Bernan Press
-623 Harold F. Tipton
-624 Julius Wiedemann
-625 P. Perona
-626 David Pointcheval
-627 Ettore Stella
-628 Bill Camarda
-629 Susanne Graf
-630 Emmett Dulaney
-631 Derrick Story
-632 Judy Freeman
-633 Javier Garcia Fronti
-634 Justin Peltier
-635 Soemon Takakuwa
-636 Maryann T. Barber
-637 Luiz A. DaSilva
-638 José Mira
-639 Houston H. Carr
-640 Klaus Tochtermann
-641 Antonio Angel Ramos Varon
-642 Hanno Lefmann
-643 Frank Vahid
-644 Jerzy Leszczynski
-645 Carlos A. Coello Coello
-646 J. C. M. Baeten
-647 Warren
-648 Maria Teresa Molfino
-649 Rosemarie E. Widmaier
-650 R. Montenegro
-651 Korinna Patelis
-652 Garry Poole
-653 Thomas Dietterich
-654 David Williamson Shaffer
-655 J. P. Pontaza
-656 Nancy Lewis
-657 Matthew Donner
-658 Yinghui Yang
-659 Trey Ideker
-660 Janet Valade
-661 Xuan-Hieu Phan
-662 Cameron McKenzie
-663 Harald H.-J. Bongartz
-664 Judith Bishop
-665 Antje Herbon
-666 Vittorio Murino
-667 Mary Z. Last
-668 Barbara Callan-Bogia
-669 Toru Fujiwara
-670 Bryant Tow
-671 William J. Gibbs
-672 Matthias Gries
-673 Seyed M. M. Tahaghoghi
-674 O. Ray Whittington
-675 Claudia M. Baca
-676 Aaron Chesir
-677 John A. Stine
-678 V.K. Jain
-679 José Merseguer
-680 Philip K. Gunning
-681 James Ambuehl
-682 Luis Orozco-Barbosa
-683 Rachid Deriche
-684 Grace Joely Beatty
+0 Taieb Znati
+1 Chris Patmore
+2 Buquan Liu
+3 Tommi Tulisalo
+4 Sally Preston
+5 Gavin J. T. Powell
+6  III
+7 Ben Willmore
+8 H. J. A. M. Heijmans
+9 Jason Eisner
+10 James O. Hamblen
+11 Eric Mylonas
+12 Doherty Eamon Patrick
+13 John Copas
+14 Alexei N. Skourikhine
+15 Ralph Stelzer
+16 David Weale
+17 Mark Thorson
+18 K. Preston White
+19 Christopher Workman
+20 Martin Eigner
+21 John Etchemendy
+22 Alessandro Micarelli
+23 Frederic Cuppens
+24 César Hervás-Martínez
+25 Endika Bengoetxea
+26 R. Bean
+27 Erich Neuhold
+28 Proyag Datta
+29 Michael G. Mauer
+30 James McDonough
+31 Manuel Núnez
+32 Eleazar Eskin
+33 Joshua Paul
+34 J. A. Mills
+35 John A. Stine
+36 Ke Lu
+37 Julio Gonzalo
+38 John T. Omohundro
+39 Gary B. Lamont
+40 Serge Vaudenay
+41 Edwin H. Jacox
+42 Chris Newman
+43 Kenneth C. Laudon
+44 Silvia T. Acuna
+45 John A. Blackley
+46 Andrea Dojmi
+47 Garry Poole
+48 Albert Yarusso
+49 Mauro Birattari
+50 Jeri R. Hanly
+51 Allen B. MacKenzie
+52 J. Wurtele
+53 Elaine Weinmann
+54 Morgan Skinner
+55 Lee Lowry
+56 Scott A. Hugh
+57 R. Ramesh
+58 Arto Tapani Juhola
+59 Fernando Galindo
+60 Colleen Lindell
+61 Stephen L. Nelson
+62 Mark A. Smith
+63 Todd Lammle
+64 Duska Rosenberg
+65 Hoon Hong
+66 Chaomin Shen
+67 Qiaozhu Mei
+68 Jen deHaan
+69 Ruchira Sasanka
+70 Seyed M. M. Tahaghoghi
+71 Xudong Wang
+72 David J. Horntrop
+73 Ron Ben Natan
+74 Michael D. Furman
+75 Slobodan Ilić
+76 X. Li
+77 Peter Lavin
+78 Debasish Jana
+79 Marcin Detyniecki
+80 Pankaj Joshi
+81 David Williamson Shaffer
+82 Paulo Martegani
+83 Xuanhui Wang
+84 A. K. Athula Wijewickrama
+85 Colin Potts
+86 Tammy Fox
+87 Nico Wallmeier
+88 Jeremy Keith
+89 Ettore Stella
+90 Lawrence C. Metzelaar
+91 Laura Parkinson
+92 Jon Barwise
+93 Nieves R. Brisaboa
+94 Rick Barba
+95 Gholam R. Amin
+96 Juan Maria Sanchez Peral
+97 Perdita Stevens
+98 Richard Johnson
+99 Juha Kärkkäinen
+100 Tom Urtis
+101 Sonia Heemstra de Groot
+102 Ryan T. Putnam
+103 Eva Onaindía
+104 Brent W. Knapp
+105 Ivan Chermayeff
+106 Hans Herber
+107 Felipe Cucker
+108 Mario Köppen
+109 Pamela W. Adams
+110 Larry Dubov
+111 Kathleen Z. Montgomery
+112 Stewart Venit
+113 Katrin Muhlfeld
+114 Gabriella Kazai
+115 James Ambuehl
+116 John C. Hancock
+117 Nicolas Sanchez-biezma
+118 Scott Shenker
+119 Patricia A. Hoefler
+120 Yi Pan
+121 Stephen Stratton
+122 R. Montenegro
+123 Bill Childers
+124 Carlos Miguez Perez
+125 Caroline I. Pade
+126 Alexander Horsch
+127 Nicolas Passat
+128 Duke Nukem
+129 Glen Coulthard
+130 Lászlo Roth
+131 Colin Malcolm Nicholls
+132 Paul Pleasant
+133 Narsingh Deo
+134 Toru Fujiwara
+135 Jan L. Harrington
+136 Trinh Anh Tuan
+137 M. Johnson
+138 Ken Abernethy
+139 Laurie Ulrich
+140 E. J. Pauwels
+141 John Maeda
+142 Thomas Stützle
+143 Chieko Matsumoto
+144 Horst Bunke
+145 I. C. McLlwaine
+146 Xiaojun Lin
+147 Jong Kyoung Kim
+148 Doug Walsh
+149 Elizabeth L. Corbett
+150 Paul Donnelley
+151 Brian E. Kramer
+152 H. Podhaisky
+153 Alexander Bick
+154 Sandro Corsaro
+155 Vern Paxson
+156 Cynthia F. Epstein
+157 D. Ryan Stephens
+158 Fumio Kishino
+159 Yigal Bejerano
+160 Jerri L. Ledford
+161 Christine S. M. Currie
+162 J. C. M. Baeten
+163 V.K. Jain
+164 Olgierd Hryniewicz
+165 A. Krzyzak
+166 Rivera-Rovelo Jorge
+167 Bjorn Gunnar Karlsson
+168 Eric Grebler
+169 Amanda Root
+170 Zhang Yi
+171 João Gabriel Silva
+172 Jeanne Aarhus
+173 Jerome Rolia
+174 Sarita V. Adve
+175 Christian Rössl
+176 Helen Brookes
+177 Yashavant P. Kanetkar
+178 Bogdan Brinzarea
+179 Honorée Corpron
+180 Dawn Wood
+181 José Santos
+182 Valerie Feldmann
+183 Huaizhong Han
+184 Nacer Boudjlida
+185 Gérard Dreyfus
+186 Elizabeth Eisner Reding
+187 Mani Kishore Vajipeyajula
+188 Oskar Bartenstein
+189 John Preston
+190 Huzefa Rangwala
+191 Randy B. Machemehl
+192 William Shakespeare
+193 Diane Burns
+194 Rob A. Rutenbar
+195 Daniel Coutellier
+196 N. Satofuka
+197 Wolfgang Nejdl
+198 Charlotte K. Lowrie
+199 Neil Daswani
+200 Robert W. Harris
+201 Heinz Handels
+202 Shimul Rahim
+203 Daniel L. Feedback
+204 Peter Wells
+205 Martin DeLaney
+206 Salem Benferhat
+207 Michael McLaughlin
+208 Fernando Picouto Ramos
+209 Margaret Burnett
+210 Toby Skandier
+211 Aida Omerovic
+212 Craig Pelkie
+213 Ralph H. Baer
+214 Rick Smith
+215 Gunther Brenner
+216 David Sánchez
+217 Robert Grauer
+218 Joze Zupancic
+219 Luis M. Camarinha-Matos
+220 Michael Patrick Brown
+221 Bill Evjen
+222 Robert Firebaugh
+223 Boaz Livny
+224 Karli Watson
+225 Bill Jelen
+226 Perry Nuffer
+227 Horacio Gaito
+228 Hanan Samet
+229 F. Lopez
+230 Arthur Naiman
+231 Keith Mulbery
+232 Yueting Chai
+233 Dipak L. Sengupta
+234 Vincent Mooney
+235 Jason Rohm
+236 Jim Krause
+237 David Pogue
+238 Christopher Breen
+239 Stephen R. Barley
+240 David Groth
+241 Claudio Marcio Quartaroli
+242 P. Martegani
+243 Laurence T. Yang
+244 Thom Robbins
+245 Ping-Chieh Lin
+246 Elaine Malfas
+247 Jay Kinghorn
+248 Knut Reinert
+249 Leandro Indrusiak
+250 K. Chew
+251 Gideon Kunda
+252 Kami LeMonds
+253 E. Skubalska-Rafajtowicz
+254 T. P. Ng
+255 Yootai Kim
+256 Jin Dong
+257 Simona Bernardi
+258 Gonzalo Navarro
+259 Daniel Amyot
+260 Hong Zhang
+261 Tom Fout
+262 Michael J. Shannon
+263 Jean-Marie R. Fiechter
+264 Bernd Gärtner
+265 Richard K. Smith
+266 Arvind Tripathi
+267 Soren Sonntag
+268 Carole Levitt
+269 J. H. Goodband
+270 James F. Peters
+271 Keenan Newton
+272 Makoto Takizawa
+273 Kerry Sheldon
+274 Paul Holden
+275 Yi Wang
+276 Constantine Caramanis
+277 Alain Vincent
+278 Maki Yoshida
+279 Leila Merrell Foster
+280 Trey Nash
+281 Ramon Puigjaner
+282 Robert Lettieri
+283 Tim Moors
+284 Paul Capello
+285 Chi Hang Li
+286 John Neufeld
+287 Marc Orchant
+288 R. Gentleman
+289 Michael J. Flynn
+290 A. J. Strickland
+291 Laura Thomson
+292 Renlong Han
+293 Scott A. Hissam
+294 Eliot Van Buskirk
+295 Manuele Bicego
+296 Sally Slack
+297 Kazuyuki Koizumi
+298 Min Qiu
+299 Richard A. McMahon
+300 Scott Fenstermacher
+301 Marcus R. Brown
+302 Casey Loe
+303 Bayro-Corrochano Eduardo
+304 Man Lin
+305 Christopher Kruegel
+306 Patrick Blattner
+307 Rajiv Kishore
+308 Richard Matheson
+309 R. A. Penfold
+310 Alicia Vargas
+311 H. Broersma
+312 Michael O'Neal
+313 Joe Fawcett
+314 Husam Hamad
+315 Christian Peter
+316 Ana García Armada
+317 Ole Schulz-Trieglaff
+318 Adele A. Hayward
+319 Michael W. Hofbaur
+320 Christopher Diggins
+321 Vojin G. Oklobdzija
+322 Patti M. Jansen
+323 Remar Sutton
+324 Jean-Marc Gauthier
+325 James Lu
+326 Katsumi Morikawa
+327 Maryann T. Barber
+328 Judy Kay
+329 Stanley Habib
+330 Lee Strobel
+331 Dominick Baier
+332 Julius Wiedemann
+333 William R. Hersh
+334 Takayuki Aoki
+335 Kurt Binder
+336 Ramakrishnan Srikant
+337 James A. Svoboda
+338 Martin Braschler
+339 Jon Jagger
+340 Christian Scheideler
+341 Takaaki Fujita
+342 Lakshman Prasad
+343 Mika Klemettinen
+344 Yen-Chun Lin
+345 Carla Rose
+346 Michael Kluck
+347 Ken Bluttman
+348 Huaimin Wang
+349 Frank L. Lewis
+350 R. Cathelin
+351 Tad Hammer
+352  Jr.
+353 Anita Schöbel
+354 Lynn Sutton
+355 Chi-Jie Lu
+356 Cameron McKenzie
+357 Joel Lacey
+358 Tony Johnson
+359 Grace Joely Beatty
+360 Seungjin Choi
+361 William J. Gibbs
+362 Daniel Cremers
+363 Torsten Suel
+364 Martha Krieg
+365 John Sharp
+366 Laura Bryan
+367 Sherry Y. Chen
+368 Jeremy McPeak
+369 Leslie M. Orchard
+370 Scott Spence
+371 Yun Chiu
+372 Gerard Blanchet
+373 Michael Smick
+374 Benoít Naegel
+375 Zakaaria Maamar
+376 Tom Collins
+377 Andrea Torsello
+378 John Alderman
+379 Sharad Maheshwari
+380 Armin Wolf
+381 Sunggu Lee
+382 Dinesh Maldasani
+383 Jon Phillips
+384 Terry Ulick
+385 Dawna Walls
+386 Tetsuji Tonda
+387 Arthur Maiman
+388 Samuel E. Portny
+389 Alvaro Euzebio Hernandez
+390 Klaus Tochtermann
+391 Jesse Liberty
+392 Tushar Mohan
+393 Angela B. Shiflet
+394 Alan Simpson
+395 Dror Feitelson
+396 Michael Devetsikiotis
+397 Michael T. Simpson
+398 Robert Mailloux
+399 Mary E. Hocks
+400 Masaharu Takahashi
+401 Walter Glenn
+402 Steve Johnson
+403 Baum
+404 Michael Shrenk
+405 Charles Parker
+406 Anson Call
+407 Marshall Ashby
+408 Rajshekhar Sunderraman
+409 Bill Ball
+410 Matthias Menge
+411 Ram K. Krishnamurthy
+412 Paul C. Dinsmore
+413 Nancy Lewis
+414 Oliver Schruffer
+415 Kazuya Fujioka
+416 Dimitri Konstantas
+417 Tom Murray
+418 Arthur A. Thompson
+419 David Munger
+420 Manoj Bhatia
+421 Richard Schmalensee
+422 Rachel Andrew
+423 Yves Pochet
+424 David A. Madsen
+425 Darril R. Gibson
+426 Flávio Morais de Assis Silva
+427 George Allen England
+428 Louise H. Jones
+429 Wade Edwards
+430 Yohannes Desta
+431 Carlos Alberto Maziero
+432 George Omura
+433 Tom Carpenter
+434 Miguel López-Díaz
+435 Marc Sturm
+436 Martin Maguire
+437 Ian F. C. Smith
+438 Vittorio Murino
+439 Diane Gromala
+440 Kai Yu
+441 Hernán Abeledo
+442 Mike Crawford
+443 Joe Grand
+444 Jean-Marie Jacquet
+445 Kevin Wegryn
+446 Isabelle Simplot-Ryl
+447 Erica Lindy
+448 Roman Verhovsek
+449 James Holmes
+450 Jie Yang
+451 Christopher Walton
+452 Ann Miller
+453 Sabine Lambrich
+454 Carlos Alberto Reyes-Garcia
+455 Ch. Klopp
+456 Fred Glover
+457 Michael S. Toot
+458 Roberta Bragg
+459 Mathieu Salzmann
+460 Gunnar Pall Thorisson
+461 Volker Scheuber
+462 Jim Woodcock
+463 Philipp Anokhin
+464 Jing Tao
+465 Masaru Kitsuregawa
+466 Stijn-Pieter van Houten
+467 Palle Agermark
+468 Robert L. Dixon
+469 Ankit Tiwari
+470 Karin Diler-Manning
+471 Thomas R. Peltier
+472 Przemyslaw Grzegorzewski
+473 Micki Krause
+474 Charles J. Brooks
+475 Priscilla Walmsley
+476 Sommawan Khumpuang
+477 Behrouz A. Forouzan
+478 Kate Clair
+479 John Brennan
+480 A. Ecer
+481 Mitsuru Ishizuka
+482 Robert Scally
+483 Bruce Shriver
+484 Santanu Chattopadhyay
+485 Ling-Ge Jiang
+486 Javier Garcia Fronti
+487 Chris Nelson
+488 Csaba Szepesvári
+489 Dmitry Bokotey
+490 David M. Ferrin
+491 Hirokazu Yanagihara
+492 C. Conti
+493 Roman Wyrzykowski
+494 Nikos Passas
+495 Pedro Larrañaga
+496 Harshad Kotecha
+497 Cristina Conati
+498 Byron S. Gottfried
+499 Du-Ming Tsai
+500 David C. Planchard
+501 Steve Schwartz
+502 Akira Namatame
+503 Thomas J. Cashman
+504 Barbara Callan-Bogia
+505 Paolo Gentilini
+506 Rajkumar Roy
+507 Dimitrios Nikolaou Serpanos
+508 Honghua Dai
+509 Brian Fitzgerald
+510 Graham Hutton
+511 Mordechai Shacham
+512 Didier Dubois
+513 Nico Pfeifer
+514 Yue Zhou
+515 Shyh-In Hwang
+516 Michael Fruergaard Pontoppidan
+517 Barry L. Sherman
+518 Jan Nordström
+519 Jayne Weisblatt
+520 Zhaohui Wu
+521 Jerry J. Weygandt
+522 Vadim S. Anishchenko
+523 Alberto Bugarín
+524 Colleen Garton
+525 Russell Drummond
+526 John VanDyk
+527 O. C. L. Haas
+528 Anthony V. Chiarella
+529 Bernd Carsten Stahl
+530 Meikel Poess
+531 Christine Gatchell
+532 G. L. Margolin
+533 Alcherio Martinoli
+534 Steven Shaviro
+535 Chen-Chuan Pan
+536 Eric Debes
+537 Dan Hotka
+538 David Knight
+539 Lee Swearingen
+540 Deepali Srivastava
+541 Hoyt Duff
+542 Carol M. Cram
+543 H. Christiaans
+544 K. Shimada
+545 Thomas Eiter
+546 Kevin Mobley
+547 J. M. House
+548 Alan J. Kalameja
+549 Marianne Fox
+550 Dongming Wang
+551 Jack R. Meredith
+552 Cynthia Busic-Snyder
+553 Partrick Carey
+554 David Cassidy
+555 B. Giinsel
+556 Regunathan Radhakrishnan
+557 Lay Christopher Fox
+558 Michael Grigoriadis
+559 Harry L. Phillips
+560 S. Dantchev
+561 John Morris
+562 Brad Price
+563 Emmett Dulaney
+564 Urubatan Neto
+565 Neil Randall
+566 David Webster
+567 Tom Bulatewicz
+568 Junko Sekine
+569 Janet Valade
+570 George C. Diezel
+571 Ron Dulin
+572 James R. McGraw
+573 Dann Gershon
+574 Deborah Tice
+575 Eric Eaton
+576 Bronis R. De Supinski
+577 Hernan P. Awad
+578 Hans-Peter Seidel
+579 Norbert Fuhr
+580 Pallab Dasgupta
+581 Claudio Hernandez
+582 Ben Raphael
+583 Victor A. Skormin
+584 Phillip Marcus
+585 Alessandro Aurigi
+586 John R. Levine
+587 Darmawan Salihun
+588 Kathleen M. Iverson
+589 Maciej M. Syslo
+590 Susan Silver
+591 Ana Cavalcanti
+592 Jerzy Wasniewski
+593 June Jamrich Parsons
+594 James B. Howland
+595 David Fox
+596 A. Heyden
+597 George L. Wybenga
+598 Kim Heldman
+599 Cynthia L. Baron
+600 John Blaint
+601 T. Stover
+602 Adam Cook
+603 Kelly L. Murdock
+604 Rachid Deriche
+605 Michel X. Goemans
+606 Celso H. Poderoso de Oliveira
+607 Tsuhan Chen
+608 Zeynep Kiziltan
+609 Blackwood Algernon
+610 Pier L. Lanzi
+611 Sherry Kinkoph
+612 Kenneth E. Corey
+613 Ling Pi
+614 Philip A. Wilsey
+615 Peter Weddle
+616 Gian Pietro Picco
+617 Angus Mcilwraith
+618 Yoonyoung Jin
+619 Naba Barkakati
+620 John Paul Mueller
+621 Yoichi Murakoshi
+622 Steve Sinchak
+623 Larry Metzelaar
+624 Jean Carletta
+625 James E. Tomakyo
+626 Stanislaw Wrycza
+627 Guo-Rui Feng
+628 Simon Kerendian
+629 Yeh-Ching Chung
+630 Prasanna Ballal
+631 Norbert Egger
+632 W. David Kelton
+633 John Domingue
+634 Maria Hybinette
+635 Margaret Levine Young
+636 Marcin Paprzycki
+637 Donna Ulmer
+638 Sydney J. Jones
+639 R. Morandi
+640 Jean Scholtz
+641 Naoki Kobayashi
+642 Vladimir Gorodetsky
+643 Steve Weitzell
+644 Giovanni Ciccotti
+645 Hugh Williams
+646 Scott A. Hutchinson
+647 Jeannette Cabanis-Brewin
+648 Jinyang Li
+649 Christoph Schulte Althoff
+650 Xuan-Hieu Phan
+651 Jeff Kent
+652 Laura Bement
+653 Tibor Bosse
+654 David S. Moore
+655 Thomas Tolxdoff
+656 Raymond Morrow
+657 Janice Cuny
+658 Cheryl Price
+659 Preston Gralla
+660 Harald H.-J. Bongartz
+661 Will Smith
+662 Joseph Feller
+663  II
+664 Steve Renals
+665 P. Fiddelaers
+666 Yuuji Aruka
+667 Jiten Rama
+668 Shan Rajegopal
+669 Douglas R. Hickey
+670 Christopher Negus
+671 Roderico Cruz
+672 Michel Léonard
+673 William J. Frost
+674 Quan Z. Sheng
+675 S. Falcon
+676 Laila M. Dawson
+677 Lynn Sorensen Sutton
+678 Ramon M. Chorda
+679 Linlin Cui
+680 Huajin Tang
+681 Philip K. Gunning
+682 Jörg Schulze
+683 Carol Yacht
+684 Edward E. Klink
 685 Raf Guidobono
-686 Dan Irish
-687 Abraham Silberschatz
-688 James A. Svoboda
-689 Pier L. Lanzi
-690 Julieanne Kost
-691 Chen He
-692 Richard Schmalensee
-693 Sharon Zardetto Aker
-694 Ivan Chermayeff
-695 Enid L. Zafran
-696 Lisa Friedrichsen
-697 Dawn Wood
-698 John Brennan
-699 Larry Rudolph
-700 R. Bean
-701 Ulrich Geske
-702 Michael Knight
-703 Priscilla Walmsley
-704 Gholam R. Amin
-705 Bill Childers
-706 Masanobu Umeda
-707 Einoshin Suzuki
-708 Françoise d'Hautcourt-Carette
-709 Setsuo Arikawa
-710 Yen-Chun Lin
-711 Steve Johnston
-712 Caroline I. Pade
-713 Joseph R. Dominick
-714 Frank Thornton
-715 Arthur A. Oliner
-716 Steven Till
-717 Yue Zhou
-718  II
-719 Gary Robert Bertoline
-720 John S. Bonner
-721 Joel Lacey
-722 Anne Wolfinger
-723 Jay David Bolter
-724 Demian Linn
-725 Jun Kikuchi
-726 S. M. Furnell
-727 Maria Guadalupe Arambula Lariz
-728 Håvard Berland
-729 Damian Hodgson
-730 Jean-Paul Bourrières
-731 Gerhard-Helge Schildt
-732 Roman Bertolami
-733 Norbert Fuhr
-734 Shiao-Li Tsao
-735 W. E. Clason
-736 Darmawan Salihun
-737 Tom Negrino
-738 Dann Gershon
-739 Du-Ming Tsai
-740 Dan Gookin
-741 Hernán Abeledo
-742 Yi Pan
-743 Frank Boddammer
-744 Charles Greg Osborn
-745 Colin Potts
-746 Pascal Fua
-747 Alessandro Micarelli
-748 Chaomin Shen
-749 W. David Kelton
-750 Alan C. Bovik
-751 Y. LeCun
-752 Yongsheng Gao
-753 Fritz T. Widmaier
-754 Didier Dubois
-755 Helen Ashman
-756 N. L. Clarke
-757 Kevin Sakamoto
-758 Tim Buterbaugh
-759 Jay April
-760 I. C. McLlwaine
-761 Jake Chen
-762 Tushar Mohan
-763 Jan L. Harrington
-764 Paolo Gentilini
-765 Pere P. Sancho
-766 Marc Hoppe
-767 James Peters
-768 Man-Lap Li
-769 Vincent Wade
-770 Volker Scheuber
-771 Sydney J. Jones
-772 John Clements
-773 Makoto Takizawa
-774 Manuele Bicego
-775 Geehyuk Lee
-776 Lynn Sutton
-777 R. Morandi
-778 Fernando Galindo
-779 Andrew Mason
-780 John C. Hancock
-781 F. Lopez
-782 L. S. Fainzilberg
-783 Lawrence C. Metzelaar
-784 Donald Christiansen
-785 Nicole Immorlica
-786 Jörg Grabner
-787 Prasanna Ballal
-788 R. C. Flagan
-789 Constantinos Dovrolis
-790 Bogdan Brinzarea
-791 Wade Edwards
-792 Amihai Motro
-793 Craig Pelkie
-794 Santanu Chattopadhyay
-795 Sarita V. Adve
-796 José R. Paramá
-797 Helmut Prendinger
-798 Walter Glenn
-799 Red Burns
-800 David Knight
-801 Ajay Divakaran
-802 James Paul Gee
-803 Terry Ulick
-804 Arthur Maiman
-805 Cay S. Horstmann
-806 Glenn Matthews
-807 Allen B. MacKenzie
-808 Richard Johnson
-809 Wei Zhao
-810 Tom Fout
-811 Stewart Venit
-812 Nico Wallmeier
-813 John Blaint
-814 Simone Stumpf
-815 Deborah Timmons
-816 Michael Shrenk
-817 Celso H. Poderoso de Oliveira
-818 Enrico Tronci
-819 Regunathan Radhakrishnan
-820 Jeff Kent
-821 Hoyt Duff
-822 Meikel Poess
-823 Jeff Cogswell
-824 Thom Robbins
-825 Raymond Morrow
-826 Thomas Stützle
-827 Parminder Flora
-828 Roger C. Parker
-829 Jan Ehrhardt
-830 Ian David Aronson
-831 Maki Yoshida
-832 Roger Toren
-833 Robert Lettieri
-834 Arnaud Bailly
-835 L. J. Van Gool
-836 Ludwik Kurz
-837 Ralph H. Baer
-838 Hayden Scott Baron
-839 J. C. Diehl
-840 Thomas Braun
-841 Eric Grebler
-842 Mireille Clerbout
-843 David Cope
-844 Anita Schöbel
-845 Elaine Weinmann
-846 Aline Maria Santos Andrade
-847 Husam Hamad
-848 Jennifer Duffy
-849 Manuel Núnez
-850 R. Cathelin
-851 Carole Levitt
-852 Yesha Yacoov
-853 Ted LoCascio
-854 Carol Peters
-855 Tony Johnson
-856 Augusto Sampaio
-857 Mauro Ferrario
-858 Paul Messaris
-859 Kami LeMonds
-860 Ron Ben Natan
-861 Pedro Larrañaga
-862 G. Hommel
-863 Gabriella Kazai
-864 Frank S. de Boer
-865 E. Skubalska-Rafajtowicz
-866 Michael G. Mauer
-867 Yin Xiong
-868 James R. McGraw
-869 David Eppstein
-870 Luís Torgo
-871 Conrad Sanderson
-872 Joze Zupancic
-873 Leslie Hardin
-874 Ian Stephenson
-875 Vidya Rajaram
-876 Ben Long
-877 Frank Hoffmann
-878 Dave Mabe
-879 Peter Scholz
-880 Jack Dongarra
-881 Simona Bernardi
-882 Katsuhiko Takahashi
-883 Bonnie L. Tensen
-884 Y. S. Hung
-885 Margaret Morrison
-886 Ramon Puigjaner
-887 Matt Wales
-888 Justin Menga
-889 Richard Friedrich
-890 Eric Eaton
-891 Perdita Stevens
-892 Damien Tromeur-Dervout
-893 Randy B. Machemehl
-894 Nieves R. Brisaboa
-895 Shimul Rahim
-896 R. Weiner
-897 Dusan Petkovic
-898 Jidong Zhao
-899 Helen Brookes
-900 Irfan Essa
-901 Himanshu Yadava
-902 Christopher Diggins
-903 Michael Worgotter
-904 Colin Malcolm Nicholls
-905 W. Gregory Wojtkowski
-906 Rex Martin
-907 Diane Gromala
-908 Honghua Dai
-909 Bill Ferguson
-910 Paul Donnelley
-911 Kelly L Murdock
-912 Gérard Dreyfus
-913 Yashavant P. Kanetkar
-914 Marcus R. Brown
-915 David Gefen
-916 Eleazar Eskin
-917 Chittibabu Govindarajulu
-918 Osamu Takata
-919 Bens Smith
-920 Rajshekhar Sunderraman
-921 Leila Merrell Foster
-922 Lee Strobel
-923 Linda Bird
-924 Charles E. Brown
-925 Mehdi Khosrowpour
-926 Jason Guy
-927 Arthur Naiman
-928 Hugh Williams
-929 Bob Bryla
-930 Herb Schwetman
-931 Kate Clair
-932 Tim Moors
-933 Joäo Gama
-934 Erich Neuhold
-935 Maria A. Gil
-936 Dietmar Seipel
-937 Paul Pleasant
-938 Cheryl R. Shrock
-939 Gleiber Fernandes Royes
-940 Jan Treur
-941 Tom Collins
-942 Jay Glynn
-943 Víctor P. Jiménez
-944 Jens Rohlf
-945 Eileen Kraemer
-946 Sally Preston
-947 Klaus Julisch
-948 Taisei Kaizouji
-949 Martijn C. Schut
-950 Jeffrey Howard
-951 Jean-Philippe Martin-Flatin
-952 R. Gentleman
-953 Jessica Cutler
-954 Nicholas C. Zakas
-955 Darrel Creacy
-956 Jose Pedro Llamazares
-957 Giovanni Ciccotti
-958 Colleen Lindell
-959 Yian Zhu
-960 Rogério Cid Bastos
-961 Hanan Samet
-962 Alexei N. Skourikhine
-963 Jong Kyoung Kim
-964 Lyle A. Cox
-965 A. Deane
-966 Martin Maguire
-967 Shyh-In Hwang
-968 Gerard Blanchet
-969 Mary E. Hocks
-970 Margaret Gonglewski
-971 John Savage
-972 A. A. Ponomaryov
-973 Michelle R. Kendrick
-974 John Markoff
-975 Gonzalo Navarro
-976 V. V. Mazalov
-977 Magnus Svärd
-978 Beth Brown
-979 James Grieshaber
-980 Linda Foster-Turpen
-981 E. Phil Haley
-982 Nigel Watling
-983 Maneesh Sethi
-984 Lisa Slater Nicholls
-985 ChengXiang Zhai
-986 Joshua Paul
-987 Stephen K. Park
-988 Lionel Felix
-989 Dominick Baier
-990 Carol M. Cram
-991 Cheng-Lin Liu
-992 Terri Calderone
-993 Guy Fouché
-994 David M. Ferrin
-995 Jinyang Li
-996 Anne H. H. Ngu
-997 Michael J. Shannon
-998 Torsten Suel
-999 Patrick R. Delaney
-1000 Stephen L. Nelson
-1001 Nigel Goldman
-1002 Claudio Hernandez
-1003 Kathleen Z. Montgomery
-1004 Janusz S. Kowalik
-1005 Frank Klawonn
-1006 June Jamrich Parsons
-1007 M. P. Ediciones
-1008 Charles R. Meader
-1009 Fenghui Zhang
-1010 Kwong B. Ng
-1011 José R. Álvarez
-1012 Gabriel Murray
-1013 Charles Parker
-1014 B. Giinsel
-1015 Hans-Peter Seidel
-1016 Simon Kerendian
-1017 In-Hyouk Song
-1018 Damon Brown
-1019 Tanner Flynn
-1020 John Sharp
-1021 Alcherio Martinoli
-1022 Lee Lowry
-1023 Luca Maria Gambardella
-1024 Derek Kueter
-1025 Brian N. Hilton
-1026 Brian Fitzgerald
-1027 Hong Zhang
-1028 Kyle Rankin
-1029 Byron S. Gottfried
-1030 Zongmin Ma
-1031 Douglas R. Hickey
-1032 Sydney Johnston
-1033 Baoji Wang
-1034 Stefan Burkhardt
-1035 Ann Miller
-1036 Anthony Reilly
-1037 Jason R. Rich
-1038 Bernd Gärtner
-1039 Heinz Handels
-1040 Wolfgang Thomas
-1041 Lakshman Prasad
-1042 George Karypis
-1043 Rolf Oppliger
-1044 Cristian Darie
-1045 Henriette Barkow
-1046 Mike Myung-Ok Lee
-1047 Alena Neviarouskaya
-1048 Jirí Matouek
-1049 Christian Nagel
-1050 Janine Warner
-1051 Tanya Staples
-1052 Ankur Bhargava
-1053 Li Chen
-1054 Michael Meadhra
-1055 Lutz Schimansky-Geier
-1056 Olgierd Hryniewicz
-1057 Richard Kegler
-1058 Julian R. Salvarredy
-1059 Kazuyuki Koizumi
-1060 Hirokazu Kato
-1061 Manfred Glesner
-1062 Wolfgang Kastner
-1063 T. P. Ng
-1064 Rajiv Kishore
-1065 Adele A. Hayward
-1066 Albert Yarusso
-1067 Joseph (Seffi) Naor
-1068 James Holmes
-1069 Linlin Cui
-1070 Matt Westgate
-1071 Tom Bulatewicz
-1072 Ding Xuan Zhou
-1073 Sally Slack
-1074 J. F. DiMarzio
-1075 Marcello Pelillo
-1076 Stanislaw Wrycza
-1077 Roy S. Freedman
-1078 Brian Lumley
-1079 Dean Bagley
-1080 Jason Rohm
-1081 S. K. Srivastava
-1082 Cynthia Busic-Snyder
-1083 Gordon Linzner
-1084 Scott A. Hissam
-1085 Will Smith
-1086 L. T. Christopher
-1087 Scott Shenker
-1088 Bård Skaflestad
-1089 Charles S. Wetherell
-1090 John Paul Mueller
-1091 Ch. Klopp
-1092 Dennis Shasha
-1093 Anita C. Millspaugh
-1094 Brenda Mallinson
-1095 Michael S. Toot
-1096 Juha Kärkkäinen
-1097 Jerry J. Weygandt
-1098 Carlito Vicencio
-1099 Albert C. Dawson
-1100 Francisco Martínez-Estudillo
-1101 Steve Johnson
-1102 Gordon A. Gow
-1103 K. Astrom
-1104 Patricia A. Hoefler
-1105 Michael McLaughlin
-1106 Joseph R. Meehan
-1107 Jon Barwise
-1108 Chris Nelson
-1109 Jared Davis
-1110 Jost Goettert
-1111 Shalom Carmel
-1112 Seungjin Choi
-1113 Nita Hewitt Rutkosky
-1114 Paul Capello
-1115 R. Ramesh
-1116 Ethelbert N. Chukwu
-1117 Varshni Singh
-1118 Braja M. Das
-1119 Le-Minh Nguyen
-1120 M. Johnson
-1121 Bruce Taylor
-1122 Man Lin
-1123 Bruce Presley
-1124 Mordechai Shacham
-1125 Glen Coulthard
-1126 Proyag Datta
-1127 F. Peinetti
-1128 Julia Wix
-1129 Richard V. Kelly
-1130 John A. Pearce
-1131 John Morris
-1132 Hassan Rajaei
-1133 David A. Van Veldhuizen
-1134 Jonathan Lawry
-1135 Bill Hamilton
-1136 Jerzy Wasniewski
-1137 Jean-Noel Mereur
-1138 Andy Yoo
-1139 Ping-Chieh Lin
-1140 Khaled Masmoudi
-1141 Dan Hotka
-1142 Jiten Rama
-1143 Rosalia Maglietta
-1144 A. E. Sheue
-1145 David Beskeen
-1146 J. Periaux
-1147 Robert A. Greenes
-1148 Carlos Alberto Reyes-Garcia
-1149 Nicola Ancona
-1150 Eric R. Keiter
-1151 Kay Yarborou Nelson
-1152 Pallab Dasgupta
-1153 Ted Lewis
-1154 Mikhail Kanevski
-1155 Aida Omerovic
-1156 E. J. Pauwels
-1157 Mitsuhiro Horade
-1158 Duke Nukem
-1159 Lida Li
-1160 Mark E. Rosch
-1161 Wita Wojtkowski
-1162 Krzysztof Sacha
-1163 Richard E. Deleon
-1164 David Keyes
-1165 Steve Weitzell
-1166 Chi Hang Li
-1167 Stephan Lukosch
-1168 James McDonough
-1169 Pamela W. Adams
-1170 Gary B. Shelly
-1171 Paul Holden
-1172 Manoj Bhatia
-1173 Iñaki Inza
-1174 Dawna Walls
-1175 Thierry D'Hers
-1176 Tsau Young Lin
-1177 Joseph E. Brewer
-1178 Antonio Fariña
-1179 Ian Akyildiz
-1180 Mary Ferrari
-1181 Charles Snyder
-1182 Daniel Amyot
-1183 Jerome Rolia
-1184 Zhang Yi
-1185 Michael W. Hofbaur
-1186 Matthias Menge
-1187 Frank Zeilfelder
-1188 Jianer Chen
-1189 Richard Nothhaft
-1190 Marie P. Planchard
-1191 Steven Shaviro
-1192 Deborah Tice
-1193 Michael Kluck
-1194 Brian E. Kramer
-1195 Dariush Derakhshani
-1196 Jim Buyens
-1197 Hoon Hong
-1198 Christopher Walton
-1199 Lee Humphreys
-1200 Yevgeni Koucheryavy
+686 Robert T. Grauer
+687 Andy Yoo
+688 Françoise d'Hautcourt-Carette
+689 A. V. Tuzikov
+690 C. Priami
+691 Jim Buyens
+692 Cheryl R. Shrock
+693 Peter T. Davis
+694 J. S. Yang
+695 Hanno Lefmann
+696 Jeff Cogswell
+697 Khaled Masmoudi
+698 Marisa Venturini Zilli
+699 Don Towsley
+700 Dan Irish
+701 Trey Ideker
+702 Wei Zhao
+703 John Markoff
+704 R. Kelly Rainer
+705 Alexi Pozdnukhov
+706 Jose A. Lozano
+707 Thomas V. Russo
+708 Rogério Cid Bastos
+709 Robert Samuel Heathcote
+710 Tarek El-Ghazawi
+711 Srinivas Shakkottai
+712 Larry Ullman
+713 Toru Kaneko
+714 Nate Perkins
+715 Philip McGuin
+716 Irfan Essa
+717 Tony Hu
+718 Pierre Comtois
+719 Harshawardhan Bal
+720 Marco Aurélio de Mesquita
+721 Apostolis Salkintzis
+722 Mike Welch
+723 Eileen Kraemer
+724 Mitchell Rosen
+725 Jirí Matouek
+726 Bill Calkins
+727 Rosa Meo
+728 Yasushi Inoguchi
+729 Adrienne Tommy
+730 Tom Negrino
+731 Katsuhiko Takahashi
+732 Rusel Demaria
+733 Xavier Fischer
+734 Robert L. Hale
+735 Ahmed Sameh
+736 Jonathan Davidson
+737 Nicola Ancona
+738 Jayshankar Sankarasetty
+739 Ian David Aronson
+740 J. Randell
+741 Michelle R. Kendrick
+742 David W. Tschanz
+743 Chittibabu Govindarajulu
+744 Cay S. Horstmann
+745 Carol Peters
+746 Jeffrey Howard
+747 Till Schummer
+748 David Sawyer McFarland
+749 Nicholas C. Zakas
+750 Sally A. Mckee
+751 Yiping Yao
+752 Jonathan Oxer
+753 Michael Raheem
+754 Man-Lap Li
+755 James Grieshaber
+756 Vincent Wade
+757 Cindy Caldwell
+758 Patrick R. Delaney
+759 Thomas Waldraff
+760 Lutz Schimansky-Geier
+761 Andrzej Skowron
+762 Richard Dal Porto
+763 John S. Bonner
+764 Sally Garrington
+765 David Beskeen
+766 Jeong-woo Sohn
+767 M. Hafed Benteftifa
+768 Xingshe Zhou
+769 Alan L. Eliason
+770 Yves Deswarte
+771 Barry D. Lewis
+772 Mary Ferrari
+773 Diane Crawford
+774 Jaydeep Marathe
+775 Julian Casas
+776 Pascal Fua
+777 Amihai Motro
+778 C. V. Hollot
+779 Wolfgang Thomas
+780 Shalom Carmel
+781 José R. Álvarez
+782 Kim Bang Salling
+783 Nita Hewitt Rutkosky
+784 Bob Bryla
+785 Tim Buterbaugh
+786 D. Lowe
+787 Seung Eun Lee
+788 Peter A. Markowich
+789 Danny Raz
+790 Kevin Sakamoto
+791 Michael Cloran
+792 Willem-Paul de Roever
+793 Mary-Terese Cozzola
+794 Roque Marín
+795 Clemens Gröpl
+796 Frank Boddammer
+797 Lionel Felix
+798 Pratul K. Ajmera
+799 Hitoshi Takeda
+800 M. Ranzato
+801 Barry Smyth
+802 Jennifer Duffy
+803 Mário Marques Freire
+804 Bill Camarda
+805 David D. Busch
+806 Stuart J. Stuple
+807 Herb Schwetman
+808 Xiaohua Wang
+809 Manfred Glesner
+810 Constantinos Dovrolis
+811 William Y. C. Wang
+812 Neil Schlager
+813 David Cope
+814 Prima Development
+815 Cathy Clarke
+816 Roy W. Tromble
+817 Zongmin Ma
+818 David Sewry
+819 Joseph E. Brewer
+820 Robert Bishop
+821 Cheryl E. Marx
+822 Rui Camacho
+823 Jonathan Herlocker
+824 P. E. Taylor
+825 James Waller
+826 Noboru Ohta
+827 Marc Mercuri
+828 David M. Bourg
+829 Samy Bengio
+830 Gary H. Sockut
+831 Rick Segel
+832 William R. Higgins
+833 Joseph (Seffi) Naor
+834 Braja M. Das
+835 Brenden Munnelly
+836 Damian Hodgson
+837 Michael Rosenblum
+838 Janine Warner
+839 V. Saxena
+840 Joseph Rubin
+841 Justo Perez Agudin
+842 Antonio Angel Ramos Varon
+843 Sydney Johnston
+844 Gene Orwell
+845 Janice Mazidi
+846 Anita Kesavan
+847 Daeyeol Lee
+848 Hayden Scott Baron
+849 Jack W. Plunkett
+850 Simone Stumpf
+851 Jinsong Fan
+852 C. H. Leung
+853 Jose Antonio Tajadura Zapirain
+854 Gerhard-Helge Schildt
+855 Cass Lewart
+856 Demian Linn
+857 Janusz S. Kowalik
+858 Tom Geismar
+859 Erin Sullivan
+860 Nigel Goldman
+861 Shirley Lacy
+862 Dennis Shasha
+863 Yong Rui
+864 S. K. Srivastava
+865 Fabio Gasparetti
+866 Ofer Rahat
+867 Harold F. Tipton
+868 Robert R. Hoffman
+869 Elliot B. Koffman
+870 Lingyu Wang
+871 Martin J. Miller
+872 Xiuzhen Cheng
+873 Lars Dragheim Olsen
+874 Luis Orozco-Barbosa
+875 Dave Mabe
+876 Lida Li
+877 Richard Kegler
+878 Jon A. McConnell
+879 Y. S. Hung
+880 R. Giladi
+881 Christian Ronse
+882 Stephen Cawood
+883 Kay Chen Tan
+884 Jens Ferner
+885 John Savage
+886 William J. Weiland
+887 J. P. Pontaza
+888 J. Knipe
+889 Wayne L. Winston
+890 Ankur Bhargava
+891 Deborah L. Bence
+892 Kazem Sohraby
+893 Bruce Presley
+894 Michael T. Goodrich
+895 Eric R. Keiter
+896 George Karypis
+897 Frank Thornton
+898 Elizabeth M. Hollinger
+899 Luke Welling
+900 Monica Farah-Stapleton
+901 Adrian Brown
+902 Carlos A. Coello Coello
+903 Lisa Slater Nicholls
+904 Catholijn M. Jonker
+905 Hirokazu Kato
+906 Tao Tao
+907 Peter Lourekas
+908 Theodore J. Anagnoson
+909 Jenny Preece
+910 Dietmar Seipel
+911 Judy Mardar
+912 Noel Epstein
+913 Adrian Frutiger
+914 James Kelly
+915 Hari Harindranath
+916 Judith L. Stern
+917 Key Pousttchi
+918 Jonathan M. Borwein
+919 Maneesh Sethi
+920 David S. Evans
+921 Holloway
+922 Yin Xiong
+923 Brenda Mallinson
+924 Ford
+925 Sung-Yang Bang
+926 R. Srikant
+927 Uffe Andersen
+928 Magdalena Salazar-Palma
+929 Günther Nürnberger
+930 Enrico Tronci
+931 Bens Smith
+932 Beda Christoph Hammerschmidt
+933 Jim Griffith
+934 Jost Goettert
+935 Lee Humphreys
+936 Henriette Barkow
+937 Maryann Barber
+938 Shelley Gaskin
+939 Wolfgang Kastner
+940 Enrique Campos-Náñnez
+941 Daoliang Li
+942 Lipika Dey
+943 Tammy Worcester
+944 Danny Goodman
+945 Andreas Nürnberger
+946 Magnus Svärd
+947 Jane E. Aaron
+948 Erland Jonsson
+949 F. Peano
+950 Ziyou Xiong
+951 Elise Moss
+952 L. S. Fainzilberg
+953 Frank S. de Boer
+954 A. H. S. Solberg
+955 Nicole Immorlica
+956 Bonnie L. Tensen
+957 A. Deane
+958 Chao Rong
+959 York Sure
+960 Klaus Julisch
+961 Ludwik Kurz
+962 Joao Batista De Jesus
+963 A. E. Sheue
+964 Ryutaro Maeda
+965 David Eppstein
+966 W. E. Clason
+967 Staff
+968 S. J. Owen
+969 Brian Lumley
+970 Martijn C. Schut
+971 George Grätzer
+972 Amitabh Chaudhary
+973 Ali Emrouznejad
+974 Abraham Silberschatz
+975 Jay Glynn
+976 Nathan Haggard
+977 Jesse M. Torres
+978 Yinghui Yang
+979 Osamu Takata
+980 Helen Ashman
+981 R. Weiner
+982 Frank Mueller
+983 Pieter Wesseling
+984 Dima Sonkin
+985 A. A. Ponomaryov
+986 Steve Holzner
+987 Julia Case Bradley
+988 M. P. Ediciones
+989 Michael Meadhra
+990 Taisei Kaizouji
+991 R. Y. Shukla
+992 Hiroki Agata
+993 J. F. DiMarzio
+994 Denham Evelyn
+995 Lyle A. Cox
+996 Roland Traunmüller
+997 P. Perona
+998 Arthur A. Oliner
+999 Kyle Rankin
+1000 Baoji Wang
+1001 D. E. Stevenson
+1002 J. C. Diehl
+1003 Scott L. Rosen
+1004 Howard A. Anton
+1005 Jairo Vieira Cordeiro
+1006 Jeffrey P. Fisher
+1007 Atsushi Yamashita
+1008 Johnny Hujol
+1009 Antonio Moreno
+1010 Johanna Moore
+1011 Shiao-Li Tsao
+1012 Darrel Creacy
+1013 Alípio Jorge
+1014 Susumu Horiguchi
+1015 S. Huanye
+1016 Li Chen
+1017 Helmut Prendinger
+1018 Jose Pedro Llamazares
+1019 Setsuo Arikawa
+1020 Ding Xuan Zhou
+1021 Steen Leleur
+1022 Lech Polkowski
+1023 Roselyn Teukolsky
+1024 Hossam Afifi
+1025 Alex Galis
+1026 Yesha Yacoov
+1027 Ludmila Cherkasova
+1028 Alena Neviarouskaya
+1029 José Merseguer
+1030 Pamela S. Beason
+1031 Amy R. Suchowski
+1032 Edward C. Lin
+1033 Gabriel Murray
+1034 Dominique Foray
+1035 Richard Nothhaft
+1036 Rick F. van der Lans
+1037 Sarah Hutchinson-Clifford
+1038 Kwong B. Ng
+1039 Riccardo Poli
+1040 Jean-Paul Bourrières
+1041 Aaron Chesir
+1042 Richard Friedrich
+1043 Martin F Krafft
+1044 Barak Raveh
+1045 William T. Niu
+1046 Giuseppe Liotta
+1047 Robert J. Hoekstra
+1048 Yu-Chen Hu
+1049 Julie Dorsey
+1050 Roger Toren
+1051 Mireille Clerbout
+1052 Jorg Rose
+1053 Matthias Gries
+1054 Cheng-Lin Liu
+1055 Nightow Yoshiro
+1056 Martin H. Weik
+1057 Haym Hirsh
+1058 Thomas Kissell
+1059 Ron Palma
+1060 Bob Seidensticker
+1061 Souhila Kaci
+1062 Robert Garfinkel
+1063 David Dvorin
+1064 John A. A. Sillince
+1065 Jianqiang Shen
+1066 Deng Cai
+1067 Alexander Keller
+1068 G. Hommel
+1069 Elizabeth Drake
+1070 Bruce Taylor
+1071 Julian R. Salvarredy
+1072 Jocelyn Robert
+1073 Hiroshi Sako
+1074 Ronen Basri
+1075 Charles S. Wetherell
+1076 Scott Kelby
+1077 N. L. Clarke
+1078 Bill Hamilton
+1079 Roy Ageloff
+1080 Kenneth Miller
+1081 Jun Kikuchi
+1082 Jack Dongarra
+1083 Marcello M. Bonsangue
+1084 Leon Petrosjan
+1085 V. V. Mazalov
+1086 Jay April
+1087 James Peters
+1088 L. J. Van Gool
+1089 Jason R. Rich
+1090 Enid L. Zafran
+1091 Mark E. Rosch
+1092 Derrick Story
+1093 Peter Sanders
+1094 Peter W. Glynn
+1095 Fritz J. Messere
+1096 Rosalia Maglietta
+1097 Lawrence M. Leemis
+1098 John C Hughes
+1099 Jens Rohlf
+1100 August Derleth
+1101 Michael B. Cutlip
+1102 Damien Tromeur-Dervout
+1103 Margaret Morrison
+1104 Ignas Niemeegers
+1105 Meinhard Schmidt
+1106 Rudolph Langer
+1107 Susanne Graf
+1108 Norman Poh
+1109 Varshni Singh
+1110 Michael Worgotter
+1111 Fritz T. Widmaier
+1112 Wei Li
+1113 Amir Ahmad
+1114 Hugo C. Pribor
+1115 David Keyes
+1116 Jidong Zhao
+1117 John Clements
+1118 Darpan Dinker
+1119 Mary Z. Last
+1120 Mark Hoogendoorn
+1121 Arthur Greef
+1122 Stefan Burkhardt
+1123 Eva Lange
+1124 Stephen K. Park
+1125 Justin Peltier
+1126 David M. Lane
+1127 Tsau Young Lin
+1128 Alexander Neiman
+1129 Jessica Cutler
+1130 Jason Eckert
+1131 David A. Wiley
+1132 Marjorie M. K. Hlava
+1133 Michael Knight
+1134 Gordon A. Gow
+1135 Dan Oja
+1136 Guy Malleus
+1137 Hans J. Skovgaard
+1138 Tanya Staples
+1139 Fernando Pelayo
+1140 Geehyuk Lee
+1141 Vidya Rajaram
+1142 K. Astrom
+1143 Lawrence Chung
+1144 Saeed V. Vaseghi
+1145 Jeffrey E. Clark
+1146 Bill Ferguson
+1147 Jenny Dugmore
+1148 Janet Caughlin
+1149 Francis Cheng
+1150 Paul Messaris
+1151 Maria A. Gil
+1152 Mikhail Kanevski
+1153 Nancy Buchanan
+1154 Brian Kahin
+1155 Witold Pedrycz
+1156 Charles N. Fischer
+1157 Henri Prade
+1158 Jean Andrews
+1159 Nicholas E. Lownes
+1160 Gideon Schreiber
+1161 Norbert Meyer
+1162 Mark Wilson
+1163 David Robinson
+1164 Jerzy Leszczynski
+1165 Kathy Ivens
+1166 Carlos Juiz
+1167 Jerzy Grzymala-Busse
+1168 Deborah Morley
+1169 James Shelton
+1170 Margaret M. Sutton
+1171 Arkangel Cast
+1172 C. O'Neill
+1173 Julia Wix
+1174 Dong-Jian Wang
+1175 Charles E. Brown
+1176 Frank Klawonn
+1177 Nicole Howard
+1178 Hans Eveking
+1179 Joseph Payne Brennan
+1180 Hans-Peter Meinzer
+1181 Joseph R. Meehan
+1182 Margaret Gonglewski
+1183 Axel Bucker
+1184 In-Hyouk Song
+1185 Donald Norris
+1186 Stephen G. Klink
+1187 Michael Price
+1188 Carlito Vicencio
+1189 Thomas G. Dietterich
+1190 Alan W. Williams
+1191 Conrad Mewton
+1192 Dan Birlew
+1193 John R. Harrald
+1194 Ian Akyildiz
+1195 T. Ogura
+1196 Anthony Reilly
+1197 Jean-Noel Mereur
+1198 Mauro Ferrario
+1199 Charles Greg Osborn
+1200 Masahiro Inuiguchi
 1201 V. S. Subrahmanian
-1202 Lee Swearingen
-1203 Jayne Weisblatt
-1204 Oskar Bartenstein
-1205 Kevin Wegryn
-1206 Paul C. Dinsmore
-1207 Renlong Han
-1208 Saleema Amershi
-1209 M. van de Panne
-1210 Michael T. Simpson
-1211 Yohannes Desta
-1212 Laura Melton
-1213 Bruce Shriver
-1214 Mary-Terese Cozzola
-1215 David Sewry
-1216 H. J. A. M. Heijmans
-1217 Hiroki Agata
-1218 Paola Forcheri
-1219 Laura Thomson
-1220 John Etchemendy
-1221 Martin Braschler
-1222 Dan Birlew
-1223 Andrea Torsello
-1224 Angus Mcilwraith
-1225 Craig McMurtry
-1226 Sonia Heemstra de Groot
-1227 Julia Case Bradley
-1228 George L. Wybenga
-1229 Gene Orwell
-1230 Monica Farah-Stapleton
-1231 Rivera-Rovelo Jorge
-1232 Judy Mardar
-1233 Jing Tao
-1234 Christine Gatchell
-1235 David Groth
-1236 Deng Cai
-1237 Nicole Howard
-1238 A. L. Kalleberg
-1239 Roy Ageloff
-1240 Brad Price
-1241 Tibor Bosse
-1242 Satish Kalidindi
-1243 Antonio Moreno
-1244 Alexander Verbraeck
-1245 Martin DeLaney
-1246 Thomas V. Russo
-1247 Jim Heid
-1248 A. V. Tuzikov
-1249 Stephen Stratton
-1250 Georghita Ghinea
-1251 Cynthia L. Baron
-1252 Jonathan Lazar
-1253 Ahmed E. Hassan
-1254 César Hervás-Martínez
-1255 Hossam Afifi
-1256 Tom Carpenter
-1257 D. Ryan Stephens
-1258 Henry Balogun
-1259 Ford
-1260 Tyson S. Hall
-1261 Taieb Znati
-1262 Christoph Schulte Althoff
-1263 Julian Casas
-1264 Galen Gruman
-1265 Lászlo Roth
-1266 Mark Clarke
-1267 Vern Paxson
-1268 Bill Calkins
-1269 Andy Ashdown
-1270 Denham Evelyn
-1271 Georgina R. Hughes
-1272 Yen-Kuang Chen
-1273 Ana Cavalcanti
-1274 Ahmed Sameh
-1275 Christopher Breen
-1276 Kay Chen Tan
-1277 Manuel Laguna
-1278 Yu-Chen Hu
-1279 Cristina Conati
-1280 Sherry Kinkoph
-1281 Richard K. Smith
-1282 Richard A. McMahon
-1283 Maria I. Sanchez-segura
-1284 James B. Howland
-1285 Andrea Dojmi
-1286 Larry Statan
-1287 Kim Bang Salling
-1288 David W. Tschanz
-1289 Thomas Eiter
-1290 Ziyou Xiong
-1291 Michael Grigoriadis
-1292 Ben Willmore
-1293 Ling-Ge Jiang
-1294 Robert Mailloux
-1295 William J. Tracz
-1296 Susan Silver
-1297 Marc Sturm
-1298 Sherry Y. Chen
-1299 Christian Sauer
-1300 Jay Dickman
-1301 Flávio Morais de Assis Silva
-1302 Lech Polkowski
-1303 Maciej M. Syslo
-1304 Jeffrey E. Clark
-1305 Andreas Nürnberger
-1306 Jaim Ahmed
-1307 H. Broersma
-1308 Jens Ferner
-1309 Bob Seidensticker
-1310 H. Podhaisky
-1311 Paul Harris
-1312 Larry Dubov
-1313 Tammy Worcester
-1314 Karim R. Lakhani
-1315 Michel Léonard
-1316 Ron Dulin
-1317 Kevin Mobley
-1318 Yigal Bejerano
-1319 John Alderman
-1320 Stijn-Pieter van Houten
-1321 Kurt Binder
-1322 Michel X. Goemans
-1323 Joe Grand
-1324 Vadim S. Anishchenko
+1202 Mehdi Khosrowpour
+1203 Roger C. Parker
+1204 Mikael Rousson
+1205 Simon Gray
+1206 ChengXiang Zhai
+1207 Maria Guadalupe Arambula Lariz
+1208 Susumu Sugiyama
+1209 Bård Skaflestad
+1210 J. Douglas Jefferys
+1211 Abel Mariano Matas Garcia
+1212 Parminder Flora
+1213 Iñaki Inza
+1214 Sonia Fahmy
+1215 Soemon Takakuwa
+1216 William W. Cohen
+1217 Vadim Timonin
+1218 Svetlana Cicmil
+1219 Dariush Derakhshani
+1220 Chen He
+1221 Paola Forcheri
+1222 Ethelbert N. Chukwu
+1223 Maurie Lockley
+1224 Jhih-En Kuo
+1225 Frank Vahid
+1226 Carl Timm
+1227 Sherry Willard Kinkoph
+1228 Dean Bagley
+1229 Jörg Grabner
+1230 Satish Kalidindi
+1231 Justin Menga
+1232 Fernando Rubio
+1233 Philip J. Pratt
+1234 Luca Maria Gambardella
+1235 Ted LoCascio
+1236 Tapan K. Sarkar
+1237 Anne Wolfinger
+1238 Jean-Philippe Martin-Flatin
+1239 Zhiping Chen
+1240 Albert C. Dawson
+1241 Chengqi Zhang
+1242 Laura Melton
+1243 Marie P. Planchard
+1244 Tom Lancaster
+1245 Antonio Fariña
+1246 Patricia J. Fewell
+1247 Wita Wojtkowski
+1248 Marc Hoppe
+1249 Jada Brock-Soldavini
+1250 Michael Schrenk
+1251 Jen-Yao Chung
+1252 Gavin Ambrose
+1253 David R. Emerson
+1254 Randy Medoff
+1255 Alexander Gelbukh
+1256 Andy Ashdown
+1257 Maria Teresa Molfino
+1258 Daniel C. Wood
+1259 Saadia Malik
+1260 Warren
+1261 Fang Yin
+1262 Eric Quinn
+1263 John Odam
+1264 Matthew Donner
+1265 Erik Holsinger
+1266 Amitabha Bagchi
+1267 Joseph R. Dominick
+1268 Richard E. Deleon
+1269 Velda L. Largen
+1270 Derek Kueter
+1271 Anita C. Millspaugh
+1272 Mounia Lalmas
+1273 Allan Hunkin
+1274 Marco Better
+1275 Galen Gruman
+1276 James Paul Gee
+1277 Frank Zeilfelder
+1278 Jonathan Lazar
+1279 Matthias Zimmermann
+1280 Srikant Nalatwad
+1281 John R. Mick
+1282 Marco Dorigo
+1283 Korinna Patelis
+1284 Mark Clarke
+1285 W. R. Quadros
+1286 David C. Gardner
+1287 David Cassady
+1288 Charles Snyder
+1289 Karim R. Lakhani
+1290 Vinton A. Dearing
+1291 Christian Sauer
+1292 Igor Melatti
+1293 Z. Wang
+1294 William E. Burr
+1295 Manuel Laguna
+1296 Thomas Dietterich
+1297 Raghu Machiraju
+1298 Glenn Matthews
+1299 David A. Van Veldhuizen
+1300 J. Richard Swenson
+1301 Nolan Hester
+1302 Shinto Eguchi
+1303 Richard V. Kelly
+1304 W. Gregory Wojtkowski
+1305 José R. Paramá
+1306 Ruth Maran
+1307 Arlene L. Eis
+1308 Doug Addison
+1309 Krzysztof Sacha
+1310 J. A. Grant
+1311 Nary Subramanian
+1312 Xiaohui Long
+1313 Gary Robert Bertoline
+1314 Woody Leonhard
+1315 William M. Farmer
+1316 Angel Cobo
+1317 Yonggang Wang
+1318 Gleiber Fernandes Royes
+1319 Ian Stephenson
+1320 Jay Dickman
+1321 Linda Bird
+1322 Vladimir Astakhov
+1323 Ulrich Geske
+1324 Paul E. Harris
 1325 David Hodgson
-1326 Gavin Ambrose
-1327 Bart Preneel
-1328 Scott Fenstermacher
-1329 Kenneth Barclay
-1330 Diane Burns
-1331 Austen Andrews
-1332 Frank Mueller
-1333 Ronen Basri
-1334 Nathan Haggard
-1335 Harshad Kotecha
-1336 Tetsuji Tonda
-1337 Kelly L. Murdock
-1338 D. Lowe
-1339 Xiaohua Wang
-1340 James Kelly
-1341 Samuel E. Portny
-1342 Ram Gopal
-1343 Ryan T. Putnam
-1344 Qiaozhu Mei
-1345 Michael O'Neal
-1346 Roy W. Tromble
-1347 Yeh-Ching Chung
-1348 Remar Sutton
-1349 Richard Matheson
-1350 Peter T. Davis
-1351 T. Sowa
-1352 A. Heyden
-1353 Ankit Tiwari
-1354 Matthias Zimmermann
-1355 Xiaojun Lin
-1356 John R. Levine
-1357 Robert Scally
-1358 D. E. Stevenson
-1359 Roland Traunmüller
-1360 Scott A. Hugh
-1361 Jhih-En Kuo
-1362 Chris Newman
-1363 Alicia Vargas
-1364 Charles J. Brooks
-1365 Jonathan Herlocker
-1366 Diane Crawford
-1367 Nicholas E. Lownes
-1368 Eric Mylonas
-1369 Adam Cook
-1370 Ian F. C. Smith
-1371 David A. Madsen
-1372 William W. Cohen
-1373 Jen-Yao Chung
-1374 Thomas S. Huang
-1375 Marc Mercuri
-1376 Fred Glover
-1377 S. Falcon
-1378 Gian Pietro Picco
-1379 Kai Yu
-1380 Toni Robinson
-1381 Marcello M. Bonsangue
-1382 Horacio Gaito
-1383 Mark Thorson
-1384 Alan L. Eliason
-1385 Yun Chiu
-1386 Christopher Negus
-1387 Henri Prade
-1388 Jie Yang
-1389 Bjorn Gunnar Karlsson
-1390 David Weale
-1391 Jenny Dugmore
-1392 Paulo Martegani
-1393 Jean Scholtz
-1394 Noriko Nagata
-1395 Hans Herber
-1396 Martha Krieg
-1397 M. Ranzato
-1398 Peter Sanders
-1399 Erik Holsinger
-1400 Kim Heldman
-1401 Michael B. Cutlip
-1402 Donald Norris
-1403 Jan Marrelli
-1404 Thomas R. Peltier
-1405 Leslie M. Orchard
-1406 Erin Sullivan
-1407 Jean-Marc Gauthier
-1408 Jean Carletta
-1409 Chi-Kin Chan
-1410 William Shakespeare
-1411 Mathieu Salzmann
-1412 Claudio Marcio Quartaroli
-1413 Atsushi Yamashita
-1414 Dinesh Maldasani
-1415 Steve Schwartz
-1416 Samy Bengio
-1417 Narsingh Deo
-1418 Mark Hoogendoorn
-1419 Ruchira Sasanka
-1420 Willem-Paul de Roever
-1421 Alex Berson
-1422 Pamela S. Beason
-1423 Jorg Rose
-1424 Jane E. Aaron
-1425 Neil Schlager
-1426 Ke Lu
-1427 Orit Hazaan
-1428 Dimitri Konstantas
-1429 Amitabh Chaudhary
-1430 Jonathan Oxer
-1431 Key Pousttchi
-1432 Hans-Georg Eßer
-1433 Jayshankar Sankarasetty
-1434 Mika Klemettinen
-1435 Yueting Chai
-1436 Carla Rose
-1437 Ken Abernethy
-1438 Chi-Sheng Shih
-1439 Neil Daswani
-1440 Simon Gray
-1441 Tapan K. Sarkar
-1442 Endika Bengoetxea
-1443 Beda Christoph Hammerschmidt
-1444 Partrick Carey
-1445 Miguel Angel Martin Tardio
-1446 Jonathan Davidson
-1447 Fernando Bueno
-1448 Roberta Bragg
-1449 Muhammad Ali Mazidi
-1450 Arthur A. Thompson
-1451 Tatjana Vadivasova
-1452 Martin Eigner
-1453 J. Knipe
-1454 Luis Joyanes Aguilar
-1455 Barry Smyth
-1456 Margaret Levine Young
-1457 J. Rodríguez
-1458 Nightow Yoshiro
-1459 Todd Lammle
-1460 James Shelton
-1461 Jen deHaan
-1462 R. A. Penfold
-1463 Maurie Lockley
-1464 Elaine Malfas
-1465 Thomas J. Cashman
-1466 Elizabeth Eisner Reding
-1467 Roy Hudd
-1468 Marcin Paprzycki
-1469 Vadim Timonin
-1470 Amanda Root
-1471 Jerzy Grzymala-Busse
-1472 Srinivas Shakkottai
-1473 Gary H. Sockut
-1474 Daoliang Li
-1475 Scott L. Rosen
-1476 John A. Blackley
-1477 Noel Epstein
-1478 Guo-Rui Feng
-1479 Holloway
-1480 Hari Harindranath
-1481 Angel Cobo
-1482 Roman Verhovsek
-1483 Frederic Cuppens
-1484 M. Hafed Benteftifa
-1485 Tom Urtis
-1486 Luis M. Camarinha-Matos
-1487 Keith Underdahl
-1488 Knut Reinert
-1489 Eva Lange
-1490 Miguel López-Díaz
-1491 Alexander Gelbukh
-1492 Fang Yin
-1493 J. Hajto
-1494 David Dvorin
-1495 Jin Dong
-1496 Michael T. Wen
-1497 Constantine Caramanis
-1498 Kazem Sohraby
-1499 David C. Gardner
-1500 Mauro Birattari
-1501 Trinh Anh Tuan
-1502 Steen Leleur
-1503 John A. A. Sillince
-1504 Andrzej Skowron
-1505 Laurence T. Yang
-1506 William J. Frost
-1507 Alain Vincent
-1508  Jr.
-1509 Sabine Lambrich
-1510 Pankaj Joshi
-1511 Jay Kinghorn
-1512 Sherry Willard Kinkoph
-1513 Roderico Cruz
-1514 T. Ogura
-1515 Tamye Riggs
-1516 Marianne Fox
-1517 Jack R. Meredith
-1518 Cynthia F. Epstein
-1519 Michael Devetsikiotis
-1520 Larry Ullman
-1521 Marco Aurélio de Mesquita
-1522 F. Peano
-1523 Jean-Marie Jacquet
-1524 Naoki Kobayashi
-1525 John A. Price
-1526 Georg Carle
-1527 R. Kelly Rainer
-1528 Robert L. Ferrett
-1529 David Munger
-1530 William Coughlan
-1531 Z. Wang
-1532 Huajin Tang
-1533 Michael Patrick Brown
-1534  d
-1535 Slobodan Ilić
-1536 Guy Malleus
-1537 Daniel Hardy
-1538 J. Wurtele
-1539 Christopher Workman
-1540 Cindy Caldwell
-1541 G. Coppa
-1542 Patrick Blattner
-1543 Mark A. Smith
-1544 John S. Yang
-1545 Marco Better
-1546 Abel Mariano Matas Garcia
-1547 Janet Caughlin
-1548 Alan W. Williams
-1549 Tom Geismar
-1550 Roselyn Teukolsky
-1551 Roman Wyrzykowski
-1552 Alan J. Kalameja
-1553 David R. Emerson
-1554 Alexander Keller
-1555 Fernando Rubio
+1326 Charles A. Brooks
+1327 T. Sowa
+1328 Gary B. Shelly
+1329 David Isern
+1330 James J Balding
+1331 Eric Skagerberg
+1332 Dario Pescador
+1333 J. Rodríguez
+1334 Brian N. Hilton
+1335 Patricia Gomez
+1336 Alan C. Bovik
+1337 Jake Chen
+1338 Sushil Jajodia
+1339 Oliver Kohlbacher
+1340 Claudia M. Baca
+1341 Donald Christiansen
+1342 Himanshu Yadava
+1343 Maurice Charbit
+1344 Bernan Press
+1345 Sarah Zelikovitz
+1346 Ajay Divakaran
+1347 Einoshin Suzuki
+1348 Roy Hudd
+1349 Will M. Wright
+1350 Luiz A. DaSilva
+1351 Giovanni Vigna
+1352 Muhammad Ali Mazidi
+1353 Kohei Hasegawa
+1354 Y. LeCun
+1355 John H. E. Taplin
+1356 Pascal Lorenz
+1357 Alexander Verbraeck
+1358 Julieanne Kost
+1359 M. van de Panne
+1360 Malolan Chetlur
+1361 Cristian Darie
+1362 Ram Gopal
+1363 John Low
+1364 Thomson South-Western Educational Publishing
+1365 Augusto Sampaio
+1366 Rolf Oppliger
+1367 R. Roth-Berghofe
+1368 J. Weimert
+1369 Toni Robinson
+1370 Faithe Wempen
+1371 Hassan Rajaei
+1372 Tatjana Vadivasova
+1373 Jonathan Turkanis
+1374 R. C. Flagan
+1375 Frank Hoffmann
+1376 A. W. K. Tang
+1377 Pere P. Sancho
+1378 Masanobu Umeda
+1379 J. Hajto
+1380 Beth Brown
+1381 Joäo Gama
+1382 Judy Freeman
+1383 Pavel Brazdil
+1384 William Coughlan
+1385 D. H. Howitt
+1386 Nigel Watling
+1387 Georghita Ghinea
+1388 Peter Scholz
+1389 Roman Bertolami
+1390 Jay David Bolter
+1391 Greg Perry
+1392 Guy Fouché
+1393 Chi-Sheng Shih
+1394 Samuel J. Mantel
+1395 O. Ray Whittington
+1396 Jason Guy
+1397 Miguel Angel Martin Tardio
+1398 Bryant Tow
+1399 Dusan Petkovic
+1400 Jaim Ahmed
+1401 Jan Ehrhardt
+1402 Frank W. Liou
+1403 Robert A. Greenes
+1404 Daniel Minoli
+1405 Víctor P. Jiménez
+1406 Alan Pipes
+1407 Paul Harris
+1408 Aline Maria Santos Andrade
+1409 Stephan Lukosch
+1410 J. Steven Jones
+1411 John E. Gamble
+1412 Daniel Hardy
+1413 Georgina R. Hughes
+1414 Pedro Cuenca
+1415 Orit Hazaan
+1416 Rex Martin
+1417 Tamye Riggs
+1418 Jonathan Lawry
+1419 F. Peinetti
+1420 Tom Wolsky
+1421 Linda Foster-Turpen
+1422 Jorge Linhares
+1423 Fenghui Zhang
+1424 Vahid Tarokh
+1425 Thomas S. Huang
+1426 John A. Price
+1427 Jim Heid
+1428 Noriko Nagata
+1429 Charles R. Meader
+1430 Bart Preneel
+1431 Andrew Mason
+1432 Chi-Kin Chan
+1433 Sudipto Mukherjee
+1434 Marcus Heege
+1435 Osvaldo Cairo Battistutti
+1436 Marcello Pelillo
+1437 Sharon Zardetto Aker
+1438 Antje Herbon
+1439 Vlad Pirogov
+1440 Deborah Timmons
+1441 Uwe Schwiegelshohn
+1442 Eddie Kohler
+1443 Jianer Chen
+1444 Yevgeni Koucheryavy
+1445 Leslie Hardin
+1446 David Thompson
+1447 Mike Myung-Ok Lee
+1448 A. L. Kalleberg
+1449 Anne H. H. Ngu
+1450 B. A. Schmitt
+1451 Arnaud Bailly
+1452 H. W. J. Lee
+1453 S. M. Furnell
+1454 Saleema Amershi
+1455 Yian Zhu
+1456 Jared Davis
+1457 Mohammad Dadfar
+1458 Red Burns
+1459 Alice Redmond-neal
+1460 David Pointcheval
+1461 Matt Westgate
+1462 Luis Joyanes Aguilar
+1463 Christian Nagel
+1464 Damien Stolarz
+1465  d
+1466 Terri Calderone
+1467 Alex Berson
+1468 Jiming Liu
+1469 Ahmed E. Hassan
+1470 Don Tica
+1471 J. Periaux
+1472 Tanner Flynn
+1473 Houston H. Carr
+1474 William J. Tracz
+1475 Stanley Boorman
+1476 Jerry Daniels
+1477 L. T. Christopher
+1478 Larry Rudolph
+1479 Michael T. Wen
+1480 David J. Carmichael
+1481 Ted Lewis
+1482 Benedetto Intrigila
+1483 Thierry D'Hers
+1484 Fernando Bueno
+1485 Robert L. Ferrett
+1486 Le-Minh Nguyen
+1487 E. Phil Haley
+1488 Georg Carle
+1489 Thomas Braun
+1490 Håvard Berland
+1491 Denise Seguin
+1492 Scott M. Shafer
+1493 Francisco Martínez-Estudillo
+1494 Hans-Georg Eßer
+1495 Damon Brown
+1496 Keith Underdahl
+1497 Doug Stuns
+1498 Olof Widlund
+1499 Austen Andrews
+1500 Cheryl Boche
+1501 Patrick Wiegand
+1502 Mitsuhiro Horade
+1503 Matt Wales
+1504 Dave Prochnow
+1505 G Khadanga
+1506 David Gefen
+1507 Maria I. Sanchez-segura
+1508 G. Coppa
+1509 José Mira
+1510 Henry Balogun
+1511 Eitan Frachtenberg
+1512 Jan Marrelli
+1513 Judith Bishop
+1514 John A. Pearce
+1515 Dan Gookin
+1516 Roy S. Freedman
+1517 R. Lowe
+1518 Joan Serrat-Fernandez
+1519 Lisa Friedrichsen
+1520 Yen-Kuang Chen
+1521 Luís Torgo
+1522 Libby Foster
+1523 Ricardo Reis
+1524 Jonathan S. Harbour
+1525 Yohsuke Imai
+1526 Sushmita Mitra
+1527 Kelly L Murdock
+1528 Giuseppe Della Penna
+1529 Rajat Khare
+1530 Takashi Seo
+1531 Ness B. Shroff
+1532 Rosemarie E. Widmaier
+1533 Kenneth Barclay
+1534 Kay Yarborou Nelson
+1535 Tyson S. Hall
+1536 A. M. Tekalp
+1537 Gordon Linzner
+1538 Steven Till
+1539 Rolin McKinlay
+1540 John S. Yang
+1541 M. Nakanishi
+1542 Steve Honeywell
+1543 Larry Statan
+1544 Craig McMurtry
+1545 David A. Marca
+1546 Yoshifumi Kitamura
+1547 Ben Long
+1548 Laurence A. Wolsey
+1549 Robert Ferrett
+1550 Steve Johnston
+1551 Yongsheng Gao
+1552 Denise O'Connor
+1553 Chris Botello
+1554 Jan Treur
+1555 Conrad Sanderson
