@@ -290,10 +290,12 @@ func SelectNodesWhere(condition func(*Node) bool) ([]*Node, bool) {
 	res := &en.ENode{}
 
 	for ok := fillNextObj(res); ok; ok = fillNextObj(res) {
-		a := Node{res}
-		if condition(&a) {
-			result = append(result, &Node{res})
+		a := &Node{res}
+		if condition(a) {
+			result = append(result, a)
 		}
+		// problem with rewriting links
+		res = &en.ENode{}
 	}
 	return result, true
 
@@ -311,6 +313,8 @@ func SelectRelationshipWhere(condition func(*Relationship) bool) ([]*Relationshi
 		if condition(&a) {
 			result = append(result, &Relationship{res})
 		}
+		// problem with rewritnig links
+		res = &en.ERelationship{}
 	}
 	return result, true
 }

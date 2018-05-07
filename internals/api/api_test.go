@@ -4,6 +4,8 @@ import (
 	"log"
 	"testing"
 
+	"github.com/alikhil/TBMS/internals/logger"
+
 	en "github.com/alikhil/TBMS/internals/engine"
 	io "github.com/alikhil/TBMS/internals/io"
 	"github.com/kmanley/golang-tuple"
@@ -158,6 +160,10 @@ func TestGetLabels(t *testing.T) {
 	defer re.DeleteFile(en.FNNodes)
 	defer re.DeleteFile(en.FNRelationships)
 	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node, _ := CreateNode("test_label")
 
@@ -180,10 +186,14 @@ func TestGetNodeProperty(t *testing.T) {
 	defer re.DeleteFile(en.FNNodes)
 	defer re.DeleteFile(en.FNRelationships)
 	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
 
 	node, _ := CreateNode("test_label",
-		tuple.NewTupleFromItems("test_prop1", int32(1)),
-		tuple.NewTupleFromItems("test_prop2", int32(2)))
+		tuple.NewTupleFromItems("test_prop1", 1),
+		tuple.NewTupleFromItems("test_prop2", "two"))
 
 	pr, ok := node.GetProperties()
 	if !ok {
@@ -198,28 +208,199 @@ func TestGetNodeProperty(t *testing.T) {
 	if properties["test_prop1"] != int32(1) {
 		t.Errorf("wrong 1st property: expected 1, get %v", properties["test_prop1"])
 	}
-	if properties["test_prop2"] != int32(2) {
-		t.Errorf("wrong 2nd property: expected 2, get %v", properties["test_prop2"])
+	if properties["test_prop2"] != "two" {
+		t.Errorf("wrong 2nd property: expected 'two', get %v", properties["test_prop2"])
 	}
 
 }
 
-func TestGetNodeProperties(t *testing.T) {
-
-}
-
 func TestGetFromRelationship(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
 
+	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
+	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
+
+	rel, _ := CreateRelationship(node1, node2, "link")
+
+	retrived_node := *rel.GetFrom()
+
+	old_id, _ := node1.GetProperty("id")
+	new_id, _ := retrived_node.GetProperty("id")
+
+	if old_id != new_id {
+		t.Errorf("expected to be equal, but get %v and %v", old_id, new_id)
+	}
 }
 
 func TestGetToRelationship(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
 
+	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
+	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
+
+	rel, _ := CreateRelationship(node1, node2, "link")
+
+	retrived_node := *rel.GetTo()
+
+	old_id, _ := node2.GetProperty("id")
+	new_id, _ := retrived_node.GetProperty("id")
+
+	if old_id != new_id {
+		t.Errorf("expected to be equal, but get %v and %v", old_id, new_id)
+	}
 }
 
 func TestGetRelationshipType(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
 
+	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
+	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
+
+	rel, _ := CreateRelationship(node1, node2, "link")
+
+	relType := rel.GetType()
+
+	if relType != "link" {
+		t.Errorf("Wrong relationship type")
+	}
 }
 
 func TestGetRelationshipProperty(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
+
+	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
+	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
+
+	rel, _ := CreateRelationship(node1, node2, "link", tuple.NewTupleFromItems("test-prop", "hello"))
+
+	pr, ok := rel.GetProperties()
+	if !ok {
+		t.Errorf("Can't get properties")
+	}
+	properties := *pr
+
+	if !ok {
+		t.Errorf("can't get properties")
+	}
+
+	if properties["test-prop"] != "hello" {
+		t.Errorf("wrong 1st property: expected 'hello' , get %v", properties["test-prop"])
+	}
+}
+
+func TestSelectNodesWhere(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
+
+	CreateNode("show", tuple.NewTupleFromItems("id", 1))
+	CreateNode("show", tuple.NewTupleFromItems("id", 2))
+	CreateNode("dont_show", tuple.NewTupleFromItems("id", 3))
+	CreateNode("dont_show", tuple.NewTupleFromItems("id", 4))
+
+	nodes, _ := SelectNodesWhere(func(node *Node) bool {
+		l := *node.GetLabels()
+		label := l[0]
+		return label == "show"
+	})
+
+	logger.Info.Printf("len(nodes) = %v", len(nodes))
+	for _, elem := range nodes {
+		l := *elem.GetLabels()
+		p, _ := elem.GetProperty("id")
+
+		label := l[0]
+		if label != "show" {
+			t.Errorf("Returns wrong node: %v with id %v", label, p)
+		}
+	}
+
+}
+
+func TestSelectRelationshipsWhere(t *testing.T) {
+	var re = &en.RealEngine{IO: io.LocalIO{}}
+	re.InitDatabase()
+	Init(re)
+	defer re.DeleteFile(en.FNInUse)
+	defer re.DeleteFile(en.FNNodes)
+	defer re.DeleteFile(en.FNRelationships)
+	defer re.DeleteFile(en.FNRelationshipTypes)
+	defer re.DeleteFile(en.FNLabels)
+	defer re.DeleteFile(en.FNLabelsStrings)
+	defer re.DeleteFile(en.FNProperties)
+	defer re.DeleteFile(en.FNPropertyKeys)
+
+	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
+	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
+
+	CreateRelationship(node1, node2, "show")
+	CreateRelationship(node1, node2, "show")
+	CreateRelationship(node1, node2, "dont_show")
+	CreateRelationship(node1, node2, "dont_show")
+
+	nodes, _ := SelectNodesWhere(func(node *Node) bool {
+		l := *node.GetLabels()
+		label := l[0]
+		return label == "show"
+	})
+
+	logger.Info.Printf("len(nodes) = %v", len(nodes))
+	for _, elem := range nodes {
+		l := *elem.GetLabels()
+		p, _ := elem.GetProperty("id")
+
+		label := l[0]
+		if label != "show" {
+			t.Errorf("Returns wrong node: %v with id %v", label, p)
+		}
+	}
 
 }
