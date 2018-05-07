@@ -1,9 +1,7 @@
 package engine
 
 import (
-	"fmt"
 	io "github.com/alikhil/TBMS/internals/io"
-	"github.com/alikhil/distributed-fs/utils"
 	"testing"
 )
 
@@ -262,28 +260,4 @@ func getCache() io.IO {
 func TestEngineWithCache(t *testing.T) {
 
 	testPack(t, getCache)
-}
-
-func TestEngineWithDFS(t *testing.T) {
-
-	var mapa = map[string]int32{
-		"nodes.store":             13,
-		"labels.store":            9,
-		"labelsStrings.store":     21,
-		"relationships.store":     34,
-		"properties.store":        14,
-		"strings.store":           64,
-		"inuse.store":             11,
-		"propertykeys.store":      21,
-		"relationshiptypes.store": 34,
-	}
-
-	client, ok := utils.GetRemoteClient(fmt.Sprintf("%s:5001", utils.GetIPAddress()))
-	if !ok {
-		t.Error("failed to connect to remote client")
-	}
-	dfs := utils.DFSClient{Client: client}
-	dfs.InitRecordMappings(&mapa)
-
-	testPack(t, func() io.IO { return &dfs })
 }
