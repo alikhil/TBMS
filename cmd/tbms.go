@@ -9,6 +9,6 @@ func main() {
 
 	logger.Info.Printf("Start")
 
-	runBenchmark()
+	runExample()
 
 }
