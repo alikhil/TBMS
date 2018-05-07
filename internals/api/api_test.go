@@ -15,11 +15,8 @@ func TestCreateRelationship(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 
 	re.InitDatabase()
+	defer re.DropDatabase()
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
 
 	nodeA := &en.ENode{
 		ID:             en.FirstID,
@@ -75,15 +72,8 @@ func TestCreateRelationshipWithProperties(t *testing.T) {
 	var re = &en.RealEngine{IO: io.LocalIO{}}
 
 	re.InitDatabase()
+	defer re.DropDatabase()
 	Init(re)
-	defer re.DeleteFile(en.FNInUse)
-	defer re.DeleteFile(en.FNNodes)
-	defer re.DeleteFile(en.FNRelationships)
-	defer re.DeleteFile(en.FNRelationshipTypes)
-	defer re.DeleteFile(en.FNProperties)
-	defer re.DeleteFile(en.FNPropertyKeys)
-	// TODO: check bug
-	defer re.DeleteFile(en.FNStrings)
 
 	nodeA := &en.ENode{
 		ID:             en.FirstID,
