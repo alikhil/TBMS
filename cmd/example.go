@@ -1,11 +1,6 @@
 package main
 
 import (
-<<<<<<< HEAD
-=======
-	// "fmt"
-	// "github.com/alikhil/distributed-fs/utils"
->>>>>>> cbe6b6ffd5161ca6eadb6fc7b989991036e56696
 	"strings"
 
 	"github.com/kmanley/golang-tuple"
