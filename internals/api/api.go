@@ -258,12 +258,19 @@ func CreateRelationship(a, b *Node, relType string, properties ...*tuple.Tuple) 
 		NextPropertyID:     nextPropertyID,
 		FirstNodeNxtRelID:  -1,
 		SecondNodeNxtRelID: -1,
+		FirstNodePrvRelID:  -1,
+		SecondNodePrvRelID: -1,
 	}
 
 	// constructing links of two double linked lists
 
 	aLastRel, foundA := getLastRelationship(a.ENode)
 	bLastRel, foundB := getLastRelationship(b.ENode)
+
+	if foundA && foundB && *aLastRel == *bLastRel {
+		aLastRel = bLastRel
+	}
+
 	if foundA {
 		relationship.FirstNodePrvRelID = aLastRel.ID
 		aLastRel.SetNextRelationshipID(a.ID, relID)
