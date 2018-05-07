@@ -6,6 +6,10 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
+
+	"github.com/alikhil/TBMS/internals/logger"
+	"github.com/alikhil/distributed-fs/utils"
 
 	api "github.com/alikhil/TBMS/internals/api"
 	en "github.com/alikhil/TBMS/internals/engine"
@@ -13,23 +17,19 @@ import (
 	tuple "github.com/kmanley/golang-tuple"
 )
 
-func BenchmarkLocalIO(b *testing.B) {
-	benchmarkCreate(io.LocalIO{}, b)
-	benchmarkInsert(io.LocalIO{}, b)
-}
+var remoteIP = "10.91.41.109:5001"
 
-func benchmarkCreate(i io.IO, b *testing.B) {
+func BenchmarkLocalIO(b *testing.B) { benchmarkIO(io.LocalIO{}, b) }
+
+func BenchmarkLocalIOCache(b *testing.B) { benchmarkIO(getCache(), b) }
+
+func BenchmarkLocalIODFS(b *testing.B) { benchmarkIO(getDFS(), b) }
+
+func BenchmarkLocalIODFSCache(b *testing.B) { benchmarkIO(getDFSWithCache(), b) }
+
+func benchmarkIO(i io.IO, b *testing.B) {
+	startTime := time.Now()
 	var re = &en.RealEngine{IO: i}
-	b.Run("init_db", func(b *testing.B) {
-		re.InitDatabase()
-		api.Init(re)
-		re.DropDatabase()
-	})
-}
-
-func benchmarkInsert(i io.IO, b *testing.B) {
-	var re = &en.RealEngine{IO: i}
-
 	re.InitDatabase()
 	api.Init(re)
 	b.Run("insert_data", func(b *testing.B) {
@@ -40,7 +40,53 @@ func benchmarkInsert(i io.IO, b *testing.B) {
 				return ok
 			})
 	})
+	endTime := time.Now()
+	logger.Info.Printf("Insertion of 1000 nodes took %v", endTime.Sub(startTime))
+
+	startTime = time.Now()
+	api.SelectNodesWhere(func(*api.Node) bool { return true })
+	endTime = time.Now()
+	logger.Info.Printf("Retrieval of 1000 nodes took %v", endTime.Sub(startTime))
+
+	// startTime = time.Now()
 	re.DropDatabase()
+}
+
+func getCache() io.IO {
+	var mapa = en.GetFileToBytesMap()
+
+	cache := io.LRUCache{}
+	cache.Init(io.LocalIO{}, mapa, 5)
+	return &cache
+}
+
+func getDFS() io.IO {
+	var mapa = en.GetFileToBytesMap()
+
+	client, ok := utils.GetRemoteClient(remoteIP)
+	if !ok {
+		panic("failed to connect to remote client")
+	}
+	dfs := utils.DFSClient{Client: client}
+	dfs.InitRecordMappings(mapa)
+	return &dfs
+}
+
+func getDFSWithCache() io.IO {
+
+	var mapa = en.GetFileToBytesMap()
+
+	client, ok := utils.GetRemoteClient(remoteIP)
+	if !ok {
+		panic("failed to connect to remote client")
+	}
+	dfs := utils.DFSClient{Client: client}
+	dfs.InitRecordMappings(mapa)
+
+	cache := io.LRUCache{}
+	cache.Init(&dfs, mapa, 5)
+
+	return &cache
 }
 
 func strToPaperParam(text string) []*tuple.Tuple {
