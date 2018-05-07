@@ -304,6 +304,7 @@ func TestGetRelationshipProperty(t *testing.T) {
 	defer re.DeleteFile(en.FNLabelsStrings)
 	defer re.DeleteFile(en.FNProperties)
 	defer re.DeleteFile(en.FNPropertyKeys)
+	defer re.DeleteFile(en.FNStrings)
 
 	node1, _ := CreateNode("from", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("to", tuple.NewTupleFromItems("id", 2))
@@ -337,6 +338,7 @@ func TestSelectNodesWhere(t *testing.T) {
 	defer re.DeleteFile(en.FNLabelsStrings)
 	defer re.DeleteFile(en.FNProperties)
 	defer re.DeleteFile(en.FNPropertyKeys)
+	defer re.DeleteFile(en.FNStrings)
 
 	CreateNode("show", tuple.NewTupleFromItems("id", 1))
 	CreateNode("show", tuple.NewTupleFromItems("id", 2))
@@ -378,7 +380,8 @@ func TestSelectRelationshipsWhere(t *testing.T) {
 	node1, _ := CreateNode("a", tuple.NewTupleFromItems("id", 1))
 	node2, _ := CreateNode("a", tuple.NewTupleFromItems("id", 2))
 
-	CreateRelationship(node1, node2, "show")
+	rel, _ := CreateRelationship(node1, node2, "show")
+	rel.ID
 	CreateRelationship(node1, node2, "show")
 	CreateRelationship(node1, node2, "dont_show")
 	CreateRelationship(node1, node2, "dont_show")
