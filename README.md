@@ -1,6 +1,12 @@
 # TBMS
+
 TBM BadAss Management System - Simple Graph Database
 
+## Requirements
+
+**Go** - 1.10.
+
+If you want to install Go and configure development environment go through [this tutorial](http://blog.t-trusty.ru/go/tutuorial/vscode/2018/04/06/go-quickstart.html).
 
 ## Dev dependencies
 
@@ -49,5 +55,12 @@ go run cmd/peer/*.go -fsdir=peer2 -port=5022 -endpoint={MASTER_ENDPOINT} # use e
 # run peer 3 (terminal #4)
 go run cmd/peer/*.go -fsdir=peer3 -port=5023 -endpoint={MASTER_ENDPOINT} # use endpoint from master log
 
+```
+
+When DFS is ready you can run `tbms.go`:
+
+```bash
+cd ~/go/src/github.com/alikhil/TBMS
+go run cmd/example.go cmd/tbms.go -dfs=true -endpoint=10.91.41.109:5001 # use endpoint from master log
 
 ```
