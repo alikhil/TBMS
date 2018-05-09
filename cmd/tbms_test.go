@@ -23,9 +23,9 @@ func BenchmarkLocalIO(b *testing.B) { benchmarkIO(io.LocalIO{}, b) }
 
 func BenchmarkLocalIOCache(b *testing.B) { benchmarkIO(getCache(), b) }
 
-func BenchmarkLocalIODFS(b *testing.B) { benchmarkIO(getDFS(), b) }
+func BenchmarkDFS(b *testing.B) { benchmarkIO(getDFS(), b) }
 
-func BenchmarkLocalIODFSCache(b *testing.B) { benchmarkIO(getDFSWithCache(), b) }
+func BenchmarkDFSCache(b *testing.B) { benchmarkIO(getDFSWithCache(), b) }
 
 func benchmarkIO(i io.IO, b *testing.B) {
 	startTime := time.Now()
