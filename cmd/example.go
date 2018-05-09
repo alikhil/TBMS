@@ -1,8 +1,8 @@
 package main
 
 import (
-	// "fmt"
-	// "github.com/alikhil/distributed-fs/utils"
+	"flag"
+	"github.com/alikhil/distributed-fs/utils"
 	"strings"
 
 	"github.com/kmanley/golang-tuple"
@@ -17,22 +17,30 @@ var makeProperty = tuple.NewTupleFromItems
 
 func runExample() {
 
-	// masterEndpoint := fmt.Sprintf("%s:%v", utils.GetIPAddress(), 5001)
-	// var mapping = en.GetFileToBytesMap()
+	var useDFS = flag.Bool("dfs", false, "to use dfs or not. if true don't forgot to set endpoint")
+	var endpoint = flag.String("endpoint", utils.GetIPAddress()+":5001", "endpoint of DFS master")
 
-	// client, ok := utils.GetRemoteClient(masterEndpoint)
-	// if !ok {
-	// 	panic("failed to connect to remote client")
-	// }
-	// dfs := utils.DFSClient{Client: client}
-	// dfs.InitRecordMappings(mapping)
+	flag.Parse()
 
-	// cache := io.LRUCache{}
-	// cache.Init(&dfs, mapping, 5)
+	masterEndpoint := *endpoint
+	var mapping = en.GetFileToBytesMap()
 
-	// var re = &en.RealEngine{IO: &cache}
+	var lowLevelIO io.IO = &io.LocalIO{}
+	if *useDFS {
+		client, ok := utils.GetRemoteClient(masterEndpoint)
+		if !ok {
+			panic("failed to connect to remote client")
+		}
+		dfs := utils.DFSClient{Client: client}
+		dfs.InitRecordMappings(mapping)
+		lowLevelIO = &dfs
+	}
 
-	var re = &en.RealEngine{IO: &io.LocalIO{}}
+	cache := io.LRUCache{}
+	cache.Init(lowLevelIO, mapping, 5)
+
+	var re = &en.RealEngine{IO: &cache}
+
 	re.InitDatabase()
 	api.Init(re)
 	logger.Info.Printf("From example")
