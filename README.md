@@ -6,7 +6,7 @@ TBM BadAss Management System - Simple Graph Database
 
 **Go** - 1.10.
 
-If you want to install Go and configure development environment go through [this tutorial](http://blog.t-trusty.ru/go/tutuorial/vscode/2018/04/06/go-quickstart.html).
+If you want to install Go and configure development environment go through [this tutorial](https://alikhil.github.io/2018/04/go-quickstart/).
 
 ## Dev dependencies
 
