@@ -2,6 +2,9 @@
 
 TBM BadAss Management System - Simple Graph Database
 
+Inspired by [Neo4j](http://neo4j.com)
+
+
 ## Requirements
 
 **Go** - 1.10.
